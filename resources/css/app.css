@@ -405,9 +405,9 @@ input.custInput {
     content: none;
 }
 
-.navbar-nav {
+/* .navbar-nav {
     height: 56px;
-}
+} */
 
 .navbar-nav .dropdown-menu {
     position: absolute;
@@ -423,7 +423,7 @@ ul.dropdown-menu-dark {
 
 /* style for panel after navbar (viewport height - navbar height) */
 div.height-full {
-    height: calc(100vh - 56px);
+    height: calc(100vh - 45px);
 }
 
 .text-light {

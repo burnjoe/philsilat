@@ -11,6 +11,17 @@
                 <div class="container-fluid m-4 w-auto">
                     <h1 class="h1Dark mb-5">LOGIN</h1>
 
+                    {{-- Validation Errors --}}
+                    @if($errors->any())
+                    <div class='alert alert-danger p-2 mt-5 fs-sm'>
+                        <ul class="ps-4 mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li class="text-justify">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
                     <form action="#" class="form-login" method="POST">
                         @csrf
 
@@ -58,6 +69,17 @@
             <div class="container-fluid col-6 my-5">
                 <h1 class="h1Dark mb-5">LOGIN</h1>
 
+                {{-- Validation Errors --}}
+                @if($errors->any())
+                <div class='alert alert-danger p-2 mt-5 fs-sm'>
+                    <ul class="ps-4 mb-0">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
                 <form action="#" class="form-login" method="POST">
                     @csrf
 
@@ -70,13 +92,15 @@
                             name="password" value="{{ old('password') }}" required placeholder="Password" autofocus>
                     </div>
                     <div class="row flex-row mt-3">
+                        @if (Route::has('password.request'))
                         <div class="col">
                             <div class="text-start">
-                                <a href="#" class="custText custText-clickable">
+                                <a href="{{ route('password.request') }}" class="custText custText-clickable">
                                     Forgot Password?
                                 </a>
                             </div>
                         </div>
+                        @endif
                         <div class="col">
                             <div class="form-btn d-flex justify-content-end">
                                 <button type="submit" value="LOGIN" name="login_desktop"

@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,8 @@ Route::get('/', function() {
 
 // Authenticated Users
 Route::middleware('auth')->group(function () {
-
+    Route::get('dashboard', Dashboard::class)
+        ->name('dashboard');
 });
 
 Auth::routes();

@@ -2,7 +2,7 @@
     <ul>
         {{-- Dashboard --}}
         <li>
-            <a href="#}">
+            <a href="{{ route('dashboard') }}">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span class="nav-item">Dashboard</span>
             </a>

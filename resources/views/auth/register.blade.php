@@ -27,6 +27,16 @@
             <div class="container-fluid col-6 my-5">
                 <h1 class="h1Dark mb-5">SIGN UP</h1>
 
+                @if($errors->any())
+                    <div class='alert alert-danger p-2 mt-5 fs-sm'>
+                        <ul class="ps-4 mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li class="text-justify">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="#" class="form-login" method="POST">
                     @csrf
 
