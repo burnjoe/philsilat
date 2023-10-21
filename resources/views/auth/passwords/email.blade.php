@@ -1,47 +1,113 @@
-@extends('layouts.app')
+<x-app-layout>
+    <div class="row flex-row height-full">
+        {{-- Left Panel --}}
+        <div class="col col-md-6 bg-body-secondary d-flex justify-content-center align-items-center">
+            {{-- MOBILE --}}
+            <div class="container-fluid d-none d-md-block">
+                <div class="d-flex justify-content-center mb-4">
+                    <img src="{{ asset('img/philsilat_logo.png') }}" alt="" height="180px" width="140px">
+                </div>
+                <h1 class="h1Light">PHILSILAT</h1>
+                <p class="pLight pLight-lg">EVENT MANAGEMENT SYSTEM</p>
+            </div>
+            <div class="card card-body bg-dark m-4 d-sm-flex d-md-none">
+                <div class="container-fluid m-4 w-auto">
+                    <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    {{-- Validation Errors --}}
+                    @if($errors->any())
+                    <div class='alert alert-danger p-2 fs-sm'>
+                        <ul class="ps-4 mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li class="text-justify">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}">
+                    {{-- Success Status --}}
+                    @if (session('status'))
+                    <div class="alert alert-success p-2 ps-3 fs-sm" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
+                    <form action="{{ route('password.email') }}" class="form-login" method="POST">
                         @csrf
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        {{-- Email --}}
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control custInput @error('email') is-invalid @enderror"
+                                name="email" value="{{ old('email') }}" required placeholder="Email" autofocus>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
+                        {{-- Submit --}}
+                        <div class="row flex-row mt-3">
+                            <div class="col">
+                                <div class="form-btn d-flex justify-content-end">
+                                    <button type="submit" value="LOGIN" name="login_desktop"
+                                        class="custBtn custBtn-gray">SEND PASSWORD RESET LINK
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+        {{-- End of Left Panel --}}
+
+        {{-- Right Panel --}}
+        <div class="col-6 bg-dark d-none d-md-flex justify-content-center align-items-center">
+            {{-- DESKTOP --}}
+            <div class="container-fluid col-6 my-5">
+                <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
+
+                {{-- Validation Errors --}}
+                @if($errors->any())
+                <div class='alert alert-danger p-2 fs-sm'>
+                    <ul class="ps-4 mb-0">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                {{-- Success Status --}}
+                @if (session('status'))
+                <div class="alert alert-success p-2 ps-3 fs-sm" role="alert">
+                    {{ session('status') }}
+                </div>
+                @endif
+
+                <form action="{{ route('password.email') }}" class="form-login" method="POST">
+                    @csrf
+
+                    {{-- Email --}}
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control custInput @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required placeholder="Email" autofocus>
+                    </div>
+                    {{-- Submit --}}
+                    <div class="row flex-row mt-3">
+                        <div class="col">
+                            <div class="form-btn d-flex justify-content-end">
+                                <button type="submit" value="LOGIN" name="login_desktop"
+                                    class="custBtn custBtn-gray">SEND PASSWORD RESET LINK
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <p class="custText">
+                            Return to
+                            <a href="{{ route('login') }}" class="custText custText-clickable">
+                                <strong>Login</strong>
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-@endsection
+</x-app-layout>

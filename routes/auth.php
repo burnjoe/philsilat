@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])
     ->name('login');
@@ -19,13 +19,14 @@ Route::get('signup', [RegisterController::class, 'showRegistrationForm'])
 
 Route::post('signup', [RegisterController::class, 'register']);
 
-Route::get('forgot-password', 'Auth\ForgotPasswordController@showLinkRequestForm')
+Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
     ->name('password.request');
 
-Route::post('forgot-password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')
+Route::post('forgot-password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])
     ->name('password.email');
 
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
     ->name('password.reset');
 
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])
+    ->name('password.update');

@@ -22,7 +22,11 @@ Route::get('/', function() {
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
+
+    
+    
 });
+
 
 // includes the auth.php in routes
 require __DIR__.'/auth.php';
