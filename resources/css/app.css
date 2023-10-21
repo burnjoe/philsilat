@@ -445,7 +445,7 @@ div label {
 }
 
 .bg-audience {
-    background-image: url(../img/bg_audience.png);
+    background-image: url('..\..\public\img\bg_audience.png');
     background-size: cover;
     background-position: center;
 }
