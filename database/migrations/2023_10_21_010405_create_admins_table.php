@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('last_name', 50);
             $table->string('first_name', 50);
             $table->enum('sex', ['Male', 'Female']);
-            $table->string('phone', 10)->unique();
+            $table->string('phone', 11)->unique();
             $table->timestamps();
         });
     }
