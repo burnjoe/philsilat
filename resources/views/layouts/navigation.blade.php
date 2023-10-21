@@ -17,9 +17,14 @@
                     <a class="navbar-brand ms-4 fw-bold fs-5" href="{{ route('root') }}">PHILSILAT</a>
                 </div>
                 @endguest
-                
+
             </div>
             <div class="d-flex flex-row">
+
+                @auth
+                <p class="pDark m-auto me-4">{{ strtoupper(auth()->user()->getRoleNames()->first()) }}</p>
+                @endauth
+
                 {{-- Dropdown --}}
                 @auth
                 <ul class="navbar-nav ms-auto me-2">
@@ -44,7 +49,7 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    document.getElementById('logout-form').submit();">
                                     <i class="bi bi-box-arrow-right me-3"></i>{{ __('Logout') }}
                                 </a>
 

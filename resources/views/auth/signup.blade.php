@@ -4,6 +4,9 @@
         <div class="col col-md-6 bg-body-secondary d-flex justify-content-center align-items-center">
             {{-- MOBILE --}}
             <div class="container-fluid d-none d-md-block">
+                <div class="d-flex justify-content-center mb-4">
+                    <img src="{{ asset('img/philsilat_logo.png') }}" alt="" height="180px" width="140px">
+                </div>
                 <h1 class="h1Light">PHILSILAT</h1>
                 <p class="pLight pLight-lg">EVENT MANAGEMENT SYSTEM</p>
             </div>
@@ -11,7 +14,7 @@
                 <div class="container-fluid m-4 w-auto">
                     <h1 class="h1Dark mb-5">SIGN UP</h1>
 
-                    <form action="#" class="form-login" method="POST">
+                    <form action="{{ route('signup') }}" class="form-login" method="POST">
                         @csrf
 
 
@@ -37,7 +40,7 @@
                     </div>
                 @endif
 
-                <form action="#" class="form-login" method="POST">
+                <form action="{{ route('signup') }}" class="form-login" method="POST">
                     @csrf
 
                     {{-- Last Name & First Name --}}
@@ -62,7 +65,7 @@
                                 value="{{ old('phone') }}" required placeholder="Phone Number" autofocus>
                         </div>
                         <div class="form-group col-6 ps-1">
-                            <select name="sex" class="form-select custFormSelect" aria-label=".form-select example"
+                            <select name="sex" class="form-select custFormSelect @error('sex') is-invalid @enderror" aria-label=".form-select example"
                                 required>
                                 <option class="custOption" value="" hidden>Sex</option>
                                 <option class="custOption" @if(old('sex')==='Male' ) selected @endif value="Male">Male
@@ -93,13 +96,12 @@
                     </div>
                     {{-- Code --}}
                     <div class="form-group mt-3">
-                        <input id="code" type="text" class="form-control custInput @error('code') is-invalid @enderror"
-                            name="code" value="{{ old('code') }}" required placeholder="Signup Code" autofocus>
+                        <input id="signup_code" type="text" class="form-control custInput @error('signup_code') is-invalid @enderror"
+                            name="signup_code" value="{{ old('signup_code') }}" required placeholder="Signup Code" autofocus>
                     </div>
                     {{-- Button --}}
                     <div class="form-btn d-flex justify-content-end mt-3">
                         <button type="submit" value="SIGN UP" class="custBtn custBtn-gray">SIGN UP</button>
-                        <!-- <input type="submit" value="SIGN UP" name="signup_desktop" class="custBtn custBtn-gray"> -->
                     </div>
                     <div class="text-center mt-5">
                         <p class="custText">
@@ -130,7 +132,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
+s
                             <div class="row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 

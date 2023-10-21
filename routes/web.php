@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Dashboard;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +24,5 @@ Route::middleware('auth')->group(function () {
         ->name('dashboard');
 });
 
-Auth::routes();
+// includes the auth.php in routes
+require __DIR__.'/auth.php';

@@ -4,6 +4,9 @@
         <div class="col col-md-6 bg-body-secondary d-flex justify-content-center align-items-center">
             {{-- MOBILE --}}
             <div class="container-fluid d-none d-md-block">
+                <div class="d-flex justify-content-center mb-4">
+                    <img src="{{ asset('img/philsilat_logo.png') }}" alt="" height="180px" width="140px">
+                </div>
                 <h1 class="h1Light">PHILSILAT</h1>
                 <p class="pLight pLight-lg">EVENT MANAGEMENT SYSTEM</p>
             </div>
@@ -37,7 +40,7 @@
                         <div class="row flex-row mt-3">
                             <div class="col">
                                 <div class="text-start">
-                                    <a href="#" class="custText custText-clickable">
+                                    <a href="{{ route('password.request') }}" class="custText custText-clickable">
                                         Forgot Password?
                                     </a>
                                 </div>
@@ -52,7 +55,7 @@
                         <div class="text-center mt-5">
                             <p class="custText">
                                 Don't have an account yet?
-                                <a href="{{ route('register') }}" class="custText custText-clickable">
+                                <a href="{{ route('signup') }}" class="custText custText-clickable">
                                     <strong>Sign Up</strong>
                                 </a>
                             </p>
@@ -111,7 +114,7 @@
                     <div class="text-center mt-5">
                         <p class="custText">
                             Don't have an account yet?
-                            <a href="{{ route('register') }}" class="custText custText-clickable">
+                            <a href="{{ route('signup') }}" class="custText custText-clickable">
                                 <strong>Sign Up</strong>
                             </a>
                         </p>
