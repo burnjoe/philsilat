@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('class_label', 2);
+            $table->enum('sex', ['Male', 'Female']);
+            $table->decimal('weight_min', 8, 2, true);
+            $table->decimal('weight_max', 8, 2, true);
             $table->timestamps();
         });
     }

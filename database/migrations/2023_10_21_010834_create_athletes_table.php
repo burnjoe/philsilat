@@ -13,6 +13,22 @@ return new class extends Migration
     {
         Schema::create('athletes', function (Blueprint $table) {
             $table->id();
+            $table->string('last_name', 50);
+            $table->string('first_name', 50);
+            $table->date('birthdate');
+            $table->enum('sex', ['Male', 'Female']);
+            $table->decimal('weight', 8, 2, true);
+            $table->string('school_name', 100);
+            $table->tinyInteger('grade_level');
+            $table->string('lrn');
+            $table->foreignId('game_id')
+                ->constrained()
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
+            $table->foreignId('team_id')
+                ->constrained()
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }

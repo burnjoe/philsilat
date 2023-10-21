@@ -13,6 +13,31 @@ return new class extends Migration
     {
         Schema::create('game_matches', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('athlete1_id');
+            $table->unsignedBigInteger('athlete2_id');
+            $table->foreignId('game_id')
+                ->constrained()
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
+            $table->unsignedBigInteger('winner_id');
+
+            // Define FK constraints
+            $table->foreign('athlete1_id')
+                ->references('id')
+                ->on('athletes')
+                ->onUpdate('RESTRICT')
+                ->onDelete('RESTRICT');
+            $table->foreign('athlete2_id')
+                ->references('id')
+                ->on('athletes')
+                ->onUpdate('RESTRICT')
+                ->onDelete('RESTRICT');
+            $table->foreign('winner_id')
+                ->references('id')
+                ->on('athletes')
+                ->onUpdate('RESTRICT')
+                ->onDelete('RESTRICT');
+
             $table->timestamps();
         });
     }

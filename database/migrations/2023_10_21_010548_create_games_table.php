@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 50);
+            $table->foreignId('category_id')
+                ->constrained()
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
+            $table->foreignId('event_id')
+                ->constrained()
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }

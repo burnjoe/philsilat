@@ -12,7 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('coaches_teams', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('coach_id');
+            $table->unsignedBigInteger('team_id');
+
+            $table->unique(['coach_id', 'team_id']);
+
+            // Define FK constraints
+            $table->foreign('coach_id')
+                ->references('id')
+                ->on('coaches')
+                ->onDelete('cascade');
+            $table->foreign('team_id')
+                ->references('id')
+                ->on('teams')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
