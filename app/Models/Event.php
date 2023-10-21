@@ -17,7 +17,7 @@ class Event extends Model
         'starts_at',
         'ends_at',
         'venue',
-        'full_address',
+        'address',
         'barangay',
         'city',
         'province',

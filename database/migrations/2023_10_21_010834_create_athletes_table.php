@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('first_name', 50);
             $table->date('birthdate');
             $table->enum('sex', ['Male', 'Female']);
-            $table->decimal('weight', 8, 2, true);
+            $table->decimal('weight', 5, 2, true);
             $table->string('school_name', 100);
             $table->tinyInteger('grade_level');
-            $table->string('lrn');
+            $table->string('lrn', 12);
             $table->foreignId('game_id')
                 ->constrained()
                 ->restrictOnUpdate()

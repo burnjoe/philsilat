@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('class_label', 2);
             $table->enum('sex', ['Male', 'Female']);
-            $table->decimal('weight_min', 8, 2, true);
-            $table->decimal('weight_max', 8, 2, true);
+            $table->decimal('min_weight', 5, 2, true);
+            $table->decimal('max_weight', 5, 2, true);
             $table->timestamps();
         });
     }

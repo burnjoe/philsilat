@@ -19,10 +19,11 @@ return new class extends Migration
             $table->timestamp('starts_at');
             $table->timestamp('ends_at');
             $table->string('venue', 20);
-            $table->string('full_address');
+            $table->string('address');
             $table->string('barangay', 20);
             $table->string('city', 20);
             $table->string('province', 20);
+            $table->enum('status', ['UPCOMING', 'REGISTRATION OPEN', 'CANCELLED', 'ONGOING', 'COMPLETED']);
             $table->timestamps();
         });
     }
