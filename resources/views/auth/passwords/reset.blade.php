@@ -12,11 +12,11 @@
             </div>
             <div class="card card-body bg-dark m-4 d-sm-flex d-md-none">
                 <div class="container-fluid m-4 w-auto">
-                    <h1 class="h1Dark mb-5">RESET PASSWORD</h1>
+                    <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
 
                     {{-- Validation Errors --}}
                     @if($errors->any())
-                    <div class='alert alert-danger p-2 mt-5 fs-sm'>
+                    <div class='alert alert-danger p-2 fs-sm'>
                         <ul class="ps-4 mb-0">
                             @foreach ($errors->all() as $error)
                             <li class="text-justify">{{ $error }}</li>
@@ -65,11 +65,11 @@
         <div class="col-6 bg-dark d-none d-md-flex justify-content-center align-items-center">
             {{-- DESKTOP --}}
             <div class="container-fluid col-6 my-5">
-                <h1 class="h1Dark mb-5">RESET PASSWORD</h1>
+                <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
 
                 {{-- Validation Errors --}}
                 @if($errors->any())
-                <div class='alert alert-danger p-2 mt-5 fs-sm'>
+                <div class='alert alert-danger p-2 fs-sm'>
                     <ul class="ps-4 mb-0">
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
