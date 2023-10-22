@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Accounts;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
 use App\Livewire\CategoriesEdit;
@@ -49,6 +50,22 @@ Route::middleware('auth')->group(function () {
             ->name('categories.delete');
     });
 
+
+    // Manage Accounts and Manage Codes
+    Route::middleware(['can:manage accounts', 'can:manage codes'])->group(function () {
+        // All Accounts
+        Route::get('accounts', Accounts::class)
+            ->name('accounts');
+
+        // Edit Accounts
+        Route::get('accounts/edit', Accounts::class)
+            ->name('accounts.edit');
+
+        // Delete Accounts
+        Route::get('accounts/delete', Accounts::class)
+            ->name('accounts.delete');
+    });
+    
 
     // Change Password
     Route::get('change-password', ChangePassword::class)

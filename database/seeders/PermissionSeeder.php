@@ -13,6 +13,7 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Manage Categories
         Permission::create(['name' => 'view categories']);
         Permission::create(['name' => 'create categories']);
         Permission::create(['name' => 'edit categories']);
@@ -24,6 +25,28 @@ class PermissionSeeder extends Seeder
                 'create categories',
                 'edit categories',
                 'delete categories',
+            ]);
+
+        // Manage Accounts
+        Permission::create(['name' => 'view accounts']);
+        Permission::create(['name' => 'edit accounts']);
+        Permission::create(['name' => 'delete accounts']);
+
+        Permission::create(['name' => 'manage accounts'])
+            ->givePermissionTo([
+                'view accounts',
+                'edit accounts',
+                'delete accounts',
+            ]);
+
+        // Manage Codes
+        Permission::create(['name' => 'view codes']);
+        Permission::create(['name' => 'generate codes']);
+
+        Permission::create(['name' => 'manage codes'])
+            ->givePermissionTo([
+                'view codes',
+                'generate codes',
             ]);
     }
 }
