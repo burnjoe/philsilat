@@ -28,7 +28,7 @@ class Categories extends Component
         redirect()->route('categories.create');
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         redirect()->route('categories.edit')
             ->with('id', $id);

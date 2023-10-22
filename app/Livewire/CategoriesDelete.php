@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
-use Error;
 use Throwable;
 
 class CategoriesDelete extends Component
