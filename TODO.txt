@@ -5,3 +5,27 @@ Minor:
 Major:
 1.
 2.
+
+
+
+Format: 
+1. Issue Found (Module Name) (Priority Level: Low/Moderate/High)
+   Detailed Steps:
+   a.
+   b.
+   c.
+
+Example:
+1. Validation Error Message Not Displaying (Categories) (Moderate)
+   Detailed Steps:
+   a. Log in as Admin
+   b. Go to Categories; Select Add Category
+   c. Input valid values for all input boxes, except for Class Label
+   d. Issue: Validation Error Message Not Showing
+
+Found Bugs at:
+1.
+2.
+3.
+4.
+5.
