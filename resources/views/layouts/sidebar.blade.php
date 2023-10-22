@@ -12,7 +12,7 @@
         {{-- Categories --}}
         {{-- Check If Admin --}}
         <li>
-            <a href="#">
+            <a href="{{ route('categories') }}">
                 <i class="bi bi-clipboard2-check"></i>
                 <span class="nav-item">Categories</span>
             </a>

@@ -8,9 +8,8 @@
         <div class="col-12">
             <div class="card bg-audience" style="overflow: hidden; height: 130px; background-color: white;">
                 <div class="header d-flex align-items-center h-100 p-3">
-
                     <div class="gx-1 text-light fw-bold ps-3" style="font-size: 28px;">
-                        Welcome, {{ auth()->user()->name }}!
+                        Welcome, {{ Auth::user()->profileable->first_name. ' ' .Auth::user()->profileable->last_name }}!
                     </div>
                 </div>
             </div>
@@ -29,7 +28,7 @@
                         <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
                             <span class="text-end">Events</span>
                             <span class="fs-2 text-end">
-                                {{-- Number of Events Here --}} 10
+                                {{ $events->count() }}
                             </span>
                         </div>
                     </div>
@@ -47,7 +46,7 @@
                         <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
                             <span class="text-end">Coaches</span>
                             <span class="fs-2 text-end">
-                                {{-- Number of Coaches Accounts Here --}} 16
+                                {{ $coachesCount }}
                             </span>
                         </div>
                     </div>
@@ -65,7 +64,7 @@
                         <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
                             <span class="text-end">Teams</span>
                             <span class="fs-2 text-end">
-                                {{-- Number of Teams Here --}} 15
+                                {{ $events->pluck('teams')->flatten()->count(); }}
                             </span>
                         </div>
                     </div>
@@ -97,7 +96,7 @@
                         <div class="header bg-audience h-100 p-3" style="overflow: hidden; max-height: 100%;">
                             <div class="gx-1 text-light ps-3" style="font-size: 24px;">
                                 <div class="row align-items-center gx-1">
-                                    <span class="text-end">{{ now()->format('M Y, D')}}</span>
+                                    <span class="text-end">{{ now()->format('D, M Y')}}</span>
                                     <span class="fw-bold text-end" style="font-size: 3rem;">{{ now()->format('d')
                                         }}</span>
                                 </div>

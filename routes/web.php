@@ -1,5 +1,9 @@
 <?php
 
+use App\Livewire\Categories;
+use App\Livewire\CategoriesCreate;
+use App\Livewire\CategoriesDelete;
+use App\Livewire\CategoriesEdit;
 use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +24,25 @@ Route::get('/', function() {
 
 // Authenticated Users
 Route::middleware('auth')->group(function () {
+    // Dashboard
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
+
+    // Categories
+    Route::get('categories', Categories::class)
+        ->name('categories');
+
+    // Add Categories
+    Route::get('categories/add', CategoriesCreate::class)
+        ->name('categories.create');
+
+    // Edit Categories
+    Route::get('categories/edit', CategoriesEdit::class)
+        ->name('categories.edit');
+
+    // Delete Categories
+    Route::get('categories/delete', CategoriesDelete::class)
+        ->name('categories.delete');
 
     
     
