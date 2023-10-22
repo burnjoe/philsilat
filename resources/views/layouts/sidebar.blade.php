@@ -34,9 +34,9 @@
         <li>
             <a href="{{ route('accounts') }}">
                 <i class="bi bi-person-badge"></i>
-                <span class="nav-item">Accounts</span>
+                <span class="nav-item">User Accounts</span>
             </a>
-            <span class="tooltip">Accounts</span>
+            <span class="tooltip">User Accounts</span>
         </li>
         @endcan
 </div>

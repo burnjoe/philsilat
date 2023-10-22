@@ -19,7 +19,7 @@ class Categories extends Component
         return view('livewire.categories', [
             'categories' => Category::orderBy('id', 'desc')
                 ->search($this->search)
-                ->paginate(10),
+                ->paginate(15),
         ]);
     }
 
