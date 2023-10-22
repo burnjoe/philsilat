@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
         $admins = Admin::all();
         $coaches = Coach::all();
 
-        foreach($admins as $admin) {
-            if($admin->last_name == 'Sabana') {
+        foreach ($admins as $admin) {
+            if ($admin->last_name == 'Sabana') {
                 User::factory()->create([
                     'email' => 'sabanajholo@gmail.com',
                     'password' => bcrypt('burnjoe25'),
@@ -36,11 +36,29 @@ class UserSeeder extends Seeder
             }
         }
 
-        foreach($coaches as $coach) {
-            User::factory()->create([
-                'profileable_id' => $coach->id,
-                'profileable_type' => Coach::class,
-            ])->assignRole('coach');
+        foreach ($coaches as $coach) {
+            if ($coach->last_name == 'Derla') {
+                User::factory()->create([
+                    'email' => 'derlajulius@gmail.com',
+                    'password' => bcrypt('password'),
+                    'status' => 'ACTIVE',
+                    'profileable_id' => $coach->id,
+                    'profileable_type' => Coach::class,
+                ])->assignRole('coach');
+            } else if ($coach->last_name == 'Ferreras') {
+                User::factory()->create([
+                    'email' => 'ferrerasvinceaustin@gmail.com',
+                    'password' => bcrypt('password'),
+                    'status' => 'ACTIVE',
+                    'profileable_id' => $coach->id,
+                    'profileable_type' => Coach::class,
+                ])->assignRole('coach');
+            } else {
+                User::factory()->create([
+                    'profileable_id' => $coach->id,
+                    'profileable_type' => Coach::class,
+                ])->assignRole('coach');
+            }
         }
     }
 }
