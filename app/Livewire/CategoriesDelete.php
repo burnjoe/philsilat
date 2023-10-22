@@ -20,7 +20,7 @@ class CategoriesDelete extends Component
         try {
             $this->category = Category::find(session('id'));
 
-            if(!$this->category) {
+            if (!$this->category) {
                 throw new Throwable;
             }
         } catch (\Throwable $th) {
@@ -33,9 +33,13 @@ class CategoriesDelete extends Component
      */
     public function destroy()
     {
-        $this->category->delete();
+        try {
+            $this->category->delete();
 
-        redirect()->route('categories');
+            redirect()->route('categories');
+        } catch (\Throwable $th) {
+            // Error here
+        }
     }
 
     /**

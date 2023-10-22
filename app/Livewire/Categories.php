@@ -17,7 +17,7 @@ class Categories extends Component
     public function render()
     {
         return view('livewire.categories', [
-            'categories' => Category::latest()
+            'categories' => Category::orderBy('id', 'desc')
                 ->search($this->search)
                 ->paginate(10),
         ]);

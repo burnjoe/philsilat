@@ -72,11 +72,15 @@ class CategoriesEdit extends Component
      */
     public function update()
     {
-        $validated = $this->validate();
+        try {
+            $validated = $this->validate();
 
-        $this->category->update($validated);
+            $this->category->update($validated);
 
-        redirect()->route('categories');
+            redirect()->route('categories');
+        } catch (\Throwable $th) {
+            // Error here
+        }
     }
 
     /**

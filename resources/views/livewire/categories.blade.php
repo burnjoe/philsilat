@@ -25,6 +25,7 @@
     <div class="mx-4 mb-3 bg-white" style="overflow-x: auto; box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.2);">
         <table class="table table-striped table-hover mb-0">
             <thead class="table-dark text-light">
+                <th scope="col">ID</th>
                 <th scope="col">Class Label</th>
                 <th scope="col">Sex Category</th>
                 <th scope="col">Min Weight (kg)</th>
@@ -34,6 +35,7 @@
             <tbody>
                 @foreach ($categories as $category)
                 <tr scope="row" wire:key="{{ $category->id }}">
+                    <td>{{ $category->id }}</td>
                     <td>{{ $category->class_label }}</td>
                     <td>{{ $category->sex }}</td>
                     <td>{{ $category->min_weight }}</td>
