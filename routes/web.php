@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Accounts;
+use App\Livewire\AccountsDelete;
 use App\Livewire\AccountsEdit;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
@@ -63,7 +64,7 @@ Route::middleware('auth')->group(function () {
             ->name('accounts.edit');
 
         // Delete Accounts
-        Route::get('accounts/delete', Accounts::class)
+        Route::get('accounts/delete', AccountsDelete::class)
             ->name('accounts.delete');
     });
     

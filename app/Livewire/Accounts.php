@@ -26,7 +26,7 @@ class Accounts extends Component
         ]);
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         redirect()->route('accounts.edit')
             ->with('id', $id);
