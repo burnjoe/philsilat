@@ -47,7 +47,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function profileable(): MorphTo {
-        return $this->morphTo(); 
+
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('email', 'like', "%{$value}%")
+            ->orWhere('status', 'like', "%{$value}%");
+    }
+
+    public function profileable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

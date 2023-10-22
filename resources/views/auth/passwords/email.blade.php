@@ -12,7 +12,7 @@
             </div>
             <div class="card card-body bg-dark m-4 d-sm-flex d-md-none">
                 <div class="container-fluid m-4 w-auto">
-                    <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
+                    <h1 class="h1Dark mb-4">FORGOT PASSWORD</h1>
 
                     {{-- Validation Errors --}}
                     @if($errors->any())
@@ -60,7 +60,7 @@
         <div class="col-6 bg-dark d-none d-md-flex justify-content-center align-items-center">
             {{-- DESKTOP --}}
             <div class="container-fluid col-6 my-5">
-                <h1 class="h1Dark mb-4">RESET PASSWORD</h1>
+                <h1 class="h1Dark mb-4">FORGOT PASSWORD</h1>
 
                 {{-- Validation Errors --}}
                 @if($errors->any())

@@ -8,6 +8,7 @@ use Livewire\Component;
 class CategoriesEdit extends Component
 {
     public $category;
+    
     public $class_label;
     public $sex;
     public $min_weight;
