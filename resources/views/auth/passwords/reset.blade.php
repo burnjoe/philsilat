@@ -91,7 +91,7 @@
                     {{-- Password --}}
                     <div class="form-group mt-3">
                         <input type="password" class="form-control custInput @error('password') is-invalid @enderror"
-                            name="password" value="{{ old('password') }}" required placeholder="New Password" autofocus>
+                            name="password" required placeholder="New Password" autofocus>
                     </div>
                     {{-- Confirm Password --}}
                     <div class="form-group mt-3">
