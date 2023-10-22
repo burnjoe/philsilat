@@ -1,5 +1,4 @@
 Minor:
-1. Check permission before showing form and performing action for CRUD (Categories)
 2. Throw message whether action was success or failure, either show it on alert or toast component (Categories)
 3. Layout is a bit off, Top Navigation Bar is not the same height in login and once logged in/dashboard (UI Layout)
 4. Once logged in, the layout doesn't fill the full height of the viewport/window (UI Layout)
@@ -28,7 +27,7 @@ Example:
    c. Input valid values for all input boxes, except for Class Label
    d. Issue: Validation Error Message Not Showing
 
-Found Bugs at:
+Found Bugs:
 1.
 2.
 3.
