@@ -1,0 +1,7 @@
+Minor:
+1. Check permission before showing form and performing action for CRUD (Categories)
+2. Throw message whether action was success or failure, either show it on alert or toast component (Categories)
+
+Major:
+1.
+2.
