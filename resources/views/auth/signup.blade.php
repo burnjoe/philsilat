@@ -90,7 +90,7 @@
                         </div>
                         {{-- Button --}}
                         <div class="form-btn d-flex justify-content-end mt-3">
-                            <button type="submit" value="SIGN UP" class="custBtn custBtn-gray">SIGN UP</button>
+                            <button type="submit" class="custBtn custBtn-gray">SIGN UP</button>
                         </div>
                         <div class="text-center mt-4">
                             <p class="custText">
@@ -184,7 +184,7 @@
                     </div>
                     {{-- Button --}}
                     <div class="form-btn d-flex justify-content-end mt-3">
-                        <button type="submit" value="SIGN UP" class="custBtn custBtn-gray">SIGN UP</button>
+                        <button type="submit" class="custBtn custBtn-gray">SIGN UP</button>
                     </div>
                     <div class="text-center mt-4">
                         <p class="custText">

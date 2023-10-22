@@ -44,8 +44,8 @@
                         <div class="row flex-row mt-3">
                             <div class="col">
                                 <div class="form-btn d-flex justify-content-end">
-                                    <button type="submit" value="LOGIN" name="login_desktop"
-                                        class="custBtn custBtn-gray">SEND PASSWORD RESET LINK
+                                    <button type="submit" class="custBtn custBtn-gray">
+                                        SEND PASSWORD RESET LINK
                                     </button>
                                 </div>
                             </div>
@@ -92,8 +92,8 @@
                     <div class="row flex-row mt-3">
                         <div class="col">
                             <div class="form-btn d-flex justify-content-end">
-                                <button type="submit" value="LOGIN" name="login_desktop"
-                                    class="custBtn custBtn-gray">SEND PASSWORD RESET LINK
+                                <button type="submit" class="custBtn custBtn-gray">
+                                    SEND PASSWORD RESET LINK
                                 </button>
                             </div>
                         </div>
