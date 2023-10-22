@@ -1,10 +1,11 @@
 <?php
 
+use App\Livewire\Dashboard;
 use App\Livewire\Categories;
+use App\Livewire\CategoriesEdit;
+use App\Livewire\Auth\ChangePassword;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
-use App\Livewire\CategoriesEdit;
-use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect()->route('login');
 })->name('root');
 
@@ -28,26 +29,32 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
 
-    // Categories
-    Route::get('categories', Categories::class)
-        ->name('categories');
 
-    // Add Categories
-    Route::get('categories/add', CategoriesCreate::class)
-        ->name('categories.create');
+    // Manage Categories
+    Route::middleware('can:manage categories')->group(function () {
+        // All Categories
+        Route::get('categories', Categories::class)
+            ->name('categories');
 
-    // Edit Categories
-    Route::get('categories/edit', CategoriesEdit::class)
-        ->name('categories.edit');
+        // Add Categories
+        Route::get('categories/add', CategoriesCreate::class)
+            ->name('categories.create');
 
-    // Delete Categories
-    Route::get('categories/delete', CategoriesDelete::class)
-        ->name('categories.delete');
+        // Edit Categories
+        Route::get('categories/edit', CategoriesEdit::class)
+            ->name('categories.edit');
 
-    
-    
+        // Delete Categories
+        Route::get('categories/delete', CategoriesDelete::class)
+            ->name('categories.delete');
+    });
+
+
+    // Change Password
+    Route::get('change-password', ChangePassword::class)
+        ->name('change-password');
 });
 
 
 // includes the auth.php in routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

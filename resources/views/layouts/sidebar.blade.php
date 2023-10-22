@@ -10,7 +10,7 @@
         </li>
 
         {{-- Categories --}}
-        {{-- Check If Admin --}}
+        @can('manage categories')
         <li>
             <a href="{{ route('categories') }}">
                 <i class="bi bi-clipboard2-check"></i>
@@ -18,6 +18,7 @@
             </a>
             <span class="tooltip">Categories</span>
         </li>
+        @endcan
 
         {{-- Events --}}
         <li>

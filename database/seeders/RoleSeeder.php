@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
     {
         Role::create(['name' => 'admin'])
             ->syncPermissions([
-                'manage events',
+                'manage categories',
             ]);
 
         Role::create(['name' => 'coach'])

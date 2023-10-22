@@ -13,17 +13,17 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::create(['name' => 'view events']);
-        Permission::create(['name' => 'create events']);
-        Permission::create(['name' => 'edit events']);
-        Permission::create(['name' => 'delete events']);
+        Permission::create(['name' => 'view categories']);
+        Permission::create(['name' => 'create categories']);
+        Permission::create(['name' => 'edit categories']);
+        Permission::create(['name' => 'delete categories']);
 
-        Permission::create(['name' => 'manage events'])
+        Permission::create(['name' => 'manage categories'])
             ->givePermissionTo([
-                'view events',
-                'create events',
-                'edit events',
-                'delete events',
+                'view categories',
+                'create categories',
+                'edit categories',
+                'delete categories',
             ]);
     }
 }

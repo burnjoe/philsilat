@@ -40,7 +40,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="change_password.php">
+                                <a class="dropdown-item" href="{{ route('change-password') }}">
                                     <i class="bi bi-key me-3"></i>Change Password
                                 </a>
                             </li>
