@@ -18,7 +18,7 @@
         </div>
         <div>
             <button wire:click.prevent="create" name="action" class="custBtn custBtn-light ms-3"><i
-                    class="bi bi-plus-lg"></i>&nbsp Add Category</button>
+                    class="bi bi-plus-lg"></i>&nbsp Add New Category</button>
         </div>
     </div>
 
