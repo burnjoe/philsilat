@@ -3,6 +3,7 @@
 use App\Livewire\Accounts;
 use App\Livewire\AccountsDelete;
 use App\Livewire\AccountsEdit;
+use App\Livewire\AccountsIndex;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
 use App\Livewire\CategoriesEdit;
@@ -58,6 +59,10 @@ Route::middleware('auth')->group(function () {
         // All Accounts
         Route::get('accounts', Accounts::class)
             ->name('accounts');
+
+        // Signup Codes
+        Route::get('accounts/signup-codes', AccountsIndex::class)
+            ->name('accounts.index');
 
         // Edit Accounts
         Route::get('accounts/edit', AccountsEdit::class)

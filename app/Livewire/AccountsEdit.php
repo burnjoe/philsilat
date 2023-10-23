@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Validation\Rule;
 
 class AccountsEdit extends Component
 {
@@ -20,11 +21,48 @@ class AccountsEdit extends Component
 
 
     /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.accounts.edit');
+    }
+
+    /**
      * Validation rules
      */
     public function rules()
     {
-        return [];
+        if ($this->password) {
+            return [
+                'last_name' => ['required', 'string', 'min:2', 'max:50'],
+                'first_name' => ['required', 'string', 'min:2', 'max:50'],
+                'phone' => [
+                    'required', 'regex:/^09\d{9}$/',
+                    Rule::unique('admins', 'phone')->ignore($this->user->id),
+                    Rule::unique('coaches', 'phone')->ignore($this->user->id),
+                ],
+                'sex' => ['required', 'in:Male,Female'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->user->id],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'role' => ['required', 'string', 'in:Admin,Coach'],
+                'status' => ['required', 'string', 'in:ACTIVE,INACTIVE'],
+            ];
+        }
+
+        return [
+            'last_name' => ['required', 'string', 'min:2', 'max:50'],
+            'first_name' => ['required', 'string', 'min:2', 'max:50'],
+            'phone' => [
+                'required', 'regex:/^09\d{9}$/',
+                Rule::unique('admins', 'phone')->ignore($this->user->id),
+                Rule::unique('coaches', 'phone')->ignore($this->user->id),
+            ],
+            'sex' => ['required', 'in:Male,Female'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->user->id],
+            'role' => ['required', 'string', 'in:Admin,Coach'],
+            'status' => ['required', 'string', 'in:ACTIVE,INACTIVE'],
+        ];
     }
 
     /**
@@ -32,7 +70,9 @@ class AccountsEdit extends Component
      */
     public function messages()
     {
-        return [];
+        return [
+            'phone.regex' => 'The :attribute field must be in a valid format. (e.g. 0921XXXXXXX)',
+        ];
     }
 
     /**
@@ -40,7 +80,10 @@ class AccountsEdit extends Component
      */
     public function validationAttributes()
     {
-        return [];
+        return [
+            'email' => 'email address',
+            'phone' => 'phone number',
+        ];
     }
 
     /**
@@ -56,7 +99,7 @@ class AccountsEdit extends Component
             $this->sex = $this->user->profileable->sex;
             $this->email = $this->user->email;
             $this->phone = $this->user->profileable->phone;
-            $this->role = $this->user->getRoleNames()->first();
+            $this->role = ucwords($this->user->getRoleNames()->first());
             $this->status = $this->user->status;
         } catch (\Throwable $th) {
             redirect()->route('accounts');
@@ -68,18 +111,11 @@ class AccountsEdit extends Component
      */
     public function update()
     {
+        // Add here checking if this user (admins & coaches) is associated with other records
         $validated = $this->validate();
 
-        $this->category->update($validated);
+        $this->user->update($validated);
 
         redirect()->route('accounts');
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.accounts.edit');
     }
 }

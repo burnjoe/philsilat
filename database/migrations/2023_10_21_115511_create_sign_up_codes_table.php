@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sign_up_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 8);
+            $table->string('code', 8)->unique();
             $table->enum('role', ['admin', 'coach']);
             $table->timestamps();
         });

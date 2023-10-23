@@ -12,6 +12,10 @@ class Accounts extends Component
 
     public $search = "";
 
+
+    /**
+     * Renders the view
+     */
     public function render()
     {
         return view('livewire.accounts', [
@@ -26,12 +30,26 @@ class Accounts extends Component
         ]);
     }
 
+    /**
+     * Redirects user to view all signup codes
+     */
+    public function index()
+    {
+        redirect()->route('accounts.index');
+    }
+
+    /**
+     * Redirects user to edit record page
+     */
     public function edit(int $id)
     {
         redirect()->route('accounts.edit')
             ->with('id', $id);
     }
 
+    /**
+     * Redirects user to delete record page
+     */
     public function delete(int $id)
     {
         redirect()->route('accounts.delete')

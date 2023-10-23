@@ -13,4 +13,14 @@ class SignUpCode extends Model
         'code',
         'role',
     ];
+
+
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value) {
+        $query->where('id', 'like', "%{$value}%")
+            ->orWhere('code', 'like', "%{$value}%")
+            ->orWhere('role', 'like', "%{$value}%");
+    }
 }
