@@ -5,8 +5,8 @@ Minor:
 5. Sidebar Mobile Responsiveness migration of scripts (UI Layout)
 
 Major:
-1.
-2.
+1. Do not allow delete on cascade when data to be deleted is used by other records.
+2. Do not allow update when data to be updated is used by other records - this ensures data integrity.
 
 
 --------------------------------------------------------------------------------------------------------------------------
