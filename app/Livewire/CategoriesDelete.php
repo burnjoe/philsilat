@@ -12,6 +12,14 @@ class CategoriesDelete extends Component
 
 
     /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.delete');
+    }
+
+    /**
      * Initializes attributes upon load
      */
     public function mount()
@@ -39,13 +47,5 @@ class CategoriesDelete extends Component
         } catch (\Throwable $th) {
             // Error here
         }
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.delete');
     }
 }

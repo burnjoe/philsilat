@@ -8,12 +8,20 @@ use Livewire\Component;
 class CategoriesEdit extends Component
 {
     public $category;
-    
+
     public $class_label;
     public $sex;
     public $min_weight;
     public $max_weight;
 
+
+    /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.edit');
+    }
 
     /**
      * Validation rules
@@ -78,13 +86,5 @@ class CategoriesEdit extends Component
         $this->category->update($validated);
 
         redirect()->route('categories');
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.edit');
     }
 }

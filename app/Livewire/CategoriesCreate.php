@@ -14,6 +14,14 @@ class CategoriesCreate extends Component
 
 
     /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.create');
+    }
+
+    /**
      * Validation rules
      */
     public function rules()
@@ -59,13 +67,5 @@ class CategoriesCreate extends Component
         Category::create($validated);
 
         redirect()->route('categories');
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.create');
     }
 }

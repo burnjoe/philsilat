@@ -14,7 +14,7 @@
                         <label for="class_label">Class Label<span style="color: #b63e3e;"> *</span></label>
                         <input wire:model="class_label" id="class_label"
                             class="form-control custInput @error('class_label') is-invalid @enderror" type="text"
-                            name="class_label" maxlength="2" autocomplete="off" placeholder="A-Z" required>
+                            name="class_label" maxlength="2" autocomplete="off" placeholder="A-Z" required autofocus>
                         @error('class_label')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

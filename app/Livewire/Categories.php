@@ -14,6 +14,9 @@ class Categories extends Component
     public $search = "";
 
 
+    /**
+     * Renders the view
+     */
     public function render()
     {
         return view('livewire.categories', [
@@ -23,17 +26,26 @@ class Categories extends Component
         ]);
     }
 
+    /**
+     * Redirects user to create record page
+     */
     public function create()
     {
         redirect()->route('categories.create');
     }
 
+    /**
+     * Redirects user to edit record page
+     */
     public function edit(int $id)
     {
         redirect()->route('categories.edit')
             ->with('id', $id);
     }
 
+    /**
+     * Redirects user to delete record page
+     */
     public function delete(int $id)
     {
         redirect()->route('categories.delete')
