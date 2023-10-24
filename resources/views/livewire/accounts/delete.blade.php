@@ -1,5 +1,5 @@
 <div>
-    <div class="container text-dark py-3">
+    <div class="text-dark p-3">
         <h3 class=" fw-bold">DELETE USER ACCOUNT</h3>
         <hr class="mb-0">
     </div>

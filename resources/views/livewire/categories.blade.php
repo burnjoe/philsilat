@@ -1,5 +1,5 @@
 <div>
-    <div class="container text-dark py-3">
+    <div class="text-dark p-3">
         <div class="d-flex align-items-center">
             <h3 class="fw-bold mb-0">CATEGORIES</h3>
         </div>
