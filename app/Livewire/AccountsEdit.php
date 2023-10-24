@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class AccountsEdit extends Component
 {
@@ -111,12 +112,21 @@ class AccountsEdit extends Component
      */
     public function update()
     {
-        // Add here checking if this user (admins & coaches) is associated with other records
-        $validated = $this->validate();
+        try {
+            $this->authorize('edit accounts');
 
-        $this->user->update($validated);
+            // Add here checking if this user (admins & coaches) is associated with other records
+            $validated = $this->validate();
 
-        redirect()->route('accounts')
-            ->with('success', 'The user account has been updated successfully.');
+            $this->user->update($validated);
+
+            redirect()->route('accounts')
+                ->with('success', 'The user account has been updated successfully.');
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 }

@@ -2,10 +2,11 @@
 
 namespace App\Livewire;
 
-use App\Models\Category;
 use App\Models\Event;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Categories extends Component
 {
@@ -31,7 +32,16 @@ class Categories extends Component
      */
     public function create()
     {
-        redirect()->route('categories.create');
+        try {
+            $this->authorize('create categories');
+
+            redirect()->route('categories.create');
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('categories')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 
     /**
@@ -39,8 +49,17 @@ class Categories extends Component
      */
     public function edit(int $id)
     {
-        redirect()->route('categories.edit')
-            ->with('id', $id);
+        try {
+            $this->authorize('edit categories');
+
+            redirect()->route('categories.edit')
+                ->with('id', $id);
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('categories')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 
     /**
@@ -48,7 +67,16 @@ class Categories extends Component
      */
     public function delete(int $id)
     {
-        redirect()->route('categories.delete')
-            ->with('id', $id);
+        try {
+            $this->authorize('delete categories');
+
+            redirect()->route('categories.delete')
+                ->with('id', $id);
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('categories')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 }

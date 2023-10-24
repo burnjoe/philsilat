@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\SignUpCode;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class AccountsIndex extends Component
 {
@@ -55,18 +56,27 @@ class AccountsIndex extends Component
      */
     public function store()
     {
-        $this->validate();
+        try {
+            $this->authorize('generate codes');
 
-        for ($i = 0; $i < $this->num_codes; $i++) {
-            SignUpCode::create([
-                'code' => $this->uniqueRandomCode(),
-                'role' => $this->role,
-            ]);
+            $this->validate();
+
+            for ($i = 0; $i < $this->num_codes; $i++) {
+                SignUpCode::create([
+                    'code' => $this->uniqueRandomCode(),
+                    'role' => $this->role,
+                ]);
+            }
+
+            session()->flash('success', 'The ' . $this->num_codes . ' signup code(s) has been added successfully.');
+
+            $this->reset();
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts.index')
+                    ->with('danger', 'Unauthorized action.');
+            }
         }
-
-        session()->flash('success', 'The ' . $this->num_codes . ' signup code(s) has been added successfully');
-
-        $this->reset();
     }
 
     /**

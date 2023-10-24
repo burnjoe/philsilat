@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
 use Throwable;
+use App\Models\User;
 use Livewire\Component;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class AccountsDelete extends Component
 {
@@ -41,12 +42,18 @@ class AccountsDelete extends Component
     public function destroy()
     {
         try {
+            $this->authorize('delete accounts');
+
             $this->user->delete();
 
             redirect()->route('accounts')
                 ->with('success', 'The user account has been updated successfully.');
         } catch (\Throwable $th) {
             // Error here
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts')
+                    ->with('danger', 'Unauthorized action.');
+            }
         }
     }
 }

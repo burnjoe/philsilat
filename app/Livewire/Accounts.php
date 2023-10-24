@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Accounts extends Component
 {
@@ -35,7 +36,16 @@ class Accounts extends Component
      */
     public function index()
     {
-        redirect()->route('accounts.index');
+        try {
+            $this->authorize('view codes');
+
+            redirect()->route('accounts.index');
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 
     /**
@@ -43,8 +53,17 @@ class Accounts extends Component
      */
     public function edit(int $id)
     {
-        redirect()->route('accounts.edit')
-            ->with('id', $id);
+        try {
+            $this->authorize('edit accounts');
+
+            redirect()->route('accounts.edit')
+                ->with('id', $id);
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 
     /**
@@ -52,7 +71,16 @@ class Accounts extends Component
      */
     public function delete(int $id)
     {
-        redirect()->route('accounts.delete')
-            ->with('id', $id);
+        try {
+            $this->authorize('delete accounts');
+
+            redirect()->route('accounts.delete')
+                ->with('id', $id);
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('accounts')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 }

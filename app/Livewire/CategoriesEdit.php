@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class CategoriesEdit extends Component
 {
@@ -81,11 +82,20 @@ class CategoriesEdit extends Component
      */
     public function update()
     {
-        $validated = $this->validate();
+        try {
+            $this->authorize('edit categories');
 
-        $this->category->update($validated);
+            $validated = $this->validate();
 
-        redirect()->route('categories')
-            ->with('success', 'The category has been updated successfully.');
+            $this->category->update($validated);
+
+            redirect()->route('categories')
+                ->with('success', 'The category has been updated successfully.');
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('categories')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 }
