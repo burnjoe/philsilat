@@ -64,7 +64,7 @@ class CategoriesCreate extends Component
     public function store()
     {
         try {
-            $this->authorize('create categories');
+            $this->authorize('manage categories');
 
             $validated = $this->validate();
 

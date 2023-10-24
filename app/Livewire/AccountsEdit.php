@@ -113,7 +113,7 @@ class AccountsEdit extends Component
     public function update()
     {
         try {
-            $this->authorize('edit accounts');
+            $this->authorize('manage accounts');
 
             // Add here checking if this user (admins & coaches) is associated with other records
             $validated = $this->validate();

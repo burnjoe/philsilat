@@ -40,7 +40,7 @@ class Events extends Component
     public function create()
     {
         try {
-            $this->authorize('create events');
+            $this->authorize('manage events');
 
             redirect()->route('events.create');
         } catch (\Throwable $th) {

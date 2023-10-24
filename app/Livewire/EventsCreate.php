@@ -75,7 +75,7 @@ class EventsCreate extends Component
     public function store()
     {
         try {
-            $this->authorize('create events');
+            $this->authorize('manage events');
 
             $validated = $this->validate();
 

@@ -33,7 +33,7 @@ class Categories extends Component
     public function create()
     {
         try {
-            $this->authorize('create categories');
+            $this->authorize('manage categories');
 
             redirect()->route('categories.create');
         } catch (\Throwable $th) {
@@ -50,7 +50,7 @@ class Categories extends Component
     public function edit(int $id)
     {
         try {
-            $this->authorize('edit categories');
+            $this->authorize('manage categories');
 
             redirect()->route('categories.edit')
                 ->with('id', $id);
@@ -68,7 +68,7 @@ class Categories extends Component
     public function delete(int $id)
     {
         try {
-            $this->authorize('delete categories');
+            $this->authorize('manage categories');
 
             redirect()->route('categories.delete')
                 ->with('id', $id);

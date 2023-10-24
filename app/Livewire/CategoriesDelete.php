@@ -42,7 +42,7 @@ class CategoriesDelete extends Component
     public function destroy()
     {
         try {
-            $this->authorize('delete categories');
+            $this->authorize('manage categories');
 
             $this->category->delete();
 

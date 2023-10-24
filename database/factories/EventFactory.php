@@ -17,9 +17,19 @@ class EventFactory extends Factory
     public function definition(): array
     {
         // Generate a random time for logged in and a later random time for logged out
-        $starts_at = fake()->dateTimeThisMonth();
+        $starts_at = fake()->randomElement([fake()->dateTimeThisMonth(), now()->modify('+' . mt_rand(0, 5) . ' days')]);
         $ends_at = clone $starts_at;
         $ends_at->modify('+' . mt_rand(1, 2) . ' days');
+
+        if ($starts_at >= now()) {
+            $status = fake()->randomElement(['UPCOMING', 'REGISTRATION OPEN', 'CANCELLED']);
+        } else if ($starts_at <= now() && $ends_at <= now()) {
+            $status = fake()->randomElement(["COMPLETED", "ONGOING"]);
+        } else if ($starts_at <= now() && $ends_at >= now()) {
+            $status = fake()->randomElement(['CANCELLED', 'ONGOING']);
+        } else {
+            $status = 'CANCELLED';
+        }
 
         return [
             'host_name' => fake()->firstName(). ' ' .fake()->lastName(),
@@ -32,7 +42,7 @@ class EventFactory extends Factory
             'barangay' => 'Banay-Banay',
             'city' => 'Cabuyao',
             'province' => 'Laguna',
-            'status' => fake()->randomElement(['UPCOMING', 'REGISTRATION OPEN', 'CANCELLED', 'ONGOING', 'COMPLETED']),
+            'status' => $status,
         ];
     }
 }

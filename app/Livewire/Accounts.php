@@ -37,7 +37,7 @@ class Accounts extends Component
     public function index()
     {
         try {
-            $this->authorize('view codes');
+            $this->authorize('manage codes');
 
             redirect()->route('accounts.index');
         } catch (\Throwable $th) {
@@ -54,7 +54,7 @@ class Accounts extends Component
     public function edit(int $id)
     {
         try {
-            $this->authorize('edit accounts');
+            $this->authorize('manage accounts');
 
             redirect()->route('accounts.edit')
                 ->with('id', $id);
@@ -72,7 +72,7 @@ class Accounts extends Component
     public function delete(int $id)
     {
         try {
-            $this->authorize('delete accounts');
+            $this->authorize('manage accounts');
 
             redirect()->route('accounts.delete')
                 ->with('id', $id);

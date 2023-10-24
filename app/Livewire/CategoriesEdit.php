@@ -83,7 +83,7 @@ class CategoriesEdit extends Component
     public function update()
     {
         try {
-            $this->authorize('edit categories');
+            $this->authorize('manage categories');
 
             $validated = $this->validate();
 

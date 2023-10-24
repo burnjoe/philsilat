@@ -42,7 +42,7 @@ class AccountsDelete extends Component
     public function destroy()
     {
         try {
-            $this->authorize('delete accounts');
+            $this->authorize('manage accounts');
 
             $this->user->delete();
 

@@ -57,7 +57,7 @@ class AccountsIndex extends Component
     public function store()
     {
         try {
-            $this->authorize('generate codes');
+            $this->authorize('manage codes');
 
             $this->validate();
 
