@@ -66,6 +66,7 @@ class CategoriesCreate extends Component
 
         Category::create($validated);
 
-        redirect()->route('categories');
+        redirect()->route('categories')
+            ->with('success', 'The category has been added successfully.');
     }
 }

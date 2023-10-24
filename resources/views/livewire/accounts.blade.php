@@ -6,6 +6,9 @@
         <hr class="mb-0">
     </div>
 
+    {{-- Alerts --}}
+    @include('livewire.inc.alerts')
+
     <div class="d-flex justify-content-between mx-4 py-3">
         <div class="d-flex align-items-center">
             <input wire:model.live.debounce.300ms="search" class="form-control custInput" type="text" name="search"

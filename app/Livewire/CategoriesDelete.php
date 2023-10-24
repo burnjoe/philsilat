@@ -43,7 +43,8 @@ class CategoriesDelete extends Component
         try {
             $this->category->delete();
 
-            redirect()->route('categories');
+            redirect()->route('categories')
+                ->with('success', 'The category has been deleted successfully.');
         } catch (\Throwable $th) {
             // Error here
         }

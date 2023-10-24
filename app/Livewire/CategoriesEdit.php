@@ -85,6 +85,7 @@ class CategoriesEdit extends Component
 
         $this->category->update($validated);
 
-        redirect()->route('categories');
+        redirect()->route('categories')
+            ->with('success', 'The category has been updated successfully.');
     }
 }

@@ -10,7 +10,7 @@ class AccountsDelete extends Component
 {
     public $user;
 
-    
+
     /**
      * Renders the view
      */
@@ -35,7 +35,7 @@ class AccountsDelete extends Component
         }
     }
 
-     /**
+    /**
      * Deletes the record from the database
      */
     public function destroy()
@@ -43,7 +43,8 @@ class AccountsDelete extends Component
         try {
             $this->user->delete();
 
-            redirect()->route('accounts');
+            redirect()->route('accounts')
+                ->with('success', 'The user account has been updated successfully.');
         } catch (\Throwable $th) {
             // Error here
         }

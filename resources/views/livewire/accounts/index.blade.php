@@ -57,6 +57,9 @@
         </div>
     </div>
 
+    {{-- Alerts --}}
+    @include('livewire.inc.alerts')
+
     {{-- Search and Back --}}
     <div class="d-flex justify-content-between mx-4 py-3">
         <div class="d-flex align-items-center">

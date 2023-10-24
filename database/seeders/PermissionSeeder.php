@@ -27,6 +27,20 @@ class PermissionSeeder extends Seeder
                 'delete categories',
             ]);
 
+        // Manage Events
+        Permission::create(['name' => 'view events']);
+        Permission::create(['name' => 'create events']);
+        Permission::create(['name' => 'edit events']);
+        Permission::create(['name' => 'delete events']);
+
+        Permission::create(['name' => 'manage events'])
+            ->givePermissionTo([
+                'view events',
+                'create events',
+                'edit events',
+                'delete events',
+            ]);
+
         // Manage Accounts
         Permission::create(['name' => 'view accounts']);
         Permission::create(['name' => 'edit accounts']);

@@ -64,6 +64,8 @@ class AccountsIndex extends Component
             ]);
         }
 
+        session()->flash('success', 'The ' . $this->num_codes . ' signup code(s) has been added successfully');
+
         $this->reset();
     }
 
