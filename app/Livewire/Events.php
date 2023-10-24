@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Event;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Events extends Component
 {
@@ -38,6 +39,15 @@ class Events extends Component
      */
     public function create()
     {
-        redirect()->route('events.create');
+        try {
+            $this->authorize('create events');
+
+            redirect()->route('events.create');
+        } catch (\Throwable $th) {
+            if ($th instanceof AuthorizationException) {
+                redirect()->route('events')
+                    ->with('danger', 'Unauthorized action.');
+            }
+        }
     }
 }
