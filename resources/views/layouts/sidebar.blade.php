@@ -21,13 +21,15 @@
         @endcan
 
         {{-- Events --}}
+        @can('manage events')
         <li>
-            <a href="#">
+            <a href="{{ route('events') }}">
                 <i class="bi bi-calendar-event"></i>
                 <span class="nav-item">Events</span>
             </a>
             <span class="tooltip">Events</span>
         </li>
+        @endcan
 
         {{-- Accounts --}}
         @can('manage accounts')

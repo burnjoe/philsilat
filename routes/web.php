@@ -10,6 +10,8 @@ use App\Livewire\CategoriesEdit;
 use App\Livewire\Auth\ChangePassword;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
+use App\Livewire\Events;
+use App\Livewire\EventsCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,18 @@ Route::middleware('auth')->group(function () {
         // Delete Categories
         Route::get('categories/delete', CategoriesDelete::class)
             ->name('categories.delete');
+    });
+
+
+    // Manage Events
+    Route::middleware('can:manage events')->group(function () {
+        // All Events
+        Route::get('events', Events::class)
+            ->name('events');
+
+        // Add Events
+        Route::get('events/add', EventsCreate::class)
+            ->name('events.create');
     });
 
 
