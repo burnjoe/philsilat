@@ -1,5 +1,4 @@
 Minor:
-2. Throw message whether action was success or failure, either show it on alert or toast component (Categories)
 3. Layout is a bit off, Top Navigation Bar is not the same height in login and once logged in/dashboard (UI Layout)
 4. Once logged in, the layout doesn't fill the full height of the viewport/window (UI Layout)
 5. Sidebar Mobile Responsiveness migration of scripts (UI Layout)
