@@ -1,5 +1,5 @@
 <div>
-    <div class="container text-dark py-3">
+    <div class="text-dark p-3">
         <h3 class="fw-bold">DASHBOARD</h3>
         <hr class="mb-0">
     </div>
@@ -64,7 +64,7 @@
                         <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
                             <span class="text-end">Teams</span>
                             <span class="fs-2 text-end">
-                                {{ $events->pluck('teams')->flatten()->count(); }}
+                                {{ $teamsCount }}
                             </span>
                         </div>
                     </div>
@@ -114,29 +114,32 @@
                             </div>
                         </div>
                         <div class="card-body" style="overflow-y: auto;">
+                            {{-- If event(s) found --}}
+                            @foreach ($todayEvents as $todayEvent)
+                            <a class="nav-link" href="#">
+                                <div class="row g-4 p-2">
+                                    <div class="col-auto mt-2">
+                                        <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
+                                    </div>
+
+                                    <div class="col mt-2 text-truncate">
+                                        <p class="d-inline-block text-truncate pt-2 mb-0" style="font-size: 20px;">{{
+                                            $todayEvent->name }}</p>
+                                        <p class="pt-0 mb-0" style="font-size: 14px;"><i class="bi bi-geo-alt me-1"></i>{{
+                                            $todayEvent->venue }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr class="mt-0 mb-3">
+                            @endforeach
+
                             {{-- If no events found --}}
-                            @if(false)
+                            @if($todayEvents->count() == 0)
                             <div class="row g-4 p-2">
                                 <div class="col-auto mt-4">
                                     <p>No events found</p>
                                 </div>
                             </div>
-                            <hr class="mt-0 mb-3">
-                            @else
-                            {{-- If event(s) found --}}
-                            <a class="nav-link" href="#">
-                                <div class="row g-4 p-2">
-                                    <div class="col-auto mt-2">
-                                        <span style="font-size: 50px"><i class="bi bi-calendar-check"></i></span>
-                                    </div>
-
-                                    <div class="col mt-2">
-                                        <p class="pt-2 mb-0" style="font-size: 20px;">Event Name</p>
-                                        <p class="pt-0 mb-0" style="font-size: 14px;"><i class="bi bi-geo-alt"></i>
-                                            Venue</p>
-                                    </div>
-                                </div>
-                            </a>
                             <hr class="mt-0 mb-3">
                             @endif
                         </div>
@@ -152,29 +155,32 @@
                             </div>
                         </div>
                         <div class="card-body" style="overflow-y: auto;">
-                            {{-- If no events found --}}
-                            @if(false)
-                            <div class="row g-4 p-2">
-                                <div class="col-auto mt-4">
-                                    <p>No events found</p>
-                                </div>
-                            </div>
-                            <hr class="mt-0 mb-3">
-                            @else
                             {{-- If event(s) found --}}
+                            @foreach ($upcomingEvents as $upcomingEvent)
                             <a class="nav-link" href="#">
                                 <div class="row g-4 p-2">
                                     <div class="col-auto mt-2">
                                         <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
                                     </div>
 
-                                    <div class="col mt-2">
-                                        <p class="pt-2 mb-0" style="font-size: 20px;">Event Name</p>
-                                        <p class="pt-0 mb-0" style="font-size: 14px;"><i class="bi bi-clock"></i> Date
-                                        </p>
+                                    <div class="col mt-2 text-truncate">
+                                        <p class="d-inline-block text-truncate pt-2 mb-0" style="font-size: 20px;">{{
+                                            $upcomingEvent->name }}</p>
+                                        <p class="pt-0 mb-0" style="font-size: 14px;"><i class="bi bi-clock me-1"></i>{{
+                                            \Carbon\Carbon::parse($upcomingEvent->starts_at)->format('M. d, Y') }}</p>
                                     </div>
                                 </div>
                             </a>
+                            <hr class="mt-0 mb-3">
+                            @endforeach
+
+                            {{-- If no events found --}}
+                            @if($upcomingEvents->count() == 0)
+                            <div class="row g-4 p-2">
+                                <div class="col-auto mt-4">
+                                    <p>No events found</p>
+                                </div>
+                            </div>
                             <hr class="mt-0 mb-3">
                             @endif
                         </div>
