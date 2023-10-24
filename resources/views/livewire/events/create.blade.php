@@ -40,7 +40,7 @@
                 <div class="row row-cols-1 g-4 pt-3">
                     {{-- Description --}}
                     <div class="form-group col">
-                        <label for="description">Descriptionz</label>
+                        <label for="description">Description</label>
                         <input wire:model="description" id="description"
                             class="form-control custInput @error('description') is-invalid @enderror" type="text"
                             name="description" autocomplete="off" placeholder="Description">
