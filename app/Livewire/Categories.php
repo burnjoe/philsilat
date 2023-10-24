@@ -34,14 +34,14 @@ class Categories extends Component
     {
         try {
             $this->authorize('manage categories');
-
-            redirect()->route('categories.create');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('categories.create');
     }
 
     /**
@@ -51,15 +51,15 @@ class Categories extends Component
     {
         try {
             $this->authorize('manage categories');
-
-            redirect()->route('categories.edit')
-                ->with('id', $id);
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('categories.edit')
+            ->with('id', $id);
     }
 
     /**
@@ -69,14 +69,14 @@ class Categories extends Component
     {
         try {
             $this->authorize('manage categories');
-
-            redirect()->route('categories.delete')
-                ->with('id', $id);
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('categories.delete')
+            ->with('id', $id);
     }
 }

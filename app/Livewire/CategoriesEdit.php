@@ -84,18 +84,18 @@ class CategoriesEdit extends Component
     {
         try {
             $this->authorize('manage categories');
-
-            $validated = $this->validate();
-
-            $this->category->update($validated);
-
-            redirect()->route('categories')
-                ->with('success', 'The category has been updated successfully.');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
-                    ->with('danger', 'Unauthorized action.');
+                ->with('danger', 'Unauthorized action.');
             }
         }
+        
+        $validated = $this->validate();
+
+        $this->category->update($validated);
+
+        redirect()->route('categories')
+            ->with('success', 'The category has been updated successfully.');
     }
 }

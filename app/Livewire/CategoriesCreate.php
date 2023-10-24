@@ -65,18 +65,18 @@ class CategoriesCreate extends Component
     {
         try {
             $this->authorize('manage categories');
-
-            $validated = $this->validate();
-
-            Category::create($validated);
-
-            redirect()->route('categories')
-                ->with('success', 'The category has been added successfully.');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
-                    ->with('danger', 'Unauthorized action.');
+                ->with('danger', 'Unauthorized action.');
             }
         }
+
+        $validated = $this->validate();
+
+        Category::create($validated);
+
+        redirect()->route('categories')
+            ->with('success', 'The category has been added successfully.');
     }
 }

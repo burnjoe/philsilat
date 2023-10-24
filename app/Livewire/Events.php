@@ -41,13 +41,13 @@ class Events extends Component
     {
         try {
             $this->authorize('manage events');
-
-            redirect()->route('events.create');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('events')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('events.create');
     }
 }

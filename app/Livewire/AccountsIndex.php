@@ -58,25 +58,25 @@ class AccountsIndex extends Component
     {
         try {
             $this->authorize('manage codes');
-
-            $this->validate();
-
-            for ($i = 0; $i < $this->num_codes; $i++) {
-                SignUpCode::create([
-                    'code' => $this->uniqueRandomCode(),
-                    'role' => $this->role,
-                ]);
-            }
-
-            session()->flash('success', 'The ' . $this->num_codes . ' signup code(s) has been added successfully.');
-
-            $this->reset();
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('accounts.index')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        $this->validate();
+
+        for ($i = 0; $i < $this->num_codes; $i++) {
+            SignUpCode::create([
+                'code' => $this->uniqueRandomCode(),
+                'role' => $this->role,
+            ]);
+        }
+
+        session()->flash('success', 'The ' . $this->num_codes . ' signup code(s) has been added successfully.');
+
+        $this->reset();
     }
 
     /**

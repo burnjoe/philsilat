@@ -76,18 +76,18 @@ class EventsCreate extends Component
     {
         try {
             $this->authorize('manage events');
-
-            $validated = $this->validate();
-
-            Event::create($validated);
-
-            redirect()->route('events')
-                ->with('success', 'The event has been added successfully.');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('events')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        $validated = $this->validate();
+
+        Event::create($validated);
+
+        redirect()->route('events')
+            ->with('success', 'The event has been added successfully.');
     }
 }

@@ -38,14 +38,14 @@ class Accounts extends Component
     {
         try {
             $this->authorize('manage codes');
-
-            redirect()->route('accounts.index');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('accounts')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('accounts.index');
     }
 
     /**
@@ -55,15 +55,15 @@ class Accounts extends Component
     {
         try {
             $this->authorize('manage accounts');
-
-            redirect()->route('accounts.edit')
-                ->with('id', $id);
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('accounts')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('accounts.edit')
+            ->with('id', $id);
     }
 
     /**
@@ -73,14 +73,14 @@ class Accounts extends Component
     {
         try {
             $this->authorize('manage accounts');
-
-            redirect()->route('accounts.delete')
-                ->with('id', $id);
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('accounts')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        redirect()->route('accounts.delete')
+            ->with('id', $id);
     }
 }

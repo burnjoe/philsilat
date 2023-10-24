@@ -114,19 +114,19 @@ class AccountsEdit extends Component
     {
         try {
             $this->authorize('manage accounts');
-
-            // Add here checking if this user (admins & coaches) is associated with other records
-            $validated = $this->validate();
-
-            $this->user->update($validated);
-
-            redirect()->route('accounts')
-                ->with('success', 'The user account has been updated successfully.');
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('accounts')
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        // Add here checking if this user (admins & coaches) is associated with other records
+        $validated = $this->validate();
+
+        $this->user->update($validated);
+
+        redirect()->route('accounts')
+            ->with('success', 'The user account has been updated successfully.');
     }
 }

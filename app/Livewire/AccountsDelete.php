@@ -43,11 +43,6 @@ class AccountsDelete extends Component
     {
         try {
             $this->authorize('manage accounts');
-
-            $this->user->delete();
-
-            redirect()->route('accounts')
-                ->with('success', 'The user account has been updated successfully.');
         } catch (\Throwable $th) {
             // Error here
             if ($th instanceof AuthorizationException) {
@@ -55,5 +50,10 @@ class AccountsDelete extends Component
                     ->with('danger', 'Unauthorized action.');
             }
         }
+
+        $this->user->delete();
+
+        redirect()->route('accounts')
+            ->with('success', 'The user account has been updated successfully.');
     }
 }
