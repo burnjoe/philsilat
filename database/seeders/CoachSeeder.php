@@ -13,7 +13,7 @@ class CoachSeeder extends Seeder
      */
     public function run(): void
     {
-        Coach::factory(8)->create();
+        Coach::factory(15)->create();
 
         Coach::factory()->create([
             'last_name' => 'Derla',
