@@ -23,8 +23,7 @@ class Category extends Model
      */
     public function scopeSearch($query, $value)
     {
-        $query->where('id', 'like', "%{$value}%")
-            ->orWhere('class_label', 'like', "%{$value}%")
+        $query->where('class_label', 'like', "%{$value}%")
             ->orWhere('sex', 'like', "%{$value}%")
             ->orWhere('min_weight', 'like', "%{$value}%")
             ->orWhere('max_weight', 'like', "%{$value}%");

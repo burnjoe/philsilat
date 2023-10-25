@@ -21,10 +21,11 @@ class Accounts extends Component
     {
         return view('livewire.accounts', [
             'users' => User::with('profileable')
-                ->whereHas('profileable', function ($query) {
-                    $query->where('last_name', 'like', "%{$this->search}%")
-                        ->orWhere('first_name', 'like', "%{$this->search}%")
-                        ->orWhere('phone', 'like', "%{$this->search}%");
+                ->where(function ($query) {
+                    $query->search($this->search)
+                        ->orWhereHas('profileable', function ($subquery) {
+                            $subquery->search($this->search);
+                        });
                 })
                 ->latest()
                 ->paginate(15)

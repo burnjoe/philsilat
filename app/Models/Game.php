@@ -26,6 +26,9 @@ class Game extends Model
         $query->where('name', 'like', "%{$value}%");
     }
 
+    /**
+     * Relationships
+     */
     public function athletes(): HasMany
     {
         return $this->hasMany(Athlete::class);

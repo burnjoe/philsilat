@@ -17,8 +17,24 @@ class Admin extends Model
         'phone',
     ];
 
-    
-    public function user() : MorphOne {
+
+
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('last_name', 'like', "%{$value}%")
+            ->orWhere('first_name', 'like', "%{$value}%")
+            ->orWhere('sex', 'like', "%{$value}%")
+            ->orWhere('phone', 'like', "%{$value}%");
+    }
+
+    /**
+     * Relationships
+     */
+    public function user(): MorphOne
+    {
         return $this->morphOne(User::class, 'profileable');
     }
 }

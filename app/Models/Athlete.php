@@ -34,9 +34,13 @@ class Athlete extends Model
             ->orWhere('first_name', 'like', "%{$value}%")
             ->orWhere('weight', 'like', "%{$value}%")
             ->orWhere('school_name', 'like', "%{$value}%")
-            ->orWhere('grade_level', 'like', "%{$value}%");
+            ->orWhere('grade_level', 'like', "%{$value}%")
+            ->orWhere('lrn', 'like', "%{$value}%");
     }
 
+    /**
+     * Relationships
+     */
     public function gameMatches(): HasMany
     {
         return $this->hasMany(GameMatch::class, 'athlete1_id', 'id')

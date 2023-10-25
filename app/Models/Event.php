@@ -35,6 +35,9 @@ class Event extends Model
             ->orWhere('status', 'like', "%{$value}%");
     }
 
+    /**
+     * Relationships
+     */
     public function teams() : HasMany {
         return $this->hasMany(Team::class);
     }
