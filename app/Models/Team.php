@@ -16,16 +16,27 @@ class Team extends Model
         'name',
     ];
 
-    
-    public function athletes() : HasMany {
+
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%");
+    }
+
+    public function athletes(): HasMany
+    {
         return $this->hasMany(Athlete::class);
     }
 
-    public function event() : BelongsTo {
+    public function event(): BelongsTo
+    {
         return $this->belongsTo(Event::class);
     }
 
-    public function coaches() : BelongsToMany {
+    public function coaches(): BelongsToMany
+    {
         return $this->belongsToMany(Coach::class);
     }
 }
