@@ -13,13 +13,14 @@ class EventsShow extends Component
 
     public $event;
 
-    public $search = "";
+    public $search;
 
-    
+
     /**
      * Initializes attributes upon load
      */
-    public function mount(Event $event) {
+    public function mount(Event $event)
+    {
         $this->event = $event;
     }
 
@@ -31,8 +32,13 @@ class EventsShow extends Component
         return view('livewire.events.show', [
             'games' => Game::with('category')
                 ->where('event_id', $this->event->id)
+                ->where(function ($query) {
+                    $query->search($this->search)
+                        ->orWhereHas('category', function ($subquery) {
+                            $subquery->search($this->search);
+                        });
+                })
                 ->latest()
-                ->search($this->search)
                 ->paginate(16)
         ]);
     }
