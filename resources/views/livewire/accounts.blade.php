@@ -16,8 +16,8 @@
             <i class="bi bi-search ms-2" aria-hidden="true"></i>
         </div>
         <div style="white-space: nowrap;">
-            <button wire:click.prevent="index" name="action" class="custBtn custBtn-light ms-3"><i
-                    class="bi bi-card-list"></i>&nbsp Signup Codes</button>
+            <a href="{{ route('accounts.index') }}" class="custBtn custBtn-light ms-3"><i
+                    class="bi bi-card-list"></i>&nbsp Signup Codes</a>
         </div>
     </div>
 
@@ -52,12 +52,13 @@
 
                     <td>
                         <div style="white-space: nowrap;">
-                            <button wire:click.prevent="edit({{$user->id}})" class="custBtn custBtn-light"
+                            <a href="{{ route('accounts.edit', ['user' => $user->id]) }}" class="custBtn custBtn-light"
                                 style="display: inline-block; margin-right: 8px;"><i class="bi bi-pencil-fill"></i>&nbsp
-                                Edit</button>
+                                Edit</a>
 
-                            <button wire:click.prevent="delete({{$user->id}})" class="custBtn custBtn-red ms-3"><i
-                                    style="display: inline-block;" class="bi bi-trash3-fill"></i>&nbsp Delete</button>
+                            <a href="{{ route('accounts.delete', ['user' => $user->id]) }}"
+                                class="custBtn custBtn-red ms-3"><i style="display: inline-block;"
+                                    class="bi bi-trash3-fill"></i>&nbsp Delete</a>
                         </div>
                     </td>
                 </tr>

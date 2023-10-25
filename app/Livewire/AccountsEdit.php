@@ -56,8 +56,8 @@ class AccountsEdit extends Component
             'first_name' => ['required', 'string', 'min:2', 'max:50'],
             'phone' => [
                 'required', 'regex:/^09\d{9}$/',
-                Rule::unique('admins', 'phone')->ignore($this->user->id),
-                Rule::unique('coaches', 'phone')->ignore($this->user->id),
+                Rule::unique('admins', 'phone')->ignore($this->user),
+                Rule::unique('coaches', 'phone')->ignore($this->user),
             ],
             'sex' => ['required', 'in:Male,Female'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->user->id],
@@ -90,21 +90,17 @@ class AccountsEdit extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(User $user)
     {
-        try {
-            $this->user = User::with('profileable')->find(session('id'));
+        $this->user = $user;
 
-            $this->last_name = $this->user->profileable->last_name;
-            $this->first_name = $this->user->profileable->first_name;
-            $this->sex = $this->user->profileable->sex;
-            $this->email = $this->user->email;
-            $this->phone = $this->user->profileable->phone;
-            $this->role = ucwords($this->user->getRoleNames()->first());
-            $this->status = $this->user->status;
-        } catch (\Throwable $th) {
-            redirect()->route('accounts');
-        }
+        $this->last_name = $user->profileable->last_name;
+        $this->first_name = $user->profileable->first_name;
+        $this->sex = $user->profileable->sex;
+        $this->email = $user->email;
+        $this->phone = $user->profileable->phone;
+        $this->role = ucwords($user->getRoleNames()->first());
+        $this->status = $user->status;
     }
 
     /**

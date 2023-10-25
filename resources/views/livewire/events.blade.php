@@ -16,8 +16,8 @@
             <i class="bi bi-search ms-2" aria-hidden="true"></i>
         </div>
         <div style="white-space: nowrap;">
-            <button wire:click.prevent="create" name="action" class="custBtn custBtn-light ms-3"><i
-                    class="bi bi-plus-lg"></i>&nbsp Add New Event</button>
+            <a href="{{ route('events.create') }}" class="custBtn custBtn-light ms-3"><i class="bi bi-plus-lg"></i>&nbsp
+                Add New Event</a>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 px-4 py-2">
         @foreach ($events as $event)
         <div class="col" id="card-event">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{ route('events.show', ['event' => $event->id]) }}">
                 <div class="card" style="height:18rem;">
                     <div class="card-body rounded overflow-hidden p-3">
                         <p class="m-0" style="font-size: 14px; color: {{$statusColor[$event->status]}};">

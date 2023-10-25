@@ -63,18 +63,14 @@ class CategoriesEdit extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(Category $category)
     {
-        try {
-            $this->category = Category::find(session('id'));
+        $this->category = $category;
 
-            $this->class_label = $this->category->class_label;
-            $this->sex = $this->category->sex;
-            $this->min_weight = $this->category->min_weight;
-            $this->max_weight = $this->category->max_weight;
-        } catch (\Throwable $th) {
-            redirect()->route('categories');
-        }
+        $this->class_label = $category->class_label;
+        $this->sex = $category->sex;
+        $this->min_weight = $category->min_weight;
+        $this->max_weight = $category->max_weight;
     }
 
     /**
@@ -87,10 +83,10 @@ class CategoriesEdit extends Component
         } catch (\Throwable $th) {
             if ($th instanceof AuthorizationException) {
                 redirect()->route('categories')
-                ->with('danger', 'Unauthorized action.');
+                    ->with('danger', 'Unauthorized action.');
             }
         }
-        
+
         $validated = $this->validate();
 
         $this->category->update($validated);

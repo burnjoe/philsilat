@@ -23,17 +23,9 @@ class CategoriesDelete extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(Category $category)
     {
-        try {
-            $this->category = Category::find(session('id'));
-
-            if (!$this->category) {
-                throw new Throwable;
-            }
-        } catch (\Throwable $th) {
-            redirect()->route('categories');
-        }
+        $this->category = $category;
     }
 
     /**

@@ -12,6 +12,7 @@ use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
 use App\Livewire\Events;
 use App\Livewire\EventsCreate;
+use App\Livewire\EventsShow;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,11 +48,11 @@ Route::middleware('auth')->group(function () {
             ->name('categories.create');
 
         // Edit Categories
-        Route::get('categories/edit', CategoriesEdit::class)
+        Route::get('categories/{category}/edit', CategoriesEdit::class)
             ->name('categories.edit');
 
         // Delete Categories
-        Route::get('categories/delete', CategoriesDelete::class)
+        Route::get('categories/{category}/delete', CategoriesDelete::class)
             ->name('categories.delete');
     });
 
@@ -65,6 +66,10 @@ Route::middleware('auth')->group(function () {
         // Add Events
         Route::get('events/add', EventsCreate::class)
             ->name('events.create');
+
+        // Event
+        Route::get('events/{event}', EventsShow::class)
+            ->name('events.show');
     });
 
 
@@ -79,14 +84,14 @@ Route::middleware('auth')->group(function () {
             ->name('accounts.index');
 
         // Edit Accounts
-        Route::get('accounts/edit', AccountsEdit::class)
+        Route::get('accounts/{user}/edit', AccountsEdit::class)
             ->name('accounts.edit');
 
         // Delete Accounts
-        Route::get('accounts/delete', AccountsDelete::class)
+        Route::get('accounts/{user}/delete', AccountsDelete::class)
             ->name('accounts.delete');
     });
-    
+
 
     // Change Password
     Route::get('change-password', ChangePassword::class)

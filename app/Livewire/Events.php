@@ -33,21 +33,4 @@ class Events extends Component
                 ->paginate(16)
         ]);
     }
-
-    /**
-     * Redirects user to create record page
-     */
-    public function create()
-    {
-        try {
-            $this->authorize('manage events');
-        } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('events')
-                    ->with('danger', 'Unauthorized action.');
-            }
-        }
-
-        redirect()->route('events.create');
-    }
 }

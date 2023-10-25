@@ -23,17 +23,9 @@ class AccountsDelete extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(User $user)
     {
-        try {
-            $this->user = User::find(session('id'));
-
-            if (!$this->user) {
-                throw new Throwable;
-            }
-        } catch (\Throwable $th) {
-            redirect()->route('accounts');
-        }
+        $this->user = $user;
     }
 
     /**
