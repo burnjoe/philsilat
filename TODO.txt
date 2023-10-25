@@ -1,8 +1,7 @@
 Minor:
 3. Layout is a bit off, Top Navigation Bar is not the same height in login and once logged in/dashboard (UI Layout)
 4. Once logged in, the layout doesn't fill the full height of the viewport/window (UI Layout)
-5. Sidebar Mobile Responsiveness migration of scripts (UI Layout)
-6. Style cards of games in events (UI Layout)
+5. Style cards of games in events (UI Layout)
 
 Major:
 1. Do not allow delete on cascade when data to be deleted is used by other records.
