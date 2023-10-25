@@ -1,25 +1,16 @@
 <div>
-    <div class="text-dark px-3 pt-3">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <h3 class="fw-bold mb-0">
-                    {{ $event->name }}
-                </h3>
-            </div>
-        </div>
-        <hr class="mb-0">
-    </div>
-
     {{-- Sub Navigation --}}
     @include('livewire.inc.subnav_event')
 
     <div class="container text-dark pb-3">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-between mb-3 pt-3">
             <div class="px-3">
                 <h5 class="fw-bold">Games</h5>
             </div>
-            <div class="px-3">
-                <a href="#" class="custBtn custBtn-light ms-3"><i class="bi bi-plus-lg"></i>&nbsp Add New Game</a>
+            <div class="d-flex justify-content-end col">
+                {{-- Search --}}
+                @include('livewire.inc.search')
+                <a href="#" class="custBtn custBtn-light me-3"><i class="bi bi-plus-lg"></i>&nbsp Add New Game</a>
             </div>
         </div>
 

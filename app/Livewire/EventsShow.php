@@ -3,11 +3,17 @@
 namespace App\Livewire;
 
 use App\Models\Event;
+use App\Models\Game;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EventsShow extends Component
 {
+    use WithPagination;
+
     public $event;
+
+    public $search = "";
 
     
     /**
@@ -22,6 +28,12 @@ class EventsShow extends Component
      */
     public function render()
     {
-        return view('livewire.events.show');
+        return view('livewire.events.show', [
+            'games' => Game::with('category')
+                ->where('event_id', $this->event->id)
+                ->latest()
+                ->search($this->search)
+                ->paginate(16)
+        ]);
     }
 }

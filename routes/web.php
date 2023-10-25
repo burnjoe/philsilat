@@ -12,7 +12,9 @@ use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
 use App\Livewire\Events;
 use App\Livewire\EventsCreate;
+use App\Livewire\EventsSettings;
 use App\Livewire\EventsShow;
+use App\Livewire\EventsTeams;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,9 +69,17 @@ Route::middleware('auth')->group(function () {
         Route::get('events/add', EventsCreate::class)
             ->name('events.create');
 
-        // Event
-        Route::get('events/{event}', EventsShow::class)
+        // Event Games
+        Route::get('events/{event}/games', EventsShow::class)
             ->name('events.show');
+            
+        // Event Teams
+        Route::get('events/{event}/teams', EventsTeams::class)
+            ->name('events.teams');
+
+        // Event Settings
+        Route::get('events/{event}/settings', EventsSettings::class)
+            ->name('events.settings');
     });
 
 

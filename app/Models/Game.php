@@ -18,19 +18,31 @@ class Game extends Model
     ];
 
 
-    public function athletes() : HasMany {
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%");
+    }
+
+    public function athletes(): HasMany
+    {
         return $this->hasMany(Athlete::class);
     }
 
-    public function gameMatches() : HasMany {
+    public function gameMatches(): HasMany
+    {
         return $this->hasMany(GameMatch::class);
     }
 
-    public function category() : BelongsTo {
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function event() : BelongsTo {
+    public function event(): BelongsTo
+    {
         return $this->belongsTo(Event::class);
     }
 }

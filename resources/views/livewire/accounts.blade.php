@@ -11,11 +11,9 @@
         @include('livewire.inc.alerts')
 
         <div class="container-fluid d-flex justify-content-between py-3">
-            <div class="d-flex align-items-center">
-                <input wire:model.live.debounce.300ms="search" class="form-control custInput" type="text" name="search"
-                    placeholder="Search" autocomplete="off">
-                <i class="bi bi-search ms-2" aria-hidden="true"></i>
-            </div>
+            {{-- Search --}}
+            @include('livewire.inc.search')
+            
             <div style="white-space: nowrap;">
                 <a href="{{ route('accounts.index') }}" class="custBtn custBtn-light ms-3"><i
                         class="bi bi-card-list"></i>&nbsp Signup Codes</a>

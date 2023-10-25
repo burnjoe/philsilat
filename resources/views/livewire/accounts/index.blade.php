@@ -58,28 +58,17 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
         {{-- Alerts --}}
         @include('livewire.inc.alerts')
 
         {{-- Search and Back --}}
         <div class="container-fluid d-flex justify-content-between py-3">
-            <div class="d-flex align-items-center">
-                <input wire:model.live.debounce.300ms="search" class="form-control custInput" type="text" name="search"
-                    placeholder="Search" autocomplete="off">
-                <i class="bi bi-search ms-2" aria-hidden="true"></i>
-            </div>
+            {{-- Search --}}
+            @include('livewire.inc.search')
+
             <div style="white-space: nowrap;">
                 <a href="{{ route('accounts') }}" class="custBtn custBtn-light"><i class="bi bi-arrow-left"></i>&nbsp
-                    Back
-                    to User Accounts</a>
+                    Back to User Accounts</a>
             </div>
         </div>
 
