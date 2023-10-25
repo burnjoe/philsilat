@@ -1,11 +1,11 @@
 <div>
-    <div>
-        <div class="text-dark p-3">
-            <h3 class=" fw-bold">EDIT USER ACCOUNT</h3>
-            <hr class="mb-0">
-        </div>
+    <div class="text-dark p-3">
+        <h3 class=" fw-bold">EDIT USER ACCOUNT</h3>
+        <hr class="mb-0">
+    </div>
 
-        <div class="container text-dark py-3">
+    <div class="container">
+        <div class="container-fluid text-dark py-3">
             <div class="p-4"
                 style="border-style: solid; border-width: 1px; border-color: #A7A7A7; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
 
@@ -13,13 +13,14 @@
                     <div class="d-flex align-items-center mb-2">
                         <h5 class="fw-bold">Personal Information</h5>
                     </div>
-                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
                         {{-- Last Name --}}
                         <div class="form-group col">
                             <label for="last_name">Last Name<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="last_name" id="last_name"
                                 class="form-control custInput @error('last_name') is-invalid @enderror" type="text"
-                                name="last_name" minlength="2" autocomplete="off" placeholder="Last Name" required autofocus>
+                                name="last_name" minlength="2" autocomplete="off" placeholder="Last Name" required
+                                autofocus>
                             @error('last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -41,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-3">
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
                         {{-- Phone --}}
                         <div class="form-group col">
                             <label for="phone">Phone Number<span style="color: #b63e3e;"> *</span></label>
@@ -77,7 +78,7 @@
                         <h5 class="fw-bold">User Account Information</h5>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
                         {{-- Email --}}
                         <div class="form-group row-1 col">
                             <label for="email">Email<span style="color: #b63e3e;"> *</span></label>
@@ -109,7 +110,7 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-3">
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
                         {{-- New Password --}}
                         <div class="form-group row-1 col">
                             <label for="password">New Password</label>
@@ -141,7 +142,7 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-3">
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
                         {{-- Confirm Password --}}
                         <div class="form-group row-1 col">
                             <label for="password-confirm">Confirm Password</label>
@@ -160,6 +161,4 @@
             </div>
         </div>
     </div>
-
-
 </div>
