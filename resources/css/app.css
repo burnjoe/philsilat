@@ -32,7 +32,7 @@ a .card:hover {
 .sidebar {
     position: fixed !important;
     left: 0;
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 55px);
     height: auto;
     width: 80px;
     background-color: #212529;
@@ -406,7 +406,7 @@ input.custInput {
 }
 
 /* .navbar-nav {
-    height: 56px;
+    height: 40px;
 } */
 
 .navbar-nav .dropdown-menu {
