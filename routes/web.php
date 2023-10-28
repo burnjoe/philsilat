@@ -16,6 +16,7 @@ use App\Livewire\EventsSettings;
 use App\Livewire\EventsShow;
 use App\Livewire\EventsTeams;
 use App\Livewire\GamesAthletes;
+use App\Livewire\GamesCreate;
 use App\Livewire\GamesMatches;
 use App\Livewire\GamesSettings;
 use Illuminate\Support\Facades\Route;
@@ -95,6 +96,11 @@ Route::middleware('auth')->group(function () {
         // Game Settings
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
+
+        // Add Games
+        Route::get('events/{event}/games/add', GamesCreate::class)
+            ->middleware('event.status')
+            ->name('games.create');
     });
 
 
