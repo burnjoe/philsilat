@@ -1,6 +1,5 @@
 Minor:
 3. Layout is a bit off, Top Navigation Bar is not the same height in login and once logged in/dashboard (UI Layout)
-4. Once logged in, the layout doesn't fill the full height of the viewport/window (UI Layout)
 5. Style cards of games in events (UI Layout)
 
 Major:
@@ -44,3 +43,7 @@ Admin Accounts:
 Coach Accounts:
 1. derlajulius@gmail.com - password
 2. ferrerasvinceaustin@gmail.com - password
+
+
+Pagination of Laravel Collection (Not Query Builder)
+https://www.youtube.com/watch?v=trzwyMAmzE0
