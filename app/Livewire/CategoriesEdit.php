@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class CategoriesEdit extends Component
 {
@@ -81,13 +80,17 @@ class CategoriesEdit extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('categories')
-                    ->with('danger', 'Unauthorized action.');
-            }
+            redirect()->route('categories')
+                ->with('danger', 'Unauthorized action.');
         }
 
         $validated = $this->validate();
+
+        if ($this->category->games()->exists()) {
+            redirect()->route('categories')
+                ->with('danger', 'Unable to update the category. It is currently in use and cannot be updated.');
+            return;
+        }
 
         $this->category->update($validated);
 

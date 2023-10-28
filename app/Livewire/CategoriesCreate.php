@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class CategoriesCreate extends Component
 {
@@ -66,10 +65,8 @@ class CategoriesCreate extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('categories')
+            redirect()->route('categories')
                 ->with('danger', 'Unauthorized action.');
-            }
         }
 
         $validated = $this->validate();

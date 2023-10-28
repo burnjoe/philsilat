@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class AccountsEdit extends Component
 {
@@ -111,10 +110,9 @@ class AccountsEdit extends Component
         try {
             $this->authorize('manage accounts');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('accounts')
-                    ->with('danger', 'Unauthorized action.');
-            }
+            redirect()->route('accounts')
+                ->with('danger', 'Unauthorized action.');
+            return;
         }
 
         // Add here checking if this user (admins & coaches) is associated with other records

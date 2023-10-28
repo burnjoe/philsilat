@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\SignUpCode;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class AccountsIndex extends Component
 {
@@ -59,10 +58,9 @@ class AccountsIndex extends Component
         try {
             $this->authorize('manage codes');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('accounts.index')
-                    ->with('danger', 'Unauthorized action.');
-            }
+            redirect()->route('accounts.index')
+                ->with('danger', 'Unauthorized action.');
+            return;
         }
 
         $this->validate();

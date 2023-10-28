@@ -2,10 +2,8 @@
 
 namespace App\Livewire;
 
-use Throwable;
 use Livewire\Component;
 use App\Models\Category;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class CategoriesDelete extends Component
 {
@@ -36,15 +34,18 @@ class CategoriesDelete extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('categories')
-                    ->with('danger', 'Unauthorized action.');
-            }
+            redirect()->route('categories')
+                ->with('danger', 'Unauthorized action.');
         }
 
-        $this->category->delete();
+        try {
+            $this->category->delete();
 
-        redirect()->route('categories')
-            ->with('success', 'The category has been deleted successfully.');
+            redirect()->route('categories')
+                ->with('success', 'The category has been deleted successfully.');
+        } catch (\Throwable $th) {
+            redirect()->route('categories')
+                ->with('danger', 'Unable to delete the category. It is currently in use and cannot be removed.');
+        }
     }
 }

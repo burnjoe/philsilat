@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\Event;
-use Illuminate\Auth\Access\AuthorizationException;
 use Livewire\Component;
 
 class EventsCreate extends Component
@@ -77,10 +76,8 @@ class EventsCreate extends Component
         try {
             $this->authorize('manage events');
         } catch (\Throwable $th) {
-            if ($th instanceof AuthorizationException) {
-                redirect()->route('events')
-                    ->with('danger', 'Unauthorized action.');
-            }
+            redirect()->route('events')
+                ->with('danger', 'Unauthorized action.');
         }
 
         $validated = $this->validate();

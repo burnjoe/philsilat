@@ -12,6 +12,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body>
@@ -35,6 +37,7 @@
         @endguest
     </div>
 
+    @livewireScripts
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
