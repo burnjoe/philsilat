@@ -116,7 +116,7 @@
                         <div class="card-body" style="overflow-y: auto;">
                             {{-- If event(s) found --}}
                             @foreach ($todayEvents as $todayEvent)
-                            <a class="nav-link" href="#">
+                            <a wire:key="{{ $todayEvent->id }}" class="nav-link" href="{{ route('events.show', ['event' => $todayEvent->id]) }}">
                                 <div class="row g-4 p-2">
                                     <div class="col-auto mt-2">
                                         <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
@@ -137,7 +137,7 @@
                             @if($todayEvents->count() == 0)
                             <div class="row g-4 p-2">
                                 <div class="col-auto mt-4">
-                                    <p>No events found</p>
+                                    <p>No events today</p>
                                 </div>
                             </div>
                             <hr class="mt-0 mb-3">
@@ -157,7 +157,7 @@
                         <div class="card-body" style="overflow-y: auto;">
                             {{-- If event(s) found --}}
                             @foreach ($upcomingEvents as $upcomingEvent)
-                            <a class="nav-link" href="#">
+                            <a wire:key="{{ $upcomingEvent }}" class="nav-link" href="{{ route('events.show', ['event' => $upcomingEvent->id])}}">
                                 <div class="row g-4 p-2">
                                     <div class="col-auto mt-2">
                                         <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
@@ -178,7 +178,7 @@
                             @if($upcomingEvents->count() == 0)
                             <div class="row g-4 p-2">
                                 <div class="col-auto mt-4">
-                                    <p>No events found</p>
+                                    <p>No upcoming events</p>
                                 </div>
                             </div>
                             <hr class="mt-0 mb-3">

@@ -127,7 +127,7 @@
                         {{-- Status --}}
                         <div class="form-group col">
                             <label for="status">Status<span style="color: #b63e3e;"> *</span></label>
-                            <select id="status" name="status"
+                            <select wire:model="status" id="status" name="status"
                                 class="form-select custFormSelect @error('status') is-invalid @enderror"
                                 aria-label=".form-select example" required>
                                 <option class="custOption" hidden>Status</option>
