@@ -1,9 +1,9 @@
 <div>
-    <div class="container text-dark py-3">
-        <div class="d-flex align-items-center">
-            <h3 class="fw-bold mb-0">CATEGORIES</h3>
+    <div class="row g-4 p-3">
+        <div class="container text-dark pt-3">
+            <h3 class="fw-bold">CATEGORIES</h3>
+            <hr class="mb-0">
         </div>
-        <hr class="mb-0">
     </div>
 
     <div class="d-flex justify-content-between mx-4 py-3">

@@ -1,7 +1,9 @@
 <div>
-    <div class="container text-dark py-3">
-        <h3 class="fw-bold">DASHBOARD</h3>
-        <hr class="mb-0">
+    <div class="row g-4 p-3">
+        <div class="container text-dark pt-3">
+            <h3 class="fw-bold">DASHBOARD</h3>
+            <hr class="mb-0">
+        </div>
     </div>
 
     <div class="row g-4 p-3">
@@ -15,7 +17,7 @@
             </div>
         </div>
     </div>
-
+ 
     {{-- Total Numbers --}}
     <div class="row row-cols-1 row-cols-lg-3 g-4 p-3">
         <div class="col">
