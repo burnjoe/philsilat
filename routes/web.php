@@ -10,6 +10,7 @@ use App\Livewire\CategoriesEdit;
 use App\Livewire\Auth\ChangePassword;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
+use App\Livewire\DropTeam;
 use App\Livewire\Events;
 use App\Livewire\EventsCreate;
 use App\Livewire\EventsSettings;
@@ -85,6 +86,16 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
+        // Drop Selected Team
+        Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
+            ->middleware('event.registration-open')
+            ->name('events.drop-team');
+
+        // Drop All Teams
+        Route::get('events/{event}/teams/drop', DropTeam::class)
+            ->middleware('event.registration-open')
+            ->name('events.drop-all-teams');
+
         // Game Matches
         Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
             ->name('games.matches');
@@ -99,7 +110,7 @@ Route::middleware('auth')->group(function () {
 
         // Add Games
         Route::get('events/{event}/games/add', GamesCreate::class)
-            ->middleware('event.status')
+            ->middleware('event.upcoming')
             ->name('games.create');
     });
 

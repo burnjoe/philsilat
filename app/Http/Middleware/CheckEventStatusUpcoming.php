@@ -7,7 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckEventStatus
+class CheckEventStatusUpcoming
 {
     /**
      * Handle an incoming request.
@@ -16,13 +16,16 @@ class CheckEventStatus
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $eventId = $request->route('event');        // Assuming you have a route parameter for event ID
+        // Assuming you have a route parameter for event ID
+        $eventId = $request->route('event');
         $event = Event::find($eventId);
 
+        // Proceed to the route
         if ($event && $event->status === 'UPCOMING') {
-            return $next($request);                 // Proceed to the route
+            return $next($request);
         }
 
-        abort('403');                               // Redirect to an unauthorized page
+        // Redirect to an unauthorized page
+        abort('403');
     }
 }
