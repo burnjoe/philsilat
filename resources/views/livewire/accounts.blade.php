@@ -30,7 +30,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Role</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)

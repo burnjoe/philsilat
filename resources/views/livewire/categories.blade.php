@@ -27,7 +27,7 @@
                     <th scope="col">Sex Category</th>
                     <th scope="col">Min Weight (kg)</th>
                     <th scope="col">Max Weight (kg)</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)

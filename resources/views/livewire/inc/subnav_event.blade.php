@@ -1,10 +1,21 @@
 <div>
+    @php
+    $statusColor = [
+    'UPCOMING' => 'primary',
+    'REGISTRATION OPEN' => 'success',
+    'CANCELLED' => 'danger',
+    'ONGOING' => 'warning',
+    'COMPLETED' => 'success',
+    ];
+    @endphp
+
     <div class="text-dark px-3 pt-3">
         <div class="d-flex justify-content-between">
             <div class="d-flex align-items-center">
                 <h3 class="fw-bold mb-0">
                     {{ $event->name }}
                 </h3>
+                <span class="badge text-bg-{{$statusColor[$event->status]}} py-1 ms-3">{{ $event->status }}</span>
             </div>
         </div>
         <hr class="mb-0">

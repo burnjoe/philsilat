@@ -10,8 +10,9 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                @if($event->status === "UPCOMING")
-                <a href="#" class="custBtn custBtn-red me-3"><i class=" bi bi-arrow-down"></i>&nbsp Drop All Teams</a>
+                @if(in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"]))
+                <a href="{{ route('events.drop-all-teams', ['event' => $event->id]) }}"
+                    class="custBtn custBtn-red me-3"><i class=" bi bi-arrow-down"></i>&nbsp Drop All Teams</a>
                 @endif
             </div>
         </div>
@@ -22,7 +23,7 @@
                     <th scope="col">Team Name</th>
                     <th scope="col">Coach 1</th>
                     <th scope="col">Coach 2</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($teams as $team)
@@ -35,10 +36,12 @@
                                 <a href="#" class="custBtn custBtn-light"
                                     style="display: inline-block; margin-right: 8px;"><i
                                         class="bi bi-eye-fill"></i>&nbsp View</a>
-
-                                <a href="#" class="custBtn custBtn-red ms-3"
+                                @if(in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"]))
+                                <a href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
+                                    class="custBtn custBtn-red ms-3"
                                     style="display: inline-block; margin-right: 8px;"><i class=" bi bi-arrow-down"></i>
                                     Drop</a>
+                                @endif
                             </div>
                         </td>
                     </tr>
