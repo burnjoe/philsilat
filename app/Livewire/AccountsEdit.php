@@ -110,9 +110,8 @@ class AccountsEdit extends Component
         try {
             $this->authorize('manage accounts');
         } catch (\Throwable $th) {
-            redirect()->route('accounts')
+            return redirect()->route('accounts')
                 ->with('danger', 'Unauthorized action.');
-            return;
         }
 
         // Add here checking if this user (admins & coaches) is associated with other records
@@ -120,7 +119,7 @@ class AccountsEdit extends Component
 
         $this->user->update($validated);
 
-        redirect()->route('accounts')
+        return redirect()->route('accounts')
             ->with('success', 'The user account has been updated successfully.');
     }
 }

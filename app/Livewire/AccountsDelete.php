@@ -34,14 +34,13 @@ class AccountsDelete extends Component
         try {
             $this->authorize('manage accounts');
         } catch (\Throwable $th) {
-            redirect()->route('accounts')
+            return redirect()->route('accounts')
                 ->with('danger', 'Unauthorized action.');
-            return;
         }
 
         $this->user->delete();
 
-        redirect()->route('accounts')
+        return redirect()->route('accounts')
             ->with('success', 'The user account has been updated successfully.');
     }
 }

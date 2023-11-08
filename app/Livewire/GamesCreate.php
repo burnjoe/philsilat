@@ -115,7 +115,7 @@ class GamesCreate extends Component
         try {
             $this->authorize('manage events');
         } catch (\Throwable $th) {
-            redirect()->route('categories')
+            return redirect()->route('categories')
                 ->with('danger', 'Unauthorized action.');
         }
 
@@ -123,7 +123,7 @@ class GamesCreate extends Component
 
         Game::create($validated);
 
-        redirect()->route('events.show', ['event' => $this->event_id])
+        return redirect()->route('events.show', ['event' => $this->event_id])
             ->with('success', 'The game has been added successfully.');
     }
 }

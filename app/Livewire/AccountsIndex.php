@@ -58,9 +58,8 @@ class AccountsIndex extends Component
         try {
             $this->authorize('manage codes');
         } catch (\Throwable $th) {
-            redirect()->route('accounts.index')
+            return redirect()->route('accounts.index')
                 ->with('danger', 'Unauthorized action.');
-            return;
         }
 
         $this->validate();

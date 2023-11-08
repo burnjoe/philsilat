@@ -80,21 +80,20 @@ class CategoriesEdit extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            redirect()->route('categories')
+            return redirect()->route('categories')
                 ->with('danger', 'Unauthorized action.');
         }
 
         $validated = $this->validate();
 
         if ($this->category->games()->exists()) {
-            redirect()->route('categories')
+            return redirect()->route('categories')
                 ->with('danger', 'Unable to update the category. It is currently in use and cannot be updated.');
-            return;
         }
 
         $this->category->update($validated);
 
-        redirect()->route('categories')
+        return redirect()->route('categories')
             ->with('success', 'The category has been updated successfully.');
     }
 }
