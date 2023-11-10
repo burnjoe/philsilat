@@ -1,9 +1,9 @@
 <div>
+
     <div class="text-dark p-3">
         <div class="d-flex align-items-center">
             <h3 class="fw-bold mb-0">USER ACCOUNTS</h3>
         </div>
-        <hr class="mb-0">
     </div>
 
     <div class="container">

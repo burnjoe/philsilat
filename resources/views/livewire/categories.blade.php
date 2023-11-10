@@ -3,7 +3,6 @@
         <div class="d-flex align-items-center">
             <h3 class="fw-bold mb-0">CATEGORIES</h3>
         </div>
-        <hr class="mb-0">
     </div>
 
     <div class="container">
