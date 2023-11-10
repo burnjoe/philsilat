@@ -3,7 +3,6 @@ Minor:
 5. Style cards of games in events (UI Layout)
 
 Major:
-1. Do not allow delete on cascade when data to be deleted is used by other records.
 2. Do not allow update when data to be updated is used by other records - this ensures data integrity.
 3. Add validation rules for checking that time of starts_at must not be below time of now().
 
