@@ -73,7 +73,6 @@
                         <a href="{{ route('categories') }}" class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                     </div>
-
                 </form>
             </div>
         </div>
