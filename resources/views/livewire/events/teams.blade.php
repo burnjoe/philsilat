@@ -3,6 +3,9 @@
     @include('livewire.inc.subnav_event')
 
     <div class="container text-dark py-3 px-1">
+        {{-- Alerts --}}
+        @include('livewire.inc.alerts')
+
         <div class="container-fluid d-flex justify-content-between mb-3">
             <div class="px-3">
                 <h5 class="fw-bold">Teams</h5>
@@ -10,7 +13,7 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                @if(in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"]))
+                @if(in_array($event->status, ["REGISTRATION OPEN"]) && $teams->isNotEmpty())
                 <a href="{{ route('events.drop-all-teams', ['event' => $event->id]) }}"
                     class="custBtn custBtn-red me-3"><i class=" bi bi-arrow-down"></i>&nbsp Drop All Teams</a>
                 @endif
@@ -36,7 +39,7 @@
                                 <a href="#" class="custBtn custBtn-light"
                                     style="display: inline-block; margin-right: 8px;"><i
                                         class="bi bi-eye-fill"></i>&nbsp View</a>
-                                @if(in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"]))
+                                @if(in_array($event->status, ["REGISTRATION OPEN"]))
                                 <a href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
                                     class="custBtn custBtn-red ms-3"
                                     style="display: inline-block; margin-right: 8px;"><i class=" bi bi-arrow-down"></i>

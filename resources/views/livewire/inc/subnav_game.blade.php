@@ -3,8 +3,10 @@
         <div class="d-flex justify-content-between">
             <div class="d-flex align-items-center">
                 <h3 class="fw-bold mb-0">
-                    {{ $game->name }} - Class {{ $game->category->class_label }} - {{ $game->category->sex }}
+                    {{ $game->name }}
                 </h3>
+                <span class="badge text-bg-primary py-1 ms-3">CLASS {{ $game->category->class_label }}</span>
+                <span class="badge text-bg-secondary py-1 ms-2">{{ strtoupper($game->category->sex) }} CATEGORY</span>
             </div>
         </div>
         <hr class="mb-0">
