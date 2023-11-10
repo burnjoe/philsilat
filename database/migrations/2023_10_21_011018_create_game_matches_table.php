@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('game_matches', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('round');
             $table->unsignedBigInteger('athlete1_id');
             $table->unsignedBigInteger('athlete2_id');
             $table->foreignId('game_id')

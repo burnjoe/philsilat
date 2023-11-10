@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class Accounts extends Component
 {
@@ -12,29 +13,22 @@ class Accounts extends Component
 
     public $search = "";
 
+
+    /**
+     * Renders the view
+     */
     public function render()
     {
         return view('livewire.accounts', [
             'users' => User::with('profileable')
-                ->whereHas('profileable', function ($query) {
-                    $query->where('last_name', 'like', "%{$this->search}%")
-                        ->orWhere('first_name', 'like', "%{$this->search}%")
-                        ->orWhere('phone', 'like', "%{$this->search}%");
+                ->where(function ($query) {
+                    $query->search($this->search)
+                        ->orWhereHas('profileable', function ($subquery) {
+                            $subquery->search($this->search);
+                        });
                 })
                 ->latest()
                 ->paginate(15)
         ]);
-    }
-
-    public function edit($id)
-    {
-        redirect()->route('accounts.edit')
-            ->with('id', $id);
-    }
-
-    public function delete(int $id)
-    {
-        redirect()->route('accounts.delete')
-            ->with('id', $id);
     }
 }

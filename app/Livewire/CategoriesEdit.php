@@ -2,18 +2,26 @@
 
 namespace App\Livewire;
 
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
 
 class CategoriesEdit extends Component
 {
     public $category;
-    
+
     public $class_label;
     public $sex;
     public $min_weight;
     public $max_weight;
 
+
+    /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.edit');
+    }
 
     /**
      * Validation rules
@@ -54,18 +62,14 @@ class CategoriesEdit extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(Category $category)
     {
-        try {
-            $this->category = Category::find(session('id'));
+        $this->category = $category;
 
-            $this->class_label = $this->category->class_label;
-            $this->sex = $this->category->sex;
-            $this->min_weight = $this->category->min_weight;
-            $this->max_weight = $this->category->max_weight;
-        } catch (\Throwable $th) {
-            redirect()->route('categories');
-        }
+        $this->class_label = $category->class_label;
+        $this->sex = $category->sex;
+        $this->min_weight = $category->min_weight;
+        $this->max_weight = $category->max_weight;
     }
 
     /**
@@ -73,18 +77,23 @@ class CategoriesEdit extends Component
      */
     public function update()
     {
+        try {
+            $this->authorize('manage categories');
+        } catch (\Throwable $th) {
+            return redirect()->route('categories')
+                ->with('danger', 'Unauthorized action.');
+        }
+
         $validated = $this->validate();
+
+        if ($this->category->games()->exists()) {
+            return redirect()->route('categories')
+                ->with('danger', 'Unable to update the category. It is currently in use and cannot be updated.');
+        }
 
         $this->category->update($validated);
 
-        redirect()->route('categories');
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.edit');
+        return redirect()->route('categories')
+            ->with('success', 'The category has been updated successfully.');
     }
 }

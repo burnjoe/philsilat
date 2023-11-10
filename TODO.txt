@@ -1,12 +1,11 @@
 Minor:
-2. Throw message whether action was success or failure, either show it on alert or toast component (Categories)
 3. Layout is a bit off, Top Navigation Bar is not the same height in login and once logged in/dashboard (UI Layout)
-4. Once logged in, the layout doesn't fill the full height of the viewport/window (UI Layout)
-5. Sidebar Mobile Responsiveness migration of scripts (UI Layout)
+5. Style cards of games in events (UI Layout)
 
 Major:
-1.
-2.
+1. Do not allow delete on cascade when data to be deleted is used by other records.
+2. Do not allow update when data to be updated is used by other records - this ensures data integrity.
+3. Add validation rules for checking that time of starts_at must not be below time of now().
 
 
 --------------------------------------------------------------------------------------------------------------------------
@@ -44,3 +43,7 @@ Admin Accounts:
 Coach Accounts:
 1. derlajulius@gmail.com - password
 2. ferrerasvinceaustin@gmail.com - password
+
+
+Pagination of Laravel Collection (Not Query Builder)
+https://www.youtube.com/watch?v=trzwyMAmzE0

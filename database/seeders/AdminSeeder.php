@@ -13,7 +13,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::factory(9)->create();
+        Admin::factory(15)->create();
 
         Admin::factory()->create([
             'last_name' => 'Sabana',

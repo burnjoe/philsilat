@@ -27,6 +27,34 @@ class PermissionSeeder extends Seeder
                 'delete categories',
             ]);
 
+        // Manage Events & Games
+        Permission::create(['name' => 'view events']);
+        Permission::create(['name' => 'create events']);
+        Permission::create(['name' => 'edit events']);
+        Permission::create(['name' => 'delete events']);
+        Permission::create(['name' => 'view games']);
+        Permission::create(['name' => 'create games']);
+        Permission::create(['name' => 'edit games']);
+        Permission::create(['name' => 'delete games']);
+        Permission::create(['name' => 'view teams']);
+        Permission::create(['name' => 'drop teams']);
+        Permission::create(['name' => 'generate matches']);
+        
+        Permission::create(['name' => 'manage events'])
+            ->givePermissionTo([
+                'view events',
+                'create events',
+                'edit events',
+                'delete events',
+                'view games',
+                'create games',
+                'edit games',
+                'delete games',
+                'view teams',
+                'drop teams',
+                'generate matches',
+            ]);
+
         // Manage Accounts
         Permission::create(['name' => 'view accounts']);
         Permission::create(['name' => 'edit accounts']);

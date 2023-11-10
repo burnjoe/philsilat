@@ -27,8 +27,7 @@ return new class extends Migration
                 ->restrictOnDelete();
             $table->foreignId('team_id')
                 ->constrained()
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

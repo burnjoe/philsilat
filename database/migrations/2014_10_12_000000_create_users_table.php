@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['INACTIVE', 'ACTIVE']);
-            $table->bigInteger('profileable_id')->unsigned();
+            $table->unsignedBigInteger('profileable_id');
             $table->string('profileable_type');
             $table->rememberToken();
             $table->timestamps();

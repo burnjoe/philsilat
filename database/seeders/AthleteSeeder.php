@@ -13,6 +13,6 @@ class AthleteSeeder extends Seeder
      */
     public function run(): void
     {
-        Athlete::factory(10)->create();
+        Athlete::factory(1000)->create();
     }
 }

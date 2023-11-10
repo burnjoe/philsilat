@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('host_name', 50);
             $table->string('name', 20);
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamp('starts_at');
             $table->timestamp('ends_at')->nullable();
             $table->string('venue', 20);
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('barangay', 20);
             $table->string('city', 20);
             $table->string('province', 20);
-            $table->enum('status', ['UPCOMING', 'REGISTRATION OPEN', 'CANCELLED', 'ONGOING', 'COMPLETED']);
+            $table->enum('status', ['UPCOMING', 'REGISTRATION OPEN', 'CANCELLED', 'ONGOING', 'COMPLETED'])->default('UPCOMING');
             $table->timestamps();
         });
     }

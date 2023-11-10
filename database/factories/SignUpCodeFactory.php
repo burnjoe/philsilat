@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\SignUpCode;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,12 @@ class SignUpCodeFactory extends Factory
      */
     public function definition(): array
     {
+        do {
+            $code = Str::random(8);
+        } while (SignUpCode::where('code', $code)->exists());
+        
         return [
-            'code' => fake()->numerify('########'),
+            'code' => $code,
             'role' => fake()->randomElement(['admin', 'coach']),
         ];
     }

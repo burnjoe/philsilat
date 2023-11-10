@@ -20,7 +20,7 @@ class TeamFactory extends Factory
         $eventId = Event::inRandomOrder()->value('id');
 
         return [
-            'name' => fake()->company(),
+            'name' => fake()->unique()->company(),
             'event_id' => $eventId,
         ];
     }

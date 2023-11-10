@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Category;
 use Livewire\Component;
+use App\Models\Category;
 
 class CategoriesCreate extends Component
 {
@@ -12,6 +12,14 @@ class CategoriesCreate extends Component
     public $min_weight;
     public $max_weight;
 
+
+    /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.create');
+    }
 
     /**
      * Validation rules
@@ -54,18 +62,18 @@ class CategoriesCreate extends Component
      */
     public function store()
     {
+        try {
+            $this->authorize('manage categories');
+        } catch (\Throwable $th) {
+            return redirect()->route('categories')
+                ->with('danger', 'Unauthorized action.');
+        }
+
         $validated = $this->validate();
 
         Category::create($validated);
 
-        redirect()->route('categories');
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.create');
+        return redirect()->route('categories')
+            ->with('success', 'The category has been added successfully.');
     }
 }

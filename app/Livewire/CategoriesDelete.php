@@ -4,8 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
-use Error;
-use Throwable;
 
 class CategoriesDelete extends Component
 {
@@ -13,19 +11,19 @@ class CategoriesDelete extends Component
 
 
     /**
+     * Renders the view
+     */
+    public function render()
+    {
+        return view('livewire.categories.delete');
+    }
+
+    /**
      * Initializes attributes upon load
      */
-    public function mount()
+    public function mount(Category $category)
     {
-        try {
-            $this->category = Category::find(session('id'));
-
-            if (!$this->category) {
-                throw new Throwable;
-            }
-        } catch (\Throwable $th) {
-            redirect()->route('categories');
-        }
+        $this->category = $category;
     }
 
     /**
@@ -34,19 +32,20 @@ class CategoriesDelete extends Component
     public function destroy()
     {
         try {
+            $this->authorize('manage categories');
+        } catch (\Throwable $th) {
+            return redirect()->route('categories')
+                ->with('danger', 'Unauthorized action.');
+        }
+
+        try {
             $this->category->delete();
 
-            redirect()->route('categories');
+            return redirect()->route('categories')
+                ->with('success', 'The category has been deleted successfully.');
         } catch (\Throwable $th) {
-            // Error here
+            return redirect()->route('categories')
+                ->with('danger', 'Unable to delete the category. It is currently in use and cannot be removed.');
         }
-    }
-
-    /**
-     * Renders the view
-     */
-    public function render()
-    {
-        return view('livewire.categories.delete');
     }
 }

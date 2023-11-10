@@ -11,6 +11,7 @@ class GameMatch extends Model
     use HasFactory;
 
     protected $fillable = [
+        'round',
         'athlete1_id',
         'athlete2_id',
         'game_id',
@@ -18,6 +19,9 @@ class GameMatch extends Model
     ];
 
 
+    /**
+     * Relationships
+     */
     public function athlete1() : BelongsTo {
         return $this->belongsTo(Athlete::class, 'athlete1_id', 'id');
     }

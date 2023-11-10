@@ -21,9 +21,23 @@ class Event extends Model
         'barangay',
         'city',
         'province',
+        'status',
     ];
 
     
+    /**
+     * Filtering search
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%")
+            ->orWhere('venue', 'like', "%{$value}%")
+            ->orWhere('status', 'like', "%{$value}%");
+    }
+
+    /**
+     * Relationships
+     */
     public function teams() : HasMany {
         return $this->hasMany(Team::class);
     }
