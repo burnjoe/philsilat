@@ -3,6 +3,7 @@
         <div class="d-flex align-items-center">
             <h3 class="fw-bold mb-0">CATEGORIES</h3>
         </div>
+        <hr class="mb-0">
     </div>
 
     <div class="container">
@@ -12,7 +13,7 @@
         <div class="container-fluid d-flex justify-content-between py-3">
             {{-- Search --}}
             @include('livewire.inc.search')
-            
+
             <div style="white-space: nowrap;">
                 <a href="{{ route('categories.create') }}" class="custBtn custBtn-light ms-3"><i
                         class="bi bi-plus-lg"></i>&nbsp Add New Category</a>

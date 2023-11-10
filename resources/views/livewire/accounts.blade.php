@@ -1,9 +1,9 @@
 <div>
-
     <div class="text-dark p-3">
         <div class="d-flex align-items-center">
             <h3 class="fw-bold mb-0">USER ACCOUNTS</h3>
         </div>
+        <hr class="mb-0">
     </div>
 
     <div class="container">
@@ -13,7 +13,7 @@
         <div class="container-fluid d-flex justify-content-between py-3">
             {{-- Search --}}
             @include('livewire.inc.search')
-            
+
             <div style="white-space: nowrap;">
                 <a href="{{ route('accounts.index') }}" class="custBtn custBtn-light ms-3"><i
                         class="bi bi-card-list"></i>&nbsp Signup Codes</a>

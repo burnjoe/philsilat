@@ -23,7 +23,7 @@
                             </span>
                             @enderror
                         </div>
-                        
+
                         <div class="form-group col">
                             <label for="sex">Sex Category<span style="color: #b63e3e;"> *</span></label>
                             <select wire:model="sex" id="sex" name="sex"
@@ -54,7 +54,7 @@
                             </span>
                             @enderror
                         </div>
-                        
+
                         <div class="form-group col">
                             <label for="max_weight">Max Weight (kg)<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="max_weight" id="max_weight"
@@ -73,6 +73,7 @@
                         <a href="{{ route('categories') }}" class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                     </div>
+
                 </form>
             </div>
         </div>

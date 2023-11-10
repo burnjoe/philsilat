@@ -204,7 +204,7 @@ a .card:hover {
 
 .main-content {
     position: relative;
-    background-color: #efe9e9;
+    background-color: #e9ecef;
     height: calc(100vh - 56px);
     /* height: auto; */
     top: 0;

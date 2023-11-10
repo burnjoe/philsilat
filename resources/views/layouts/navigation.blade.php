@@ -13,8 +13,11 @@
                 @endauth
                 @guest
                 {{-- Navbar Brand --}}
-                <a class="navbar-brand ms-4 fw-bold fs-5" href="{{ route('root') }}">PHILSILAT</a>
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-4 fw-bold fs-5" href="{{ route('root') }}">PHILSILAT</a>
+                </div>
                 @endguest
+
             </div>
             <div class="d-flex flex-row">
 
