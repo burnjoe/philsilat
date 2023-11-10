@@ -29,8 +29,8 @@
                     <div class="form-group col">
                         <label for="password">New Password<span style="color: #b63e3e;"> *</span></label>
                         <input id="password" type="password"
-                            class="form-control custInput @error('password') is-invalid @enderror"
-                            name="password" required placeholder="New Password" autofocus>
+                            class="form-control custInput @error('password') is-invalid @enderror" name="password"
+                            required placeholder="New Password" autofocus>
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
