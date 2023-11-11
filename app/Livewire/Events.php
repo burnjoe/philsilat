@@ -12,6 +12,7 @@ class Events extends Component
     use WithPagination;
 
     public $search = "";
+    public $selectedStatus = [];
 
 
     /**
@@ -21,7 +22,12 @@ class Events extends Component
     {
         return view('livewire.events', [
             'events' => Event::orderBy('starts_at', 'desc')
-                ->search($this->search)
+                ->when($this->search, function ($query) {
+                    return $query->search($this->search);
+                })
+                ->when($this->selectedStatus, function ($query) {
+                    return $query->status($this->selectedStatus);
+                })
                 ->paginate(16)
         ]);
     }

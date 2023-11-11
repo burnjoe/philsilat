@@ -19,16 +19,23 @@ class Category extends Model
 
 
     /**
-     * Filtering search
+     * Data filters
      */
     public function scopeSearch($query, $value)
     {
         $query->where('class_label', 'like', "%{$value}%")
-            ->orWhere('sex', 'like', "%{$value}%")
             ->orWhere('min_weight', 'like', "%{$value}%")
             ->orWhere('max_weight', 'like', "%{$value}%");
     }
 
+    public function scopeSex($query, $array)
+    {
+        $query->whereIn('sex', $array);
+    }
+
+    /**
+     * Relationships
+     */
     public function games(): HasMany
     {
         return $this->hasMany(Game::class);

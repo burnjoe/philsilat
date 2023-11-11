@@ -13,6 +13,7 @@ class Categories extends Component
     use WithPagination;
 
     public $search = "";
+    public $selectedSex = [];
 
 
     /**
@@ -22,7 +23,12 @@ class Categories extends Component
     {
         return view('livewire.categories', [
             'categories' => Category::orderBy('id', 'desc')
-                ->search($this->search)
+                ->when($this->search, function ($query) {
+                    return $query->search($this->search);
+                })
+                ->when($this->selectedSex, function ($query) {
+                    return $query->sex($this->selectedSex);
+                })
                 ->paginate(15),
         ]);
     }

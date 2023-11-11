@@ -24,25 +24,31 @@ class Event extends Model
         'status',
     ];
 
-    
+
     /**
-     * Filtering search
+     * Data filters
      */
     public function scopeSearch($query, $value)
     {
         $query->where('name', 'like', "%{$value}%")
-            ->orWhere('venue', 'like', "%{$value}%")
-            ->orWhere('status', 'like', "%{$value}%");
+            ->orWhere('venue', 'like', "%{$value}%");
+    }
+
+    public function scopeStatus($query, $array)
+    {
+        $query->whereIn('status', $array);
     }
 
     /**
      * Relationships
      */
-    public function teams() : HasMany {
+    public function teams(): HasMany
+    {
         return $this->hasMany(Team::class);
     }
-    
-    public function games() : HasMany {
+
+    public function games(): HasMany
+    {
         return $this->hasMany(Game::class);
     }
 }

@@ -34,13 +34,13 @@
                         <ul class="dropdown-menu dropdown-menu-dark">
                            <li>
                               <a class="dropdown-item">
-                                 <input class="form-check-input me-1" type="checkbox" value="" id="male">
+                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1" type="checkbox" value="Male" id="male">
                                  <label class="form-check-label fs-6 fw-normal" for="male">Male</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input class="form-check-input me-1" type="checkbox" value="" id="female">
+                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1" type="checkbox" value="Female" id="female">
                                  <label class="form-check-label fs-6 fw-normal" for="female">Female</label>
                               </a>
                            </li>
@@ -75,8 +75,6 @@
                @endforeach
             </tbody>
          </table>
-
-         <button wire:click.prevent="display">Display</button>
 
          {{-- No Records Found --}}
          @if ($categories->total() == 0)
