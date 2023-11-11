@@ -114,7 +114,7 @@
 
       {{-- No Records Found --}}
       @if ($events->total() == 0)
-      <div class="d-flex justify-content-center align-items-center my-5">
+      <div class="d-flex justify-content-center align-items-center my-5 pb-5">
          @if (empty($search))
          <h4>No existing events.</h4>
          @else
