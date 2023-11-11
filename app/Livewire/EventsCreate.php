@@ -76,15 +76,15 @@ class EventsCreate extends Component
         try {
             $this->authorize('manage events');
         } catch (\Throwable $th) {
-            return redirect()->route('events')
-                ->with('danger', 'Unauthorized action.');
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('events', navigate: true);
         }
 
         $validated = $this->validate();
 
         Event::create($validated);
 
-        return redirect()->route('events')
-            ->with('success', 'The event has been added successfully.');
+        session()->flash('danger', 'The event has been added successfully.');
+        return $this->redirectRoute('events', navigate: true);
     }
 }

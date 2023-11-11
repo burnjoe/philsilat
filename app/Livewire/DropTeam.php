@@ -38,18 +38,18 @@ class DropTeam extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            return redirect()->route('events.teams', ['event' => $this->event->id])
-                ->with('danger', 'Unauthorized action.');
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
         }
 
         try {
             $this->team->delete();
 
-            return redirect()->route('events.teams', ['event' => $this->event->id])
-                ->with('success', 'The team has been dropped successfully.');
+            session()->flash('success', 'The team has been dropped successfully.');
+            return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
         } catch (\Throwable $th) {
-            return redirect()->route('events.teams', ['event' => $this->event->id])
-                ->with('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
         }
     }
 
@@ -61,22 +61,22 @@ class DropTeam extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            return redirect()->route('events.teams', ['event' => $this->event->id])
-                ->with('danger', 'Unauthorized action.');
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
         }
 
         try {
-            if(!$this->team->exists) {
+            if (!$this->team->exists) {
                 Team::where('event_id', $this->event->id)->delete();
-    
-                return redirect()->route('events.teams', ['event' => $this->event->id])
-                    ->with('success', 'All teams have been dropped successfully.');
+
+                session()->flash('success', 'All teams have been dropped successfully.');
+                return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
             } else {
                 throw new \Throwable;
             }
         } catch (\Throwable $th) {
-            return redirect()->route('events.teams', ['event' => $this->event->id])
-                ->with('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            return $this->redirectRoute('events.teams', ['event' => $this->event->id], navigate: true);
         }
     }
 }

@@ -34,18 +34,18 @@ class CategoriesDelete extends Component
         try {
             $this->authorize('manage categories');
         } catch (\Throwable $th) {
-            return redirect()->route('categories')
-                ->with('danger', 'Unauthorized action.');
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('categories', navigate: true);
         }
 
         try {
             $this->category->delete();
 
-            return redirect()->route('categories')
-                ->with('success', 'The category has been deleted successfully.');
+            session()->flash('success', 'The category has been deleted successfully.');
+            return $this->redirectRoute('categories', navigate: true);
         } catch (\Throwable $th) {
-            return redirect()->route('categories')
-                ->with('danger', 'Unable to delete the category. It is currently in use and cannot be removed.');
+            session()->flash('danger', 'Unable to delete the category. It is currently in use and cannot be removed.');
+            return $this->redirectRoute('categories', navigate: true);
         }
     }
 }

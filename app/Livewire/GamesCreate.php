@@ -115,15 +115,15 @@ class GamesCreate extends Component
         try {
             $this->authorize('manage events');
         } catch (\Throwable $th) {
-            return redirect()->route('categories')
-                ->with('danger', 'Unauthorized action.');
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('categories', navigate: true);
         }
 
         $validated = $this->validate();
 
         Game::create($validated);
 
-        return redirect()->route('events.show', ['event' => $this->event_id])
-            ->with('success', 'The game has been added successfully.');
+        session()->flash('success', 'The game has been added successfully.');
+        return $this->redirectRoute('events.show', ['event' => $this->event_id], navigate: true);
     }
 }
