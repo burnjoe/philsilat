@@ -9,7 +9,7 @@
 
          <div>
             {{-- route check --}}
-            <a href="" class="custBtn custBtn-red me-3">
+            <a wire:navigate href="" class="custBtn custBtn-red me-3">
                <i style="display: inline-block;" class="bi bi-trash3-fill"></i>
                &nbsp Delete Game
             </a>
@@ -86,7 +86,7 @@
                </div>
 
                <div class="form-group d-flex justify-content-end pt-4">
-                  <a href="{{ route('events.show', ['event' => $event->id]) }}" class="custBtn custBtn-light">Cancel</a>
+                  <a wire:navigate href="{{ route('events.show', ['event' => $event->id]) }}" class="custBtn custBtn-light">Cancel</a>
                   <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                </div>
             </form>

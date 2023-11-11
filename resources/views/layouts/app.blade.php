@@ -42,11 +42,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
     <script>
-        let btn1 = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
         btn.onclick = function () {
-        sidebar.classList.toggle('active');
+            $('.sidebar').toggleClass('active');
         }
 
         $(document).ready(function ($) {

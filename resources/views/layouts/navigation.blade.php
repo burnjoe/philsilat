@@ -9,12 +9,12 @@
                     <i class="bi bi-list"></i>
                 </a>
                 {{-- Navbar Brand --}}
-                <a class="navbar-brand ms-2 fw-bold fs-5" href="{{ route('root') }}">PHILSILAT</a>
+                <a class="navbar-brand ms-2 fw-bold fs-5" wire:navigate href="{{ route('root') }}">PHILSILAT</a>
                 @endauth
                 @guest
                 {{-- Navbar Brand --}}
                 <div class="container-fluid">
-                    <a class="navbar-brand ms-4 fw-bold fs-5" href="{{ route('root') }}">PHILSILAT</a>
+                    <a class="navbar-brand ms-4 fw-bold fs-5" wire:navigate href="{{ route('root') }}">PHILSILAT</a>
                 </div>
                 @endguest
 
@@ -35,12 +35,12 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li>
-                                <a class="dropdown-item" href="profile.php">
+                                <a class="dropdown-item" wire:navigate href="profile.php">
                                     <i class="bi bi-person me-3"></i>My Profile
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('change-password') }}">
+                                <a class="dropdown-item" wire:navigate href="{{ route('change-password') }}">
                                     <i class="bi bi-key me-3"></i>Change Password
                                 </a>
                             </li>

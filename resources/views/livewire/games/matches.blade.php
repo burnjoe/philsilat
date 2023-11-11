@@ -10,7 +10,7 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                <a href="#" class="custBtn custBtn-light me-3"><i class="bi bi-diagram-2"></i>&nbsp Generate Matches</a>
+                <a wire:navigate href="#" class="custBtn custBtn-light me-3"><i class="bi bi-diagram-2"></i>&nbsp Generate Matches</a>
             </div>
         </div>
 

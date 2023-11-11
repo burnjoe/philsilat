@@ -73,7 +73,7 @@
             </div>
 
             {{-- Add New Event Button --}}
-            <a href="{{ route('events.create') }}" class="custBtn custBtn-light ms-3"><i class="bi bi-plus-lg"></i>&nbsp
+            <a wire:navigate href="{{ route('events.create') }}" class="custBtn custBtn-light ms-3"><i class="bi bi-plus-lg"></i>&nbsp
                Add New Event</a>
          </div>
       </div>
@@ -83,7 +83,7 @@
          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 px-3 py-2">
             @foreach ($events as $event)
                <div wire:key="{{ $event->id }}" class="col" id="card-event">
-                  <a class="nav-link" href="{{ route('events.show', ['event' => $event->id]) }}">
+                  <a class="nav-link" wire:navigate href="{{ route('events.show', ['event' => $event->id]) }}">
                      <div class="card" style="height:18rem;">
                         <div class="card-body rounded overflow-hidden p-3">
                            <span

@@ -70,10 +70,9 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-end pt-4">
-                        <a href="{{ route('categories') }}" class="custBtn custBtn-light">Cancel</a>
+                        <a wire:navigate href="{{ route('categories') }}" class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                     </div>
-
                 </form>
             </div>
         </div>

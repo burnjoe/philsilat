@@ -2,7 +2,7 @@
     <ul>
         {{-- Dashboard --}}
         <li>
-            <a href="{{ route('dashboard') }}">
+            <a wire:navigate href="{{ route('dashboard') }}">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span class="nav-item">Dashboard</span>
             </a>
@@ -12,7 +12,7 @@
         {{-- Categories --}}
         @can('manage categories')
         <li>
-            <a href="{{ route('categories') }}">
+            <a wire:navigate href="{{ route('categories') }}">
                 <i class="bi bi-clipboard2-check"></i>
                 <span class="nav-item">Categories</span>
             </a>
@@ -23,7 +23,7 @@
         {{-- Events --}}
         @can('manage events')
         <li>
-            <a href="{{ route('events') }}">
+            <a wire:navigate href="{{ route('events') }}">
                 <i class="bi bi-calendar-event"></i>
                 <span class="nav-item">Events</span>
             </a>
@@ -34,7 +34,7 @@
         {{-- Accounts --}}
         @can('manage accounts')
         <li>
-            <a href="{{ route('accounts') }}">
+            <a wire:navigate href="{{ route('accounts') }}">
                 <i class="bi bi-person-badge"></i>
                 <span class="nav-item">Accounts</span>
             </a>

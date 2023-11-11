@@ -15,7 +15,7 @@
          @include('livewire.inc.search')
 
          <div style="white-space: nowrap;">
-            <a href="{{ route('categories.create') }}" class="custBtn custBtn-light ms-3"><i
+            <a wire:navigate href="{{ route('categories.create') }}" class="custBtn custBtn-light ms-3"><i
                   class="bi bi-plus-lg"></i>&nbsp Add New Category</a>
          </div>
       </div>
@@ -54,37 +54,39 @@
             </thead>
             <tbody>
                @foreach ($categories as $category)
-                  <tr scope="row" wire:key="{{ $category->id }}">
-                     <td>{{ $category->class_label }}</td>
-                     <td>{{ $category->sex }}</td>
-                     <td>{{ $category->min_weight }}</td>
-                     <td>{{ $category->max_weight }}</td>
-                     <td>
-                        <div style="white-space: nowrap;">
-                           <a href="{{ route('categories.edit', ['category' => $category->id]) }}"
-                              class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
-                                 class="bi bi-pencil-fill"></i>&nbsp
-                              Edit</a>
+               <tr scope="row" wire:key="{{ $category->id }}">
+                  <td>{{ $category->class_label }}</td>
+                  <td>{{ $category->sex }}</td>
+                  <td>{{ $category->min_weight }}</td>
+                  <td>{{ $category->max_weight }}</td>
+                  <td>
+                     <div style="white-space: nowrap;">
+                        <a wire:navigate href="{{ route('categories.edit', ['category' => $category->id]) }}"
+                           class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
+                              class="bi bi-pencil-fill"></i>&nbsp
+                           Edit</a>
 
-                           <a href="{{ route('categories.delete', ['category' => $category->id]) }}"
-                              class="custBtn custBtn-red ms-3"><i style="display: inline-block;"
-                                 class="bi bi-trash3-fill"></i>&nbsp Delete</a>
-                        </div>
-                     </td>
-                  </tr>
+                        <a wire:navigate href="{{ route('categories.delete', ['category' => $category->id]) }}"
+                           class="custBtn custBtn-red ms-3"><i style="display: inline-block;"
+                              class="bi bi-trash3-fill"></i>&nbsp Delete</a>
+                     </div>
+                  </td>
+               </tr>
                @endforeach
             </tbody>
          </table>
 
+         <button wire:click.prevent="display">Display</button>
+
          {{-- No Records Found --}}
          @if ($categories->total() == 0)
-            <div class="d-flex justify-content-center align-items-center my-5">
-               @if (empty($search))
-                  <h4>No existing records.</h4>
-               @else
-                  <h4>No records found for matching "{{ $search }}".</h4>
-               @endif
-            </div>
+         <div class="d-flex justify-content-center align-items-center my-5">
+            @if (empty($search))
+            <h4>No existing records.</h4>
+            @else
+            <h4>No records found for matching "{{ $search }}".</h4>
+            @endif
+         </div>
          @endif
       </div>
 

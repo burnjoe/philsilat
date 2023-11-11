@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group d-flex justify-content-end pt-4">
-                        <a href="{{ route('events.show', ['event' => $event->id]) }}"
+                        <a wire:navigate href="{{ route('events.show', ['event' => $event->id]) }}"
                             class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                     </div>

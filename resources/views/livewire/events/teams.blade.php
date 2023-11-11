@@ -14,7 +14,7 @@
                 {{-- Search --}}
                 @include('livewire.inc.search')
                 @if(in_array($event->status, ["REGISTRATION OPEN"]) && $teams->isNotEmpty())
-                <a href="{{ route('events.drop-all-teams', ['event' => $event->id]) }}"
+                <a wire:navigate href="{{ route('events.drop-all-teams', ['event' => $event->id]) }}"
                     class="custBtn custBtn-red me-3"><i class=" bi bi-arrow-down"></i>&nbsp Drop All Teams</a>
                 @endif
             </div>
@@ -36,11 +36,11 @@
                         <td></td>
                         <td>
                             <div style="white-space: nowrap;">
-                                <a href="#" class="custBtn custBtn-light"
+                                <a wire:navigate href="#" class="custBtn custBtn-light"
                                     style="display: inline-block; margin-right: 8px;"><i
                                         class="bi bi-eye-fill"></i>&nbsp View</a>
                                 @if(in_array($event->status, ["REGISTRATION OPEN"]))
-                                <a href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
+                                <a wire:navigate href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
                                     class="custBtn custBtn-red ms-3"
                                     style="display: inline-block; margin-right: 8px;"><i class=" bi bi-arrow-down"></i>
                                     Drop</a>

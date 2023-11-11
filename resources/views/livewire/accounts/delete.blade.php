@@ -16,7 +16,7 @@
 
                 <form wire:submit.prevent="destroy">
                     <div class="form-group d-flex justify-content-end pt-4">
-                        <a href="{{ route('accounts') }}" class="custBtn custBtn-light">Cancel</a>
+                        <a wire:navigate href="{{ route('accounts') }}" class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-red ms-3">Delete</button>
                     </div>
                 </form>

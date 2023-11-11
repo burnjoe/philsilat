@@ -14,7 +14,7 @@
                 {{-- Search --}}
                 @include('livewire.inc.search')
                 @if($event->status === "UPCOMING")
-                <a href="{{ route('games.create', ['event' => $event->id]) }}" class="custBtn custBtn-light me-3"><i
+                <a wire:navigate href="{{ route('games.create', ['event' => $event->id]) }}" class="custBtn custBtn-light me-3"><i
                         class="bi bi-plus-lg"></i>&nbsp Add New Game</a>
                 @endif
             </div>
@@ -24,7 +24,7 @@
             @foreach ($games as $game)
             <div class="col" id="card-event">
                 <a wire:key="{{ $game->id }}" class="nav-link"
-                    href="{{ route('games.matches', ['event' => $event->id, 'game' => $game->id]) }}">
+                    wire:navigate href="{{ route('games.matches', ['event' => $event->id, 'game' => $game->id]) }}">
                     <div class="card" style="height:18rem;">
                         <div class="card-body rounded overflow-hidden">
                             <div class="h-100 d-flex justify-content-center align-items-center p-3">

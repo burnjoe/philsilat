@@ -119,7 +119,7 @@
                                 {{-- If event(s) found --}}
                                 @foreach ($todayEvents as $todayEvent)
                                 <a wire:key="{{ $todayEvent->id }}" class="nav-link"
-                                    href="{{ route('events.show', ['event' => $todayEvent->id]) }}">
+                                    wire:navigate href="{{ route('events.show', ['event' => $todayEvent->id]) }}">
                                     <div class="row g-4 p-2">
                                         <div class="col-auto mt-2">
                                             <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
@@ -163,7 +163,7 @@
                                 {{-- If event(s) found --}}
                                 @foreach ($upcomingEvents as $upcomingEvent)
                                 <a wire:key="{{ $upcomingEvent }}" class="nav-link"
-                                    href="{{ route('events.show', ['event' => $upcomingEvent->id])}}">
+                                    wire:navigate href="{{ route('events.show', ['event' => $upcomingEvent->id])}}">
                                     <div class="row g-4 p-2">
                                         <div class="col-auto mt-2">
                                             <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>

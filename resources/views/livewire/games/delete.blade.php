@@ -17,7 +17,7 @@
             <form wire:submit.prevent="destroy">
                <div class="form-group d-flex justify-content-end pt-4">
                   {{-- route check --}}
-                  <a href="" class="custBtn custBtn-light">Cancel</a>
+                  <a wire:navigate href="" class="custBtn custBtn-light">Cancel</a>
                   <button type="submit" value="true" class="custBtn custBtn-red ms-3">Delete</button>
                </div>
             </form>

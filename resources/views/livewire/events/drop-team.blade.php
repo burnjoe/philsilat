@@ -20,7 +20,7 @@
 
                 <form wire:submit.prevent="{{ $team->exists ? 'destroy' : 'destroyAll'}}">
                     <div class="form-group d-flex justify-content-end pt-4">
-                        <a href="{{ route('events.teams', ['event' => $event->id]) }}"
+                        <a wire:navigate href="{{ route('events.teams', ['event' => $event->id]) }}"
                             class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-red ms-3">Drop</button>
                     </div>

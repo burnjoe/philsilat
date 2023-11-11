@@ -67,7 +67,7 @@
          @include('livewire.inc.search')
 
          <div style="white-space: nowrap;">
-            <a href="{{ route('accounts') }}" class="custBtn custBtn-light"><i class="bi bi-arrow-left"></i>&nbsp
+            <a wire:navigate href="{{ route('accounts') }}" class="custBtn custBtn-light"><i class="bi bi-arrow-left"></i>&nbsp
                Back to User Accounts</a>
          </div>
       </div>
