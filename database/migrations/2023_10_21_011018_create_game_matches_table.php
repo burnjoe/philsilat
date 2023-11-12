@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->tinyInteger('round');
             $table->unsignedBigInteger('athlete1_id');
-            $table->unsignedBigInteger('athlete2_id');
+            $table->unsignedBigInteger('athlete2_id')->nullable();
             $table->foreignId('game_id')
                 ->constrained()
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
-            $table->unsignedBigInteger('winner_id');
+            $table->unsignedBigInteger('winner_id')->nullable();
 
             // Define FK constraints
             $table->foreign('athlete1_id')
