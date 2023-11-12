@@ -20,21 +20,33 @@ class GameMatch extends Model
 
 
     /**
+     * Data filters
+     */
+    public function scopeRound($query, $value)
+    {
+        $query->where('round', 'like', "%{$value}%");
+    }
+
+    /**
      * Relationships
      */
-    public function athlete1() : BelongsTo {
+    public function athlete1(): BelongsTo
+    {
         return $this->belongsTo(Athlete::class, 'athlete1_id', 'id');
     }
 
-    public function athlete2() : BelongsTo {
+    public function athlete2(): BelongsTo
+    {
         return $this->belongsTo(Athlete::class, 'athlete2_id', 'id');
     }
 
-    public function winner() : BelongsTo {
+    public function winner(): BelongsTo
+    {
         return $this->belongsTo(Athlete::class, 'winner_id', 'id');
     }
 
-    public function game() : BelongsTo {
+    public function game(): BelongsTo
+    {
         return $this->belongsTo(Game::class);
     }
 }

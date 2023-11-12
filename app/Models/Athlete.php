@@ -26,7 +26,7 @@ class Athlete extends Model
 
 
     /**
-     * Filtering search
+     * Data filters
      */
     public function scopeSearch($query, $value)
     {
@@ -36,6 +36,12 @@ class Athlete extends Model
             ->orWhere('school_name', 'like', "%{$value}%")
             ->orWhere('grade_level', 'like', "%{$value}%")
             ->orWhere('lrn', 'like', "%{$value}%");
+    }
+
+    public function scopeNoMatchesInSameGame($query, $gameId)
+    {
+        $query->where('game_id', $gameId)
+            ->whereDoesntHave('gameMatches');
     }
 
     /**
