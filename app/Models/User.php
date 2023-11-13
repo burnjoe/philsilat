@@ -49,12 +49,27 @@ class User extends Authenticatable
 
 
     /**
-     * Filtering search
+     * Data filters
      */
     public function scopeSearch($query, $value)
     {
         $query->where('email', 'like', "%{$value}%")
             ->orWhere('status', 'like', "%{$value}%");
+    }
+
+    public function scopeSex($query, $array)
+    {
+        $query->whereIn('sex', $array);
+    }
+
+    public function scopeRole($query, $array)
+    {
+        $query->whereIn('role', $array);
+    }
+
+    public function scopeStatus($query, $array)
+    {
+        $query->whereIn('status', $array);
     }
 
     public function profileable(): MorphTo

@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Event;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class Events extends Component
 {
@@ -13,7 +12,7 @@ class Events extends Component
 
     public $search = "";
     public $selectedStatus = [];
-
+    public $isStatusDropdownOpen = false; // Add a property to manage dropdown state
 
     /**
      * Renders the view
@@ -28,7 +27,25 @@ class Events extends Component
                 ->when($this->selectedStatus, function ($query) {
                     return $query->status($this->selectedStatus);
                 })
-                ->paginate(16)
+                ->paginate(16),
         ]);
+    }
+
+    // Clear all filters
+    public function clearAllFilters()
+    {
+        $this->selectedStatus = [];
+    }
+
+    // Toggle dropdown state
+    public function toggleSexDropdown()
+    {
+        $this->isStatusDropdownOpen = !$this->isStatusDropdownOpen;
+    }
+
+    // Close dropdown when clicking outside
+    public function closeStatusDropdown()
+    {
+        $this->isStatusDropdownOpen = false;
     }
 }

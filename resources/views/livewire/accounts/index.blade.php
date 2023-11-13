@@ -63,11 +63,23 @@
 
       {{-- Search and Back --}}
       <div class="container-fluid d-flex justify-content-between py-3">
-         {{-- Search --}}
-         @include('livewire.inc.search')
+         <div class="d-flex">
+            {{-- Search --}}
+            @include('livewire.inc.search')
+            {{-- Clear all filters --}}
+            <div class="d-flex align-items-center">
+               <a href="#" class="nav-link" style="color: #dc3545;" wire:click="clearAllFilters">
+                  <i class="bi bi-x-circle-fill"></i>
+                  <span style="text-decoration: underline;">
+                     Clear all filters
+                  </span>
+               </a>
+            </div>
+         </div>
 
          <div style="white-space: nowrap;">
-            <a wire:navigate href="{{ route('accounts') }}" class="custBtn custBtn-light"><i class="bi bi-arrow-left"></i>&nbsp
+            <a wire:navigate href="{{ route('accounts') }}" class="custBtn custBtn-light"><i
+                  class="bi bi-arrow-left"></i>&nbsp
                Back to User Accounts</a>
          </div>
       </div>
@@ -79,21 +91,24 @@
                <th scope="col">Signup Code</th>
                <th scope="col">
                   <ul class="navbar-nav ms-auto me-2">
-                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle py-0" role="button" data-bs-toggle="dropdown"
-                           data-bs-auto-close="outside" aria-expanded="false">
+                     <li class="nav-item dropdown" wire:click.away="closeRoleDropdown">
+                        <a wire:click="toggleRoleDropdown" class="nav-link dropdown-toggle py-0" role="button"
+                           aria-expanded="{{ $isRoleDropdownOpen ? 'true' : 'false' }}">
                            Role
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
+                        <ul class="dropdown-menu dropdown-menu-dark"
+                           style="{{ $isRoleDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input class="form-check-input me-1" type="checkbox" value="" id="admin">
+                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                    type="checkbox" value="Admin" id="admin">
                                  <label class="form-check-label fs-6 fw-normal" for="admin">Admin</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input class="form-check-input me-1" type="checkbox" value="" id="coach">
+                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                    type="checkbox" value="Coach" id="coach">
                                  <label class="form-check-label fs-6 fw-normal" for="coach">Coach</label>
                               </a>
                            </li>

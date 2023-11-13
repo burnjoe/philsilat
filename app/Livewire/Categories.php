@@ -2,11 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Models\Event;
-use Livewire\Component;
 use App\Models\Category;
+use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class Categories extends Component
 {
@@ -14,7 +12,7 @@ class Categories extends Component
 
     public $search = "";
     public $selectedSex = [];
-
+    public $isSexDropdownOpen = false;
 
     /**
      * Renders the view
@@ -31,5 +29,23 @@ class Categories extends Component
                 })
                 ->paginate(15),
         ]);
+    }
+
+    // Clear all filters
+    public function clearAllFilters()
+    {
+        $this->selectedSex = [];
+    }
+
+    // Toggle dropdown state
+    public function toggleSexDropdown()
+    {
+        $this->isSexDropdownOpen = !$this->isSexDropdownOpen;
+    }
+
+    // Close all dropdowns when clicking outside
+    public function closeSexDropdown()
+    {
+        $this->isSexDropdownOpen = false;
     }
 }
