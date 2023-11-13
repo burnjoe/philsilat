@@ -224,7 +224,7 @@ a .card:hover {
 
 /* Styles */
 body {
-    font-family: 'Nunito Sans', 'Arial', sans-serif !important;
+    font-family: "Nunito Sans", "Arial", sans-serif !important;
 }
 
 h1.h1Light {
@@ -410,7 +410,7 @@ input.custInput {
 } */
 
 .navbar-nav .dropdown-menu {
-    position: absolute;
+    position: absolute !important;
 }
 
 .dropdown-divider {
@@ -445,7 +445,7 @@ div label {
 }
 
 .bg-audience {
-    background-image: url('..\..\public\img\bg_audience.png');
+    background-image: url("..\..\public\img\bg_audience.png");
     background-size: cover;
     background-position: center;
 }

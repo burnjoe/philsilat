@@ -16,11 +16,16 @@ class SignUpCode extends Model
 
 
     /**
-     * Filtering search
+     * Data filters
      */
     public function scopeSearch($query, $value) {
         $query->where('id', 'like', "%{$value}%")
             ->orWhere('code', 'like', "%{$value}%")
             ->orWhere('role', 'like', "%{$value}%");
+    }
+
+    public function scopeRole($query, $array)
+    {
+        $query->whereIn('role', $array);
     }
 }
