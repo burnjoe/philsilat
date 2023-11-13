@@ -1,0 +1,41 @@
+Laravel Commands Cheat Sheet
+
+
+-> php artisan make:model <NewModelName> --migration            // create model with migration
+
+-> php artisan migrate                                          // migrate migrations
+
+-> php artisan migrate:rollback                                 // reverse last batch migration
+
+-> php artisan migrate:refresh                                  // migrate rollback + migrate (remigrate)
+
+-> php artisan migrate:fresh                                    // drop tables + migrate
+
+-> php artisan db:seed                                          // seed database
+
+-> php artisan migrate:refresh --seed                           // migrate rollback + migrate + seed database
+
+-> php artisan migrate:fresh --seed                             // drop tables + migrate + seed database
+
+-> php artisan make:controller <NewControllerName>              // create new controller
+
+-> php artisan make:seeder <NewSeederName>                      // create new seeder
+
+-> php artisan make:livewire <ComponentName>                    // create new livewire component
+
+
+
+
+
+
+Git Commands Cheat Sheet 
+
+-> git checkout <branch-name>                                   // switch branch 
+
+-> git checkout -b <new-branch-name>                            // create new branch in local repo from current branch
+
+-> git checkout -b <new-branch-name> origin/<remote_branch>     // create new branch in local repo from remote repo
+
+-> git branch                                                   // shows all the list of branches in local repo 
+
+-> git branch -d <branch>                                       // deletes local branch
