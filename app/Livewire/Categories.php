@@ -12,6 +12,7 @@ class Categories extends Component
 
     public $search = "";
     public $selectedSex = [];
+
     public $isSexDropdownOpen = false;
 
     /**
@@ -31,19 +32,33 @@ class Categories extends Component
         ]);
     }
 
-    // Clear all filters
+    /**
+     * Checks if there are filters
+     */
+    public function hasFilters()
+    {
+        return !empty($this->selectedSex);
+    }
+
+    /**
+     * Clear all filters
+     */
     public function clearAllFilters()
     {
         $this->selectedSex = [];
     }
 
-    // Toggle dropdown state
+    /**
+     * Toggle dropdown state
+     */
     public function toggleSexDropdown()
     {
         $this->isSexDropdownOpen = !$this->isSexDropdownOpen;
     }
 
-    // Close all dropdowns when clicking outside
+    /**
+     * Close all dropdowns when clicking outside
+     */
     public function closeSexDropdown()
     {
         $this->isSexDropdownOpen = false;

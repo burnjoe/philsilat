@@ -15,6 +15,7 @@ class Accounts extends Component
     public $selectedSex = [];
     public $selectedRole = [];
     public $selectedStatus = [];
+
     public $isSexDropdownOpen = false;
     public $isRoleDropdownOpen = false;
     public $isStatusDropdownOpen = false;
@@ -46,7 +47,17 @@ class Accounts extends Component
         ]);
     }
 
-    // Clear all filters
+    /**
+     * Checks if there are filters
+     */
+    public function hasFilters()
+    {
+        return !empty($this->selectedSex) || !empty($this->selectedRole) || !empty($this->selectedStatus);
+    }
+
+    /**
+     * Clear all filters
+     */
     public function clearAllFilters()
     {
         $this->selectedSex = [];
@@ -54,7 +65,9 @@ class Accounts extends Component
         $this->selectedStatus = [];
     }
 
-    // Toggle dropdown state
+    /**
+     * Toggle dropdown state
+     */
     public function toggleSexDropdown()
     {
         $this->isSexDropdownOpen = !$this->isSexDropdownOpen;
@@ -70,7 +83,9 @@ class Accounts extends Component
         $this->isStatusDropdownOpen = !$this->isStatusDropdownOpen;
     }
 
-    // Close all dropdowns when clicking outside
+    /**
+     * Close all dropdowns when clicking outside
+     */
     public function closeSexDropdown()
     {
         $this->isSexDropdownOpen = false;

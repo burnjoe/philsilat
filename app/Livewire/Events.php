@@ -12,7 +12,8 @@ class Events extends Component
 
     public $search = "";
     public $selectedStatus = [];
-    public $isStatusDropdownOpen = false; // Add a property to manage dropdown state
+
+    public $isStatusDropdownOpen = false;
 
     /**
      * Renders the view
@@ -31,19 +32,33 @@ class Events extends Component
         ]);
     }
 
-    // Clear all filters
+    /**
+     * Checks if there are filters
+     */
+    public function hasFilters()
+    {
+        return !empty($this->selectedStatus);
+    }
+
+    /**
+     * Clear all filters
+     */
     public function clearAllFilters()
     {
         $this->selectedStatus = [];
     }
 
-    // Toggle dropdown state
+    /**
+     * Toggle dropdown state
+     */
     public function toggleSexDropdown()
     {
         $this->isStatusDropdownOpen = !$this->isStatusDropdownOpen;
     }
 
-    // Close dropdown when clicking outside
+    /**
+     * Close dropdown when clicking outside
+     */
     public function closeStatusDropdown()
     {
         $this->isStatusDropdownOpen = false;

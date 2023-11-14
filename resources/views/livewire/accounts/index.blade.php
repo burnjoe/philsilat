@@ -66,7 +66,9 @@
          <div class="d-flex">
             {{-- Search --}}
             @include('livewire.inc.search')
+
             {{-- Clear all filters --}}
+            @if($this->hasFilters())
             <div class="d-flex align-items-center">
                <a href="#" class="nav-link" style="color: #dc3545;" wire:click="clearAllFilters">
                   <i class="bi bi-x-circle-fill"></i>
@@ -75,6 +77,7 @@
                   </span>
                </a>
             </div>
+            @endif
          </div>
 
          <div style="white-space: nowrap;">

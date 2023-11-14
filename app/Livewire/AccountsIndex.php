@@ -16,6 +16,7 @@ class AccountsIndex extends Component
 
     public $search = "";
     public $selectedRole = [];
+
     public $isRoleDropdownOpen = false;
 
     /**
@@ -36,19 +37,33 @@ class AccountsIndex extends Component
         ]);
     }
 
-    // Clear all filters
+    /**
+     * Checks if there are filters
+     */
+    public function hasFilters()
+    {
+        return !empty($this->selectedRole);
+    }
+
+    /**
+     * Clear all filters
+     */
     public function clearAllFilters()
     {
         $this->selectedRole = [];
     }
 
-    // Toggle dropdown state
+    /**
+     * Toggle dropdown state
+     */
     public function toggleRoleDropdown()
     {
         $this->isRoleDropdownOpen = !$this->isRoleDropdownOpen;
     }
 
-    // Close all dropdowns when clicking outside
+    /**
+     * Close all dropdowns when clicking outside
+     */
     public function closeRoleDropdown()
     {
         $this->isRoleDropdownOpen = false;
