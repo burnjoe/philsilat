@@ -22,9 +22,9 @@ class GameMatch extends Model
     /**
      * Data filters
      */
-    public function scopeRound($query, $value)
+    public function scopeRound($query, $round)
     {
-        $query->where('round', 'like', "%{$value}%");
+        $query->where('round', $round);
     }
 
     /**

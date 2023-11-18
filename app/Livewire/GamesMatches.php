@@ -16,7 +16,7 @@ class GamesMatches extends Component
     public $event;
     public $game;
 
-    public $round = '1';
+    public $round;
     public $winner_id;
 
     public $search = "";
@@ -29,6 +29,12 @@ class GamesMatches extends Component
     {
         $this->event = $event;
         $this->game = $game;
+        $this->round = GameMatch::select('round')
+            ->where('game_id', $game->id)
+            ->groupBy('round')
+            ->latest('round')
+            ->first()
+            ->round ?? 1;
     }
 
     /**
@@ -47,10 +53,14 @@ class GamesMatches extends Component
                         ->orWhereHas('athlete2.team', fn ($query) => $query->search($this->search))
                         ->orWhereHas('winner.team', fn ($query) => $query->search($this->search));
                 })
-                ->where(function ($query) {
+                ->when($this->round, function ($query) {
                     $query->round($this->round);
                 })
-                ->paginate(15)
+                ->paginate(15),
+            'rounds' => GameMatch::select('round')
+                ->where('game_id', $this->game->id)
+                ->groupBy('round')
+                ->get(),
         ]);
     }
 
@@ -95,82 +105,70 @@ class GamesMatches extends Component
     }
 
     /**
-     * Generate matches
+     * Generate match pairings
+     *
+     * Matchmaking Rules:
+     * 
+     * If Matchmake for round 1:
+     * 1. Athlete must be a different athlete
+     * 2. Athlete must be on a different team
+     * 3. Athlete must be on the same event
+     * 4. Athlete must be on the same game (that includes its sex and weight category) + (age range: to follow)
+     * 5. Athlete must have no existing match on this event
+     * 
+     * If Matchmake for round >= 2:
+     * 1. Athlete must be a different athlete
+     * 2. Athlete must be on a different team
+     * 3. Athlete must be on the same event
+     * 4. Athlete must be on the same game (that includes its sex and weight category) + (age range: to follow)
+     * 5. Athlete must be a winner athlete of the previous round (current round - 1)
+     * 
+     * Before to proceed to next round:
+     * 1. Check if all current round matches has winner
+     * 2. Check if round number is valid and not skipping round (e.g. Round 1 -> Round 4) 
+     *
      */
     public function generateMatches()
     {
-        /**
-         * Matchmaking Rules:
-         * 
-         * If Matchmake for round 1:
-         * 1. Athlete must be a different athlete
-         * 2. Athlete must be on a different team
-         * 3. Athlete must be on the same event
-         * 4. Athlete must be on the same game (that includes its sex and weight category) + (age range: to follow)
-         * 5. Athlete must have no existing match on this event
-         * 
-         * If Matchmake for round >= 2:
-         * 1. Athlete must be a different athlete
-         * 2. Athlete must be on a different team
-         * 3. Athlete must be on the same event
-         * 4. Athlete must be on the same game (that includes its sex and weight category) + (age range: to follow)
-         * 5. Athlete must be a winner athlete of the previous round (current round - 1)
-         * 
-         * Before to proceed to next round:
-         * 1. Check if all current round matches has winner
-         * 2. Check if round number is valid and not skipping round (e.g. Round 1 -> Round 4) 
-         */
-
-
-
-
-
+        // Get latest round number
+        $this->round = GameMatch::select('round')
+            ->where('game_id', $this->game->id)
+            ->groupBy('round')
+            ->latest('round')
+            ->first();
 
         // Shuffle the athletes randomly
-        // $athletes = Athlete::all()->shuffle();
+        if (!$this->round) {
+            $athletes = Athlete::noMatchesInSameGame($this->game->id)->get()->shuffle();
+        } else {
+            $this->round = $this->round->round;
+            $athletes = Athlete::winnersOfSameRound($this->game->id, $this->round)->get()->shuffle();
+        }
 
-        // $athletes = Athlete::where('game_id', $this->game->id)->get()->shuffle();
-
-        $athletes = Athlete::noMatchesInSameGame($this->game->id)->get()->shuffle();
-        // dd($athletes);
+        // Create match pairings for new round
+        $this->round += 1;
 
         // Create match pairings
-        $matches = [];
-
         while ($athletes->count() >= 2) {
             $athlete = $athletes->shift();
-
-            // Randomly select an opponent from the remaining athletes
-            // $opponent = $athletes->random();
             $opponent = $athletes->shift();
 
-            // Remove the opponent from the remaining athletes
-            // $athletes = $athletes->reject(function ($athlete) use ($opponent) {
-            //     return $athlete->id === $opponent->id;
-            // });
-
             // Create a match between $athlete and $opponent
-            $match = GameMatch::create([
+            GameMatch::create([
                 'round' => $this->round,
                 'game_id' => $this->game->id,
                 'athlete1_id' => $athlete->id,
                 'athlete2_id' => $opponent->id,
             ]);
-
-            $matches[] = $match;
         }
 
-        // dd($matches);
-
-        // Handle any remaining athlete (if the number of athletes is odd)
-        if ($athletes->count() === 1) {
+        // Handle any remaining athlete
+        if ($athletes->isNotEmpty()) {
             GameMatch::create([
                 'round' => $this->round,
                 'game_id' => $this->game->id,
                 'athlete1_id' => $athletes->first()->id,
             ]);
-            // $unmatchedAthlete = $athletes->first();
-            // You can either assign them a bye or handle it as needed for your specific tournament rules.
         }
     }
 
@@ -188,15 +186,19 @@ class GamesMatches extends Component
 
         $validated = $this->validate();
 
-        $winner = GameMatch::where('round', $this->round)
-            ->where('game_id', $this->game->id)
-            ->where('athlete1_id', $winner_id)
-            ->orWhere('athlete2_id', $this->winner_id)
+        $winner = GameMatch::where('game_id', $this->game->id)
+            ->where('round', $this->round)
+            ->where(function ($query) use ($winner_id) {
+                $query->where('athlete1_id', $winner_id)
+                      ->orWhere('athlete2_id', $winner_id);
+            })
             ->first();
+            
+        if ($winner) {
+            $winner->update($validated);
 
-        $winner->update($validated);
-
-        $this->reset('winner_id');
+            $this->reset('winner_id');
+        }
     }
 
     /**
@@ -223,12 +225,5 @@ class GamesMatches extends Component
 
             $this->reset('winner_id');
         }
-    }
-
-    /**
-     * Proceed to next round, creates new round for new matches
-     */
-    public function proceedNextRound()
-    {
     }
 }

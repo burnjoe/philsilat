@@ -7,14 +7,26 @@
 
         <div class="container-fluid d-flex justify-content-between mb-3 pt-3">
             <div class="px-3">
-                <h5 class="fw-bold">Matches</h5>
+                <h5 class="fw-bold">
+                    Matches — Round {{ $round }}
+
+                    @if($matches->count() === 2)
+                    (Semi-Finals)
+                    @elseif($matches->count() === 1)
+                    (Finals)
+                    @else
+                    (Elimination)
+                    @endif
+                </h5>
             </div>
 
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                <button wire:click="generateMatches" class="custBtn custBtn-light me-3">Proceed to Next Round &nbsp<i
+                @if($rounds->count() >= 1 && $matches->count() > 1)
+                <button wire:click="generateMatches" class="custBtn custBtn-light me-3">Generate Next Round &nbsp<i
                         class="bi bi-arrow-right"></i></button>
+                @endif
             </div>
         </div>
 
@@ -31,13 +43,17 @@
                                     Round
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
+                                    @foreach ($rounds as $_round)
                                     <li>
                                         <a class="dropdown-item">
                                             <input wire:model.live.debounce.300ms="round" class="form-check-input me-1"
-                                                type="radio" value="1" id="1">
-                                            <label class="form-check-label fs-6 fw-normal" for="1">Round 1</label>
+                                                type="radio" value="{{ $_round->round }}" id="{{ $_round->round }}">
+                                            <label class="form-check-label fs-6 fw-normal" for="{{ $_round->round }}">
+                                                Round {{ $_round->round }}
+                                            </label>
                                         </a>
                                     </li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -50,12 +66,12 @@
                     <tr scope="row" wire:key="{{ $match->id }}">
                         <td>
                             <span class="badge text-bg-danger py-1 me-1">{{ $match->athlete1->team->name ?? '' }}</span>
-                            {{ $match->athlete1->last_name ?? '' }}
+                            {{ $match->athlete1->id ?? 'N/A' }}
                         </td>
                         <td>
                             <span class="badge text-bg-primary py-1 me-1">{{ $match->athlete2->team->name ?? ''
                                 }}</span>
-                            {{ $match->athlete2->last_name ?? '' }}
+                            {{ $match->athlete2->id ?? 'N/A' }}
                         </td>
                         <td>{{ $match->round }}</td>
                         <td>
@@ -68,7 +84,7 @@
 
                             <span class="badge text-bg-{{$badgeColor}} py-1 me-1">{{ $match->winner->team->name
                                 }}</span>
-                            {{ $match->winner->last_name }}
+                            {{ $match->winner->id }}
                             @else
                             <div>
                                 <select wire:model.live.debounce.300ms="winner_id" name="winner"
@@ -91,7 +107,7 @@
                             @endif
                         </td>
                         <td>
-                            @if($match->winner)
+                            @if($match->winner && $round === $rounds->count())
                             <button wire:click="denounceWinner({{$match->winner->id}})" class="custBtn custBtn-light"><i
                                     class="bi bi-arrow-counterclockwise"></i>&nbsp
                                 Undo</button>
