@@ -21,6 +21,8 @@ class GamesMatches extends Component
 
     public $search = "";
 
+    public $isRoundDropdownOpen = false;
+
     /**
      * Initializes attributes at load
      */
@@ -102,6 +104,22 @@ class GamesMatches extends Component
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+
+    /**
+     * Toggle dropdown state
+     */
+    public function toggleRoundDropdown()
+    {
+        $this->isRoundDropdownOpen = !$this->isRoundDropdownOpen;
+    }
+
+    /**
+     * Close all dropdowns when clicking outside
+     */
+    public function closeRoundDropdown()
+    {
+        $this->isRoundDropdownOpen = false;
     }
 
     /**
