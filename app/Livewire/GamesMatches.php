@@ -21,7 +21,6 @@ class GamesMatches extends Component
 
     public $search = "";
 
-
     /**
      * Initializes attributes at load
      */
@@ -57,6 +56,7 @@ class GamesMatches extends Component
                     $query->round($this->round);
                 })
                 ->paginate(15),
+            'round' => $this->round,
             'rounds' => GameMatch::select('round')
                 ->where('game_id', $this->game->id)
                 ->groupBy('round')
@@ -70,7 +70,7 @@ class GamesMatches extends Component
     public function rules()
     {
         return [
-            'winner_id' => 'required',
+            'winner_id' => 'required|integer',
         ];
     }
 
@@ -143,19 +143,37 @@ class GamesMatches extends Component
         } else {
             $this->round = $this->round->round;
             $athletes = Athlete::winnersOfSameRound($this->game->id, $this->round)->get()->shuffle();
+            $this->closeMatchesOfRound($this->round);
+        }
+
+        // Use to check if all match pairings of this round is closed
+        $checkMatch = GameMatch::where('game_id', $this->game->id)
+            ->where('round', $this->round)
+            ->value('is_closed') ?? true;
+
+        // Checks if there's an athlete and ensure all pairs have winners
+        if ($athletes->isEmpty() || !$checkMatch) {
+            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            return;
         }
 
         // Create match pairings for new round
         $this->round += 1;
 
+        // Gets last game number
+        $game_no = GameMatch::where('game_id', $this->game->id)
+            ->count();
+
         // Create match pairings
         while ($athletes->count() >= 2) {
+            $game_no++;
             $athlete = $athletes->shift();
             $opponent = $athletes->shift();
 
             // Create a match between $athlete and $opponent
             GameMatch::create([
                 'round' => $this->round,
+                'game_no' => $game_no,
                 'game_id' => $this->game->id,
                 'athlete1_id' => $athlete->id,
                 'athlete2_id' => $opponent->id,
@@ -164,8 +182,11 @@ class GamesMatches extends Component
 
         // Handle any remaining athlete
         if ($athletes->isNotEmpty()) {
+            $game_no++;
+
             GameMatch::create([
                 'round' => $this->round,
+                'game_no' => $game_no,
                 'game_id' => $this->game->id,
                 'athlete1_id' => $athletes->first()->id,
             ]);
@@ -190,10 +211,10 @@ class GamesMatches extends Component
             ->where('round', $this->round)
             ->where(function ($query) use ($winner_id) {
                 $query->where('athlete1_id', $winner_id)
-                      ->orWhere('athlete2_id', $winner_id);
+                    ->orWhere('athlete2_id', $winner_id);
             })
             ->first();
-            
+
         if ($winner) {
             $winner->update($validated);
 
@@ -224,6 +245,21 @@ class GamesMatches extends Component
             ]);
 
             $this->reset('winner_id');
+        }
+    }
+
+    /**
+     * Close matches, means that action made to this match will be irreversible
+     */
+    public function closeMatchesOfRound($round)
+    {
+        $matches = GameMatch::where('game_id', $this->game->id)
+            ->where('round', $round);
+
+        // Checks if all match pairs of the current round has winner
+        if (!$matches->get()->where('winner_id', null)->count() > 0) {
+            $matches->where('is_closed', false)
+                ->update(['is_closed' => true]);
         }
     }
 }

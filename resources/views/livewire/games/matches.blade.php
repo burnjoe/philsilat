@@ -14,6 +14,9 @@
                     (Semi-Finals)
                     @elseif($matches->count() === 1)
                     (Finals)
+                    @if($matches->first()->is_closed)
+                    <span class="badge text-bg-success py-1 ms-1">Completed</span>
+                    @endif
                     @else
                     (Elimination)
                     @endif
@@ -23,9 +26,13 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                @if($rounds->count() >= 1 && $matches->count() > 1)
+                @if($rounds->count() >= 1 && $matches->count() > 1 && !$matches->where('winner_id', null)->count() > 0
+                && !$matches->first()->is_closed)
                 <button wire:click="generateMatches" class="custBtn custBtn-light me-3">Generate Next Round &nbsp<i
                         class="bi bi-arrow-right"></i></button>
+                @elseif($matches->count() == 1 && !$matches->first()->is_closed && $matches->first()->winner_id)
+                <button wire:click="closeMatchesOfRound({{$round}})" class="custBtn custBtn-light me-3"><i
+                        class="bi bi-lock-fill"></i>&nbsp Mark Game Complete</button>
                 @endif
             </div>
         </div>
@@ -33,6 +40,7 @@
         <div class="mx-4 mb-3 bg-white" style="overflow-x: auto;  box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.2);">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-dark text-light" style="white-space: nowrap;">
+                    <th scope="col">Game #</th>
                     <th scope="col">Red Corner</th>
                     <th scope="col">Blue Corner</th>
                     <th scope="col">
@@ -65,13 +73,16 @@
                     @foreach ($matches as $match)
                     <tr scope="row" wire:key="{{ $match->id }}">
                         <td>
+                            {{ $match->game_no }}
+                        </td>
+                        <td>
                             <span class="badge text-bg-danger py-1 me-1">{{ $match->athlete1->team->name ?? '' }}</span>
-                            {{ $match->athlete1->id ?? 'N/A' }}
+                            {{ $match->athlete1->last_name ?? 'N/A' }}
                         </td>
                         <td>
                             <span class="badge text-bg-primary py-1 me-1">{{ $match->athlete2->team->name ?? ''
                                 }}</span>
-                            {{ $match->athlete2->id ?? 'N/A' }}
+                            {{ $match->athlete2->last_name ?? 'N/A' }}
                         </td>
                         <td>{{ $match->round }}</td>
                         <td>
@@ -84,7 +95,7 @@
 
                             <span class="badge text-bg-{{$badgeColor}} py-1 me-1">{{ $match->winner->team->name
                                 }}</span>
-                            {{ $match->winner->id }}
+                            {{ $match->winner->last_name }}
                             @else
                             <div>
                                 <select wire:model.live.debounce.300ms="winner_id" name="winner"
@@ -107,7 +118,7 @@
                             @endif
                         </td>
                         <td>
-                            @if($match->winner && $round === $rounds->count())
+                            @if($match->winner && !$match->is_closed)
                             <button wire:click="denounceWinner({{$match->winner->id}})" class="custBtn custBtn-light"><i
                                     class="bi bi-arrow-counterclockwise"></i>&nbsp
                                 Undo</button>
