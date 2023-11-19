@@ -12,10 +12,12 @@ class GameMatch extends Model
 
     protected $fillable = [
         'round',
+        'game_no',
+        'game_id',
         'athlete1_id',
         'athlete2_id',
-        'game_id',
         'winner_id',
+        'is_closed'
     ];
 
 
