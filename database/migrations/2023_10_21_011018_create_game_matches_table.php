@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('game_matches', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('round');
-            $table->unsignedBigInteger('athlete1_id');
-            $table->unsignedBigInteger('athlete2_id');
+            $table->integer('game_no')->unsigned();
             $table->foreignId('game_id')
                 ->constrained()
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
-            $table->unsignedBigInteger('winner_id');
+            $table->unsignedBigInteger('athlete1_id');
+            $table->unsignedBigInteger('athlete2_id')->nullable();
+            $table->unsignedBigInteger('winner_id')->nullable();
+            $table->boolean('is_closed')->default(false);
 
             // Define FK constraints
             $table->foreign('athlete1_id')
