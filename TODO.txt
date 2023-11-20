@@ -6,6 +6,19 @@ Major:
 2. Do not allow update when data to be updated is used by other records - this ensures data integrity.
 3. Add validation rules for checking that time of starts_at must not be below time of now().
 
+--------------------------------------------------------------------------------------------------------------------------
+
+Pending Modules:
+1. Events Settings
+2. Game Settings
+3. View Teams
+4. Summary Reports
+5. Dashboard (Admin & Coach)
+6. My Profile
+7. Change password
+8. View Event Details
+9. Join Event
+10. Leave Event
 
 --------------------------------------------------------------------------------------------------------------------------
 
