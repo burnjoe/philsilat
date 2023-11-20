@@ -30,6 +30,11 @@ class Coach extends Model
             ->orWhere('phone', 'like', "%{$value}%");
     }
 
+    public function scopeSex($query, $array)
+    {
+        $query->whereIn('sex', $array);
+    }
+
     /**
      * Relationships
      */

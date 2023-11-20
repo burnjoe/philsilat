@@ -18,7 +18,7 @@
             {{-- Clear all filters --}}
             @if($this->hasFilters())
             <div class="d-flex align-items-center">
-               <a href="#" class="nav-link" style="color: #dc3545;" wire:click="clearAllFilters">
+               <a class="nav-link" style="color: #dc3545; cursor: pointer;" wire:click="clearAllFilters">
                   <i class="bi bi-x-circle-fill"></i>
                   <span style="text-decoration: underline;">
                      Clear all filters
@@ -31,7 +31,8 @@
          <div style="white-space: nowrap;">
             <a wire:navigate href="{{ route('accounts.index') }}" class="custBtn custBtn-light ms-3"><i
                   class="bi bi-card-list"></i>&nbsp
-               Signup Codes</a>
+               Signup Codes &nbsp<i
+               class="bi bi-arrow-right"></i></a>
          </div>
       </div>
 
@@ -51,14 +52,14 @@
                            style="{{ $isSexDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedSexes" class="form-check-input me-1"
                                     type="checkbox" value="Male" id="male">
                                  <label class="form-check-label fs-6 fw-normal" for="male">Male</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedSexes" class="form-check-input me-1"
                                     type="checkbox" value="Female" id="female">
                                  <label class="form-check-label fs-6 fw-normal" for="female">Female</label>
                               </a>
@@ -80,14 +81,14 @@
                            style="{{ $isRoleDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedRoles" class="form-check-input me-1"
                                     type="checkbox" value="Admin" id="admin">
                                  <label class="form-check-label fs-6 fw-normal" for="admin">Admin</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedRoles" class="form-check-input me-1"
                                     type="checkbox" value="Coach" id="coach">
                                  <label class="form-check-label fs-6 fw-normal" for="coach">Coach</label>
                               </a>
@@ -107,14 +108,14 @@
                            style="{{ $isStatusDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                     type="checkbox" value="ACTIVE" id="active">
                                  <label class="form-check-label fs-6 fw-normal" for="active">Active</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                     type="checkbox" value="INACTIVE" id="inactive">
                                  <label class="form-check-label fs-6 fw-normal" for="inactive">Inactive</label>
                               </a>

@@ -32,12 +32,16 @@ class EventsShow extends Component
         return view('livewire.events.show', [
             'games' => Game::with('category')
                 ->where('event_id', $this->event->id)
-                ->where(function ($query) {
+                ->when(
+                    $this->search,
+                    fn ($query) =>
                     $query->search($this->search)
-                        ->orWhereHas('category', function ($subquery) {
-                            $subquery->search($this->search);
-                        });
-                })
+                        ->orWhereHas(
+                            'category',
+                            fn ($subquery) =>
+                            $subquery->search($this->search)
+                        )
+                )
                 ->latest()
                 ->paginate(16)
         ]);

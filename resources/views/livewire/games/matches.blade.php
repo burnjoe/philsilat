@@ -45,12 +45,13 @@
                     <th scope="col">Blue Corner</th>
                     <th scope="col">
                         <ul class="navbar-nav ms-auto me-2">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle py-0" role="button" data-bs-toggle="dropdown"
-                                    data-bs-auto-close="outside" aria-expanded="false">
+                            <li class="nav-item dropdown" wire:click.away="closeRoundDropdown">
+                                <a wire:click="toggleRoundDropdown" class="nav-link dropdown-toggle py-0" role="button"
+                                    aria-expanded="{{ $isRoundDropdownOpen ? 'true' : 'false' }}">
                                     Round
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-dark">
+                                <ul class="dropdown-menu dropdown-menu-dark"
+                                    style="{{ $isRoundDropdownOpen ? 'display: block;' : 'display: none;' }}">
                                     @foreach ($rounds as $_round)
                                     <li>
                                         <a class="dropdown-item">

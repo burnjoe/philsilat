@@ -22,30 +22,45 @@
 
       {{-- Search, Filter, and Add Button --}}
       <div class="container-fluid d-flex justify-content-between py-3">
-         {{-- Search --}}
-         @include('livewire.inc.search')
+         <div class="d-flex">
+            {{-- Search --}}
+            @include('livewire.inc.search')
 
+            {{-- Clear all filters --}}
+            @if($this->hasFilters())
+            <div class="d-flex align-items-center">
+               <a class="nav-link" style="color: #dc3545; cursor: pointer;" wire:click="clearAllFilters">
+                  <i class="bi bi-x-circle-fill"></i>
+                  <span style="text-decoration: underline;">
+                     Clear all filters
+                  </span>
+               </a>
+            </div>
+            @endif
+         </div>
+
+         {{-- Filter by status --}}
          <div class="d-flex" style="white-space: nowrap;">
-            {{-- Filter by status --}}
             <div class="d-flex align-items-center">
                <ul class="navbar-nav ms-auto me-2">
-                  <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown"
-                        data-bs-auto-close="outside" aria-expanded="false">
+                  <li class="nav-item dropdown" wire:click.away="closeStatusDropdown">
+                     <a wire:click="toggleSexDropdown" class="nav-link dropdown-toggle p-0" role="button"
+                        aria-expanded="{{ $isStatusDropdownOpen ? 'true' : 'false' }}">
                         <i class="bi bi-filter-right"></i>
                         Filter by: Status
                      </a>
-                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
+                        style="{{ $isStatusDropdownOpen ? 'display: block;' : 'display: none;' }}">
                         <li>
                            <a class="dropdown-item">
-                              <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                              <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                  type="checkbox" value="UPCOMING" id="upcoming">
                               <label class="form-check-label fs-6 fw-normal" for="upcoming">Upcoming</label>
                            </a>
                         </li>
                         <li>
                            <a class="dropdown-item">
-                              <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                              <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                  type="checkbox" value="REGISTRATION OPEN" id="registrationOpen">
                               <label class="form-check-label fs-6 fw-normal" for="registrationOpen">Registration
                                  Open</label>
@@ -53,21 +68,21 @@
                         </li>
                         <li>
                            <a class="dropdown-item">
-                              <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                              <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                  type="checkbox" value="ONGOING" id="ongoing">
                               <label class="form-check-label fs-6 fw-normal" for="ongoing">Ongoing</label>
                            </a>
                         </li>
                         <li>
                            <a class="dropdown-item">
-                              <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                              <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                  type="checkbox" value="COMPLETED" id="completed">
                               <label class="form-check-label fs-6 fw-normal" for="completed">Completed</label>
                            </a>
                         </li>
                         <li>
                            <a class="dropdown-item">
-                              <input wire:model.live.debounce.300ms="selectedStatus" class="form-check-input me-1"
+                              <input wire:model.live.debounce.300ms="selectedStatuses" class="form-check-input me-1"
                                  type="checkbox" value="CANCELLED" id="cancelled">
                               <label class="form-check-label fs-6 fw-normal" for="cancelled">Cancelled</label>
                            </a>
@@ -79,8 +94,8 @@
 
             {{-- Add New Event Button --}}
             <a wire:navigate href="{{ route('events.create') }}" class="custBtn custBtn-light ms-3"><i
-                  class="bi bi-plus-lg"></i>&nbsp
-               Add New Event</a>
+                  class="bi bi-plus-lg"></i>&nbsp Add New Event
+            </a>
          </div>
       </div>
 

@@ -70,7 +70,7 @@
             {{-- Clear all filters --}}
             @if($this->hasFilters())
             <div class="d-flex align-items-center">
-               <a href="#" class="nav-link" style="color: #dc3545;" wire:click="clearAllFilters">
+               <a class="nav-link" style="color: #dc3545; cursor: pointer;" wire:click="clearAllFilters">
                   <i class="bi bi-x-circle-fill"></i>
                   <span style="text-decoration: underline;">
                      Clear all filters
@@ -103,14 +103,14 @@
                            style="{{ $isRoleDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedRoles" class="form-check-input me-1"
                                     type="checkbox" value="Admin" id="admin">
                                  <label class="form-check-label fs-6 fw-normal" for="admin">Admin</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedRole" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedRoles" class="form-check-input me-1"
                                     type="checkbox" value="Coach" id="coach">
                                  <label class="form-check-label fs-6 fw-normal" for="coach">Coach</label>
                               </a>

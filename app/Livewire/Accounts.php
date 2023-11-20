@@ -12,9 +12,9 @@ class Accounts extends Component
     use WithPagination;
 
     public $search = "";
-    public $selectedSex = [];
-    public $selectedRole = [];
-    public $selectedStatus = [];
+    public $selectedSexes = [];
+    public $selectedRoles = [];
+    public $selectedStatuses = [];
 
     public $isSexDropdownOpen = false;
     public $isRoleDropdownOpen = false;
@@ -26,22 +26,40 @@ class Accounts extends Component
     public function render()
     {
         return view('livewire.accounts', [
-            'users' => User::with('profileable')
-                ->where(function ($query) {
+            'users' => User::with(['profileable', 'roles'])
+                ->when(
+                    $this->search,
+                    fn ($query) =>
                     $query->search($this->search)
-                        ->orWhereHas('profileable', function ($subquery) {
-                            $subquery->search($this->search);
-                        });
-                })
-                ->when($this->selectedSex, function ($query) {
-                    return $query->sex($this->selectedSex);
-                })
-                ->when($this->selectedRole, function ($query) {
-                    return $query->role($this->selectedRole);
-                })
-                ->when($this->selectedStatus, function ($query) {
-                    return $query->status($this->selectedStatus);
-                })
+                        ->orWhereHas(
+                            'profileable',
+                            fn ($subquery) =>
+                            $subquery->search($this->search)
+                        )
+                )
+                ->when(
+                    $this->selectedSexes,
+                    fn ($query) =>
+                    $query->whereHas(
+                        'profileable',
+                        fn ($subquery) =>
+                        $subquery->sex($this->selectedSexes)
+                    )
+                )
+                ->when(
+                    $this->selectedRoles,
+                    fn ($query) =>
+                    $query->whereHas(
+                        'roles',
+                        fn ($subquery) =>
+                        $subquery->whereIn('name', $this->selectedRoles)
+                    )
+                )
+                ->when(
+                    $this->selectedStatuses,
+                    fn ($query) =>
+                    $query->status($this->selectedStatuses)
+                )
                 ->latest()
                 ->paginate(15)
         ]);
@@ -52,7 +70,7 @@ class Accounts extends Component
      */
     public function hasFilters()
     {
-        return !empty($this->selectedSex) || !empty($this->selectedRole) || !empty($this->selectedStatus);
+        return !empty($this->selectedSexes) || !empty($this->selectedRoles) || !empty($this->selectedStatuses);
     }
 
     /**
@@ -60,9 +78,9 @@ class Accounts extends Component
      */
     public function clearAllFilters()
     {
-        $this->selectedSex = [];
-        $this->selectedRole = [];
-        $this->selectedStatus = [];
+        $this->selectedSexes = [];
+        $this->selectedRoles = [];
+        $this->selectedStatuses = [];
     }
 
     /**

@@ -18,7 +18,7 @@
             {{-- Clear all filters --}}
             @if($this->hasFilters())
             <div class="d-flex align-items-center">
-               <a href="#" class="nav-link" style="color: #dc3545;" wire:click="clearAllFilters">
+               <a class="nav-link" style="color: #dc3545; cursor: pointer;" wire:click="clearAllFilters">
                   <i class="bi bi-x-circle-fill"></i>
                   <span style="text-decoration: underline;">
                      Clear all filters
@@ -49,14 +49,14 @@
                            style="{{ $isSexDropdownOpen ? 'display: block;' : 'display: none;' }}">
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedSexes" class="form-check-input me-1"
                                     type="checkbox" value="Male" id="male">
                                  <label class="form-check-label fs-6 fw-normal" for="male">Male</label>
                               </a>
                            </li>
                            <li>
                               <a class="dropdown-item">
-                                 <input wire:model.live.debounce.300ms="selectedSex" class="form-check-input me-1"
+                                 <input wire:model.live.debounce.300ms="selectedSexes" class="form-check-input me-1"
                                     type="checkbox" value="Female" id="female">
                                  <label class="form-check-label fs-6 fw-normal" for="female">Female</label>
                               </a>

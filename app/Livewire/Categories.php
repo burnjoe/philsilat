@@ -11,7 +11,7 @@ class Categories extends Component
     use WithPagination;
 
     public $search = "";
-    public $selectedSex = [];
+    public $selectedSexes = [];
 
     public $isSexDropdownOpen = false;
 
@@ -22,12 +22,16 @@ class Categories extends Component
     {
         return view('livewire.categories', [
             'categories' => Category::orderBy('id', 'desc')
-                ->when($this->search, function ($query) {
-                    return $query->search($this->search);
-                })
-                ->when($this->selectedSex, function ($query) {
-                    return $query->sex($this->selectedSex);
-                })
+                ->when(
+                    $this->search,
+                    fn ($query) =>
+                    $query->search($this->search)
+                )
+                ->when(
+                    $this->selectedSexes,
+                    fn ($query) =>
+                    $query->sex($this->selectedSexes)
+                )
                 ->paginate(15),
         ]);
     }
@@ -37,7 +41,7 @@ class Categories extends Component
      */
     public function hasFilters()
     {
-        return !empty($this->selectedSex);
+        return !empty($this->selectedSexes);
     }
 
     /**
@@ -45,7 +49,7 @@ class Categories extends Component
      */
     public function clearAllFilters()
     {
-        $this->selectedSex = [];
+        $this->selectedSexes = [];
     }
 
     /**

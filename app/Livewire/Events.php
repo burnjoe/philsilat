@@ -11,7 +11,7 @@ class Events extends Component
     use WithPagination;
 
     public $search = "";
-    public $selectedStatus = [];
+    public $selectedStatuses = [];
 
     public $isStatusDropdownOpen = false;
 
@@ -22,12 +22,16 @@ class Events extends Component
     {
         return view('livewire.events', [
             'events' => Event::orderBy('starts_at', 'desc')
-                ->when($this->search, function ($query) {
-                    return $query->search($this->search);
-                })
-                ->when($this->selectedStatus, function ($query) {
-                    return $query->status($this->selectedStatus);
-                })
+                ->when(
+                    $this->search,
+                    fn ($query) =>
+                    $query->search($this->search)
+                )
+                ->when(
+                    $this->selectedStatuses,
+                    fn ($query) =>
+                    $query->status($this->selectedStatuses)
+                )
                 ->paginate(16),
         ]);
     }
@@ -37,7 +41,7 @@ class Events extends Component
      */
     public function hasFilters()
     {
-        return !empty($this->selectedStatus);
+        return !empty($this->selectedStatuses);
     }
 
     /**
@@ -45,7 +49,7 @@ class Events extends Component
      */
     public function clearAllFilters()
     {
-        $this->selectedStatus = [];
+        $this->selectedStatuses = [];
     }
 
     /**

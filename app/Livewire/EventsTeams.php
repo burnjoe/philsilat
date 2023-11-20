@@ -33,7 +33,11 @@ class EventsTeams extends Component
             'teams' => Team::with('athletes')
                 ->where('event_id', $this->event->id)
                 ->latest()
-                ->search($this->search)
+                ->when(
+                    $this->search,
+                    fn ($query) =>
+                    $query->search($this->search)
+                )
                 ->paginate(16)
         ]);
     }

@@ -35,7 +35,11 @@ class GamesAthletes extends Component
         return view('livewire.games.athletes', [
             'athletes' => Athlete::with('team')
                 ->where('game_id', $this->game->id)
-                ->search($this->search)
+                ->when(
+                    $this->search,
+                    fn ($query) =>
+                    $query->search($this->search)
+                )
                 ->paginate(15)  
         ]);
     }

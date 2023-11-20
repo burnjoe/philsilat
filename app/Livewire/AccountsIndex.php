@@ -15,7 +15,7 @@ class AccountsIndex extends Component
     public $role;
 
     public $search = "";
-    public $selectedRole = [];
+    public $selectedRoles = [];
 
     public $isRoleDropdownOpen = false;
 
@@ -26,13 +26,16 @@ class AccountsIndex extends Component
     {
         return view('livewire.accounts.index', [
             'codes' => SignUpCode::latest()
-                // ->search($this->search)
-                ->when($this->search, function ($query) {
-                    return $query->search($this->search);
-                })
-                ->when($this->selectedRole, function ($query) {
-                    return $query->role($this->selectedRole);
-                })
+                ->when(
+                    $this->search,
+                    fn ($query) =>
+                    $query->search($this->search)
+                )
+                ->when(
+                    $this->selectedRoles,
+                    fn ($query) =>
+                    $query->role($this->selectedRoles)
+                )
                 ->paginate(15)
         ]);
     }
@@ -42,7 +45,7 @@ class AccountsIndex extends Component
      */
     public function hasFilters()
     {
-        return !empty($this->selectedRole);
+        return !empty($this->selectedRoles);
     }
 
     /**
@@ -50,7 +53,7 @@ class AccountsIndex extends Component
      */
     public function clearAllFilters()
     {
-        $this->selectedRole = [];
+        $this->selectedRoles = [];
     }
 
     /**
