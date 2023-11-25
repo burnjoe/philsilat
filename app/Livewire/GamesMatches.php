@@ -148,6 +148,12 @@ class GamesMatches extends Component
      */
     public function generateMatches()
     {
+        // Only generate match pairings for ongoing events
+        if ($this->event->status !== "ONGOING") {
+            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            return;
+        }
+
         // Get latest round number
         $this->round = GameMatch::select('round')
             ->where('game_id', $this->game->id)
@@ -276,6 +282,10 @@ class GamesMatches extends Component
 
         // Checks if all match pairs of the current round has winner
         if (!$matches->get()->where('winner_id', null)->count() > 0) {
+            if ($matches->count() === 1) {
+                $this->game->update(['is_completed' => true]);
+            }
+            
             $matches->where('is_closed', false)
                 ->update(['is_closed' => true]);
         }
