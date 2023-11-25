@@ -84,7 +84,7 @@ class EventsCreate extends Component
 
         Event::create($validated);
 
-        session()->flash('danger', 'The event has been added successfully.');
+        session()->flash('success', 'The event has been added successfully.');
         return $this->redirectRoute('events', navigate: true);
     }
 }

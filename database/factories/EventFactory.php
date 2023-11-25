@@ -18,6 +18,7 @@ class EventFactory extends Factory
     {
         // Generate a random time for logged in and a later random time for logged out
         $starts_at = fake()->randomElement([fake()->dateTimeThisMonth(), now()->modify('+' . mt_rand(0, 5) . ' days')]);
+        $starts_at->setTime($starts_at->format('H'), $starts_at->format('i'), 0);
         $ends_at = clone $starts_at;
         $ends_at->modify('+' . mt_rand(1, 2) . ' days');
 

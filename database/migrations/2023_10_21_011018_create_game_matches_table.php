@@ -17,8 +17,7 @@ return new class extends Migration
             $table->integer('game_no')->unsigned();
             $table->foreignId('game_id')
                 ->constrained()
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->unsignedBigInteger('athlete1_id');
             $table->unsignedBigInteger('athlete2_id')->nullable();
             $table->unsignedBigInteger('winner_id')->nullable();
@@ -28,18 +27,18 @@ return new class extends Migration
             $table->foreign('athlete1_id')
                 ->references('id')
                 ->on('athletes')
-                ->onUpdate('RESTRICT')
-                ->onDelete('RESTRICT');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('athlete2_id')
                 ->references('id')
                 ->on('athletes')
-                ->onUpdate('RESTRICT')
-                ->onDelete('RESTRICT');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('winner_id')
                 ->references('id')
                 ->on('athletes')
-                ->onUpdate('RESTRICT')
-                ->onDelete('RESTRICT');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });

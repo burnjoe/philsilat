@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('lrn', 12);
             $table->foreignId('game_id')
                 ->constrained()
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->foreignId('team_id')
                 ->constrained()
                 ->cascadeOnDelete();

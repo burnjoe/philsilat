@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->foreignId('event_id')
                 ->constrained()
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -20,8 +20,8 @@ return new class extends Migration
                 ->restrictOnDelete();
             $table->foreignId('event_id')
                 ->constrained()
-                ->restrictOnUpdate()
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });
     }
