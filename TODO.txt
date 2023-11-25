@@ -9,6 +9,7 @@ Major:
 --------------------------------------------------------------------------------------------------------------------------
 
 Pending Modules:
+0. Result Summary (Each Games)
 1. View Teams
 2. Summary Reports
 3. Dashboard (Admin & Coach)
