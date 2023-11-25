@@ -1,25 +1,28 @@
 <?php
 
+use App\Livewire\Events;
 use App\Livewire\Accounts;
-use App\Livewire\AccountsDelete;
-use App\Livewire\AccountsEdit;
-use App\Livewire\AccountsIndex;
+use App\Livewire\DropTeam;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
-use App\Livewire\CategoriesEdit;
-use App\Livewire\Auth\ChangePassword;
-use App\Livewire\CategoriesCreate;
-use App\Livewire\CategoriesDelete;
-use App\Livewire\DropTeam;
-use App\Livewire\Events;
-use App\Livewire\EventsCreate;
-use App\Livewire\EventsSettings;
 use App\Livewire\EventsShow;
 use App\Livewire\EventsTeams;
-use App\Livewire\GamesAthletes;
 use App\Livewire\GamesCreate;
+use App\Livewire\GamesDelete;
+use App\Livewire\AccountsEdit;
+use App\Livewire\EventsCreate;
 use App\Livewire\GamesMatches;
+use App\Livewire\AccountsIndex;
+use App\Livewire\GamesAthletes;
 use App\Livewire\GamesSettings;
+use App\Livewire\AccountsDelete;
+use App\Livewire\CategoriesEdit;
+use App\Livewire\EventsSettings;
+use App\Livewire\CategoriesCreate;
+use App\Livewire\CategoriesDelete;
+use App\Livewire\Auth\ChangePassword;
+use App\Livewire\EventsCancel;
+use App\Livewire\EventsDelete;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +89,14 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
+        // Delete Events
+        Route::get('events/{event}/delete', EventsDelete::class)
+            ->name('events.delete');
+
+        // Cancel Events
+        Route::get('events/{event}/cancel', EventsCancel::class)
+            ->name('events.cancel');
+
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
             ->middleware('event.registration-open')
@@ -107,6 +118,10 @@ Route::middleware('auth')->group(function () {
         // Game Settings
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
+
+        // Delete Games
+        Route::get('events/{event}/games/{game}/delete', GamesDelete::class)
+            ->name('games.delete');
 
         // Add Games
         Route::get('events/{event}/games/add', GamesCreate::class)

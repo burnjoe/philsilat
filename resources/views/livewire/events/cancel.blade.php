@@ -1,6 +1,6 @@
 <div>
     <div class="text-dark p-3">
-        <h3 class=" fw-bold">DELETE EVENT</h3>
+        <h3 class=" fw-bold">CANCEL EVENT</h3>
         <hr class="mb-0">
     </div>
 
@@ -11,14 +11,14 @@
 
                 <div class="d-flex align-items-center">
                     <i class="bi bi-x-circle-fill text-danger fs-1"></i>
-                    <span class="fs-4 ms-4">Are you sure to delete this event?</span>
+                    <span class="fs-4 ms-4">Are you sure to cancel this event?</span>
                 </div>
 
-                <form wire:submit.prevent="destroy">
+                <form wire:submit.prevent="cancelEvent">
                     <div class="form-group d-flex justify-content-end pt-4">
                         <a wire:navigate href="{{ route('events.settings', ['event' => $event->id]) }}"
                             class="custBtn custBtn-light">Cancel</a>
-                        <button type="submit" value="true" class="custBtn custBtn-red ms-3">Delete</button>
+                        <button type="submit" value="true" class="custBtn custBtn-red ms-3">Cancel Event</button>
                     </div>
                 </form>
             </div>
