@@ -9,16 +9,14 @@ Major:
 --------------------------------------------------------------------------------------------------------------------------
 
 Pending Modules:
-1. Events Settings
-2. Game Settings
-3. View Teams
-4. Summary Reports
-5. Dashboard (Admin & Coach)
-6. My Profile
-7. Change password
-8. View Event Details
-9. Join Event
-10. Leave Event
+1. View Teams
+2. Summary Reports
+3. Dashboard (Admin & Coach)
+4. My Profile
+5. Change password
+6. View Event Details
+7. Join Event
+8. Leave Event
 
 --------------------------------------------------------------------------------------------------------------------------
 
