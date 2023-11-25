@@ -14,12 +14,14 @@ use App\Livewire\DropTeam;
 use App\Livewire\Events;
 use App\Livewire\EventsCreate;
 use App\Livewire\EventsSettings;
+use App\Livewire\TechnicalGuidelines;
 use App\Livewire\EventsShow;
 use App\Livewire\EventsTeams;
 use App\Livewire\GamesAthletes;
 use App\Livewire\GamesCreate;
 use App\Livewire\GamesMatches;
 use App\Livewire\GamesSettings;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +88,10 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
+        // Event Results
+        Route::get('event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+            ->name('export_event_results_pdf');
+
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
             ->middleware('event.registration-open')
@@ -107,6 +113,10 @@ Route::middleware('auth')->group(function () {
         // Game Settings
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
+
+        // Game Match Results
+        Route::get('match-results-pdf', [PdfController::class, 'export_match_results_pdf'])
+            ->name('export_match_results_pdf');
 
         // Add Games
         Route::get('events/{event}/games/add', GamesCreate::class)
