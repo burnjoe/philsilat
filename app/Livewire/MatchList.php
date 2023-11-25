@@ -39,7 +39,7 @@ class MatchList extends Component
                         ->orWhereHas('winner.team', fn ($query) => $query->search($this->search));
                 })
                 ->round($this->round)
-                ->paginate(3),
+                ->paginate(15),
             'round' => $this->round,
             'rounds' => GameMatch::select('round')
                 ->where('game_id', $this->game->id)
@@ -122,7 +122,6 @@ class MatchList extends Component
         // Only generate match pairings for ongoing events
         if ($this->event->status !== "ONGOING") {
             session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
-
             return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
         }
 
@@ -150,7 +149,6 @@ class MatchList extends Component
         // Checks if there's an athlete and ensure all pairs have winners
         if ($athletes->isEmpty() || !$checkMatch) {
             session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
-
             return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
         }
 
@@ -190,7 +188,6 @@ class MatchList extends Component
         }
 
         session()->flash('success', 'The pairings for the round have been successfully generated.');
-
         return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
     }
 
@@ -262,7 +259,14 @@ class MatchList extends Component
             if ($matches->count() === 1) {
                 $this->game->update(['is_completed' => true]);
 
+
+                // Create table for winners
+
+                $matches->where('is_closed', false)
+                ->update(['is_closed' => true]);
+
                 session()->flash('success', 'The game has been successfully completed.');
+                return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
             }
 
             $matches->where('is_closed', false)

@@ -1,7 +1,7 @@
 <div>
     <div class="container-fluid d-flex justify-content-between mb-3 pt-3">
         <div class="px-3">
-            <h5 class="fw-bold">
+            <span class="fs-5 fw-bold">
                 @if($matches->count() === 1)
                 Finals
                 @elseif($matches->count() === 2)
@@ -11,18 +11,17 @@
                 @endif
 
                 (Round {{ $round }})
+            </span>
 
-                @if($matches->count() > 0)
-                @if($matches->first()->is_closed)
-                <span class="badge text-bg-success py-1 ms-1">COMPLETED</span>
-                @endif
-                @endif
-            </h5>
+            @if($matches->count() > 0)
+            @if($matches->first()->is_closed)
+            <span class="badge text-bg-success py-1 ms-1">COMPLETED</span>
+            @endif
+            @endif
         </div>
         <div class="d-flex justify-content-end col">
             {{-- Search --}}
             @include('livewire.inc.search')
-            {{-- @dd($matches) --}}
             @if($rounds->count() >= 1 && $matches->total() > 1 && $is_round_completed && !$matches->first()->is_closed)
             <button wire:click="generateMatches" class="custBtn custBtn-light me-3">Generate Next Round &nbsp<i
                     class="bi bi-arrow-right"></i></button>
@@ -54,12 +53,14 @@
                     </td>
                     <td>
                         <span class="badge text-bg-danger py-1 me-1">{{ $match->athlete1->team->name ?? '' }}</span>
-                        {{ $match->athlete1->last_name ?? 'N/A' }}
+                        {{ $match->athlete1()->exists() ? $match->athlete1->last_name.', '.$match->athlete1->first_name
+                        : 'N/A' }}
                     </td>
                     <td>
                         <span class="badge text-bg-primary py-1 me-1">{{ $match->athlete2->team->name ?? ''
                             }}</span>
-                        {{ $match->athlete2->last_name ?? 'N/A' }}
+                        {{ $match->athlete2()->exists() ? $match->athlete2->last_name.', '.$match->athlete2->first_name
+                        : 'N/A' }}
                     </td>
                     {{-- <td>{{ $match->round }}</td> --}}
                     <td>
@@ -72,7 +73,8 @@
 
                         <span class="badge text-bg-{{$badgeColor}} py-1 me-1">{{ $match->winner->team->name
                             }}</span>
-                        {{ $match->winner->last_name }}
+                        {{ $match->winner()->exists() ? $match->winner->last_name.', '.$match->winner->first_name :
+                        'N/A' }}
                         @else
                         <div>
                             <select wire:model.live.debounce.300ms="winner_id" name="winner"
