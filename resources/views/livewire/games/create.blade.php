@@ -11,6 +11,7 @@
 
                 <form wire:submit.prevent="store">
                     <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        {{-- Game Name --}}
                         <div class="form-group col">
                             <label for="name">Game Name<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="name" id="name"
@@ -23,6 +24,7 @@
                             @enderror
                         </div>
 
+                        {{-- Sex Category --}}
                         <div class="form-group col">
                             <label for="sex">Sex Category<span style="color: #b63e3e;"> *</span></label>
                             <select wire:model.live="sex" id="sex" name="sex"
@@ -39,6 +41,7 @@
                             @enderror
                         </div>
 
+                        {{-- Class Label --}}
                         <div class="form-group col">
                             <label for="category_id">Class Label<span style="color: #b63e3e;"> *</span></label>
                             <select wire:model.live="category_id" id="category_id" name="category_id"
@@ -61,12 +64,14 @@
                     </div>
 
                     <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
+                        {{-- Minimum Weight --}}
                         <div class="form-group col">
                             <label for="min_weight">Minimum Weight (kg)<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="min_weight" id="min_weight" class="form-control custInput" type="text"
                                 name="min_weight" autocomplete="off" placeholder="Minimum Weight" disabled>
                         </div>
 
+                        {{-- Maximum Weight --}}
                         <div class="form-group col">
                             <label for="max_weight">Maximum Weight (kg)<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="max_weight" id="max_weight" class="form-control custInput" type="text"
@@ -74,12 +79,12 @@
                         </div>
                     </div>
 
+                    {{-- Save and Cancel --}}
                     <div class="form-group d-flex justify-content-end pt-4">
                         <a wire:navigate href="{{ route('events.show', ['event' => $event->id]) }}"
                             class="custBtn custBtn-light">Cancel</a>
                         <button type="submit" value="true" class="custBtn custBtn-green ms-3">Save</button>
                     </div>
-
                 </form>
             </div>
         </div>

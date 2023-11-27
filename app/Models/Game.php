@@ -15,6 +15,7 @@ class Game extends Model
         'name',
         'category_id',
         'event_id',
+        'is_completed'
     ];
 
 

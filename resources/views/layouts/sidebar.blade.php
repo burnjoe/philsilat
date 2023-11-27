@@ -1,4 +1,4 @@
-<div class="sidebar active">
+<div class="sidebar active overflow-y-auto">
     <ul>
         {{-- Dashboard --}}
         <li>
@@ -41,4 +41,5 @@
             <span class="tooltip">Accounts</span>
         </li>
         @endcan
+    </ul>
 </div>

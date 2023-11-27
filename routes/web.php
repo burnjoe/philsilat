@@ -1,26 +1,29 @@
 <?php
 
+use App\Livewire\Events;
 use App\Livewire\Accounts;
-use App\Livewire\AccountsDelete;
-use App\Livewire\AccountsEdit;
-use App\Livewire\AccountsIndex;
+use App\Livewire\DropTeam;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
-use App\Livewire\CategoriesEdit;
-use App\Livewire\Auth\ChangePassword;
-use App\Livewire\CategoriesCreate;
-use App\Livewire\CategoriesDelete;
-use App\Livewire\DropTeam;
-use App\Livewire\Events;
-use App\Livewire\EventsCreate;
-use App\Livewire\EventsSettings;
 use App\Livewire\EventsShow;
 use App\Livewire\EventsTeams;
-use App\Livewire\GamesAthletes;
 use App\Livewire\GamesCreate;
+use App\Livewire\GamesDelete;
+use App\Livewire\AccountsEdit;
+use App\Livewire\EventsCreate;
 use App\Livewire\GamesMatches;
+use App\Livewire\AccountsIndex;
+use App\Livewire\GamesAthletes;
 use App\Livewire\GamesSettings;
 use App\Http\Controllers\PdfController;
+use App\Livewire\AccountsDelete;
+use App\Livewire\CategoriesEdit;
+use App\Livewire\EventsSettings;
+use App\Livewire\CategoriesCreate;
+use App\Livewire\CategoriesDelete;
+use App\Livewire\Auth\ChangePassword;
+use App\Livewire\EventsCancel;
+use App\Livewire\EventsDelete;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,6 +93,14 @@ Route::middleware('auth')->group(function () {
         // Event Results
         Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
             ->name('export_event_results_pdf');
+      
+        // Delete Events
+        Route::get('events/{event}/delete', EventsDelete::class)
+            ->name('events.delete');
+
+        // Cancel Events
+        Route::get('events/{event}/cancel', EventsCancel::class)
+            ->name('events.cancel');
 
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
@@ -116,6 +127,10 @@ Route::middleware('auth')->group(function () {
         // Game Results
         Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
             ->name('export_game_results_pdf');
+      
+        // Delete Games
+        Route::get('events/{event}/games/{game}/delete', GamesDelete::class)
+            ->name('games.delete');
 
         // Add Games
         Route::get('events/{event}/games/add', GamesCreate::class)

@@ -22,7 +22,7 @@ class GamesCreate extends Component
 
 
     /**
-     * Initializes attributes upopn load
+     * Initializes attributes upon load
      */
     public function mount(Event $event)
     {
