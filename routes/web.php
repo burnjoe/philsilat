@@ -15,6 +15,7 @@ use App\Livewire\GamesMatches;
 use App\Livewire\AccountsIndex;
 use App\Livewire\GamesAthletes;
 use App\Livewire\GamesSettings;
+use App\Http\Controllers\PdfController;
 use App\Livewire\AccountsDelete;
 use App\Livewire\CategoriesEdit;
 use App\Livewire\EventsSettings;
@@ -89,6 +90,10 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
+        // Event Results
+        Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+            ->name('export_event_results_pdf');
+      
         // Delete Events
         Route::get('events/{event}/delete', EventsDelete::class)
             ->name('events.delete');
@@ -119,6 +124,10 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
 
+        // Game Results
+        Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
+            ->name('export_game_results_pdf');
+      
         // Delete Games
         Route::get('events/{event}/games/{game}/delete', GamesDelete::class)
             ->name('games.delete');
