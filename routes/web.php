@@ -14,7 +14,6 @@ use App\Livewire\DropTeam;
 use App\Livewire\Events;
 use App\Livewire\EventsCreate;
 use App\Livewire\EventsSettings;
-use App\Livewire\TechnicalGuidelines;
 use App\Livewire\EventsShow;
 use App\Livewire\EventsTeams;
 use App\Livewire\GamesAthletes;
