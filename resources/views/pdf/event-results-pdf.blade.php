@@ -143,14 +143,16 @@
          <img src="{{ public_path('img/philsilat_pdf_logo.png') }}" style="width: 30%; height: auto;" />
       </div>
       <div class="vertical-line"></div>
+
       <div class="event-header">
-         {{-- main name class --}}
+         {{-- event name --}}
          <div class="event-name">
-            {{-- data  --}}
-            <span class="event-title">Event Name</span>
+            {{ $event->name }} {{ $event->id }}
          </div>
-         {{-- office class --}}
-         <div class="sub-name"><span class="event-date">Event Date</span> - <span class="venue">Venue</span></div>
+         {{-- date - venue --}}
+         <div class="sub-name">{{ \Carbon\Carbon::parse($event->starts_at)->format('M. d, Y') }}
+            - {{ $event->venue }}
+         </div>
       </div>
    </div>
 
@@ -159,13 +161,14 @@
       {{-- Title --}}
       <div class="title">
          <div>PENCAK SILAT - TANDING COMPETITION</div>
-         <div><span class="category">MALE CATEGORY</span></div>
+         <div>MALE CATEGORY</div>
          <div>FINAL OFFICIAL RESULT</div>
       </div>
 
       {{-- Table --}}
       <div class="table">
          <table>
+            {{-- Class A --}}
             <thead>
                <tr>
                   <th>MEDAL</th>
@@ -195,6 +198,7 @@
                   <td>REGION 1</td>
                </tr>
             </tbody>
+            {{-- Class B --}}
             <thead>
                <tr>
                   <th>MEDAL</th>
@@ -224,6 +228,7 @@
                   <td>REGION 1</td>
                </tr>
             </tbody>
+            {{-- Class C --}}
             <thead>
                <tr>
                   <th>MEDAL</th>
@@ -253,6 +258,7 @@
                   <td>REGION 1</td>
                </tr>
             </tbody>
+            {{-- Class D --}}
             <thead>
                <tr>
                   <th>MEDAL</th>

@@ -30,7 +30,9 @@
                         href="{{ route('games.settings', ['event' => $event->id, 'game' => $game->id]) }}">Settings</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="{{ route('export_match_results_pdf') }}" target="_blank">Match
+                     <a class="nav-link"
+                        href="{{ route('export_game_results_pdf', ['event' => $event->id, 'game' => $game->id]) }}"
+                        target="_blank">Game
                         Results</a>
                   </li>
                </ul>

@@ -38,8 +38,10 @@
                      <a class="nav-link" wire:navigate
                         href="{{ route('events.settings', ['event' => $event->id]) }}">Settings</a>
                   </li>
+                  {{-- generate results --}}
                   <li class="nav-item">
-                     <a class="nav-link" href="{{ route('export_event_results_pdf') }}" target="_blank">Event
+                     <a class="nav-link"
+                        href="{{ route('export_event_results_pdf', ['event' => $event->id]) }}" target="_blank">Event
                         Results</a>
                   </li>
                </ul>

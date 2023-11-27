@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
             ->name('events.settings');
 
         // Event Results
-        Route::get('event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+        Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
             ->name('export_event_results_pdf');
 
         // Drop Selected Team
@@ -114,9 +114,9 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
 
-        // Game Match Results
-        Route::get('match-results-pdf', [PdfController::class, 'export_match_results_pdf'])
-            ->name('export_match_results_pdf');
+        // Game Results
+        Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
+            ->name('export_game_results_pdf');
 
         // Add Games
         Route::get('events/{event}/games/add', GamesCreate::class)

@@ -81,6 +81,10 @@
          font-size: 18px;
       }
 
+      .uc {
+         text-transform: uppercase;
+      }
+
       /* Table */
       .table {
          text-align: center;
@@ -151,13 +155,14 @@
       </div>
       <div class="vertical-line"></div>
       <div class="event-header">
-         {{-- main name class --}}
+         {{-- event name --}}
          <div class="event-name">
-            {{-- data  --}}
-            <span class="event-title">Event Name</span>
+            {{ $event->name }} {{ $event->id }}
          </div>
-         {{-- office class --}}
-         <div class="sub-name"><span class="event-date">Event Date</span> - <span class="venue">Venue</span></div>
+         {{-- date - venue --}}
+         <div class="sub-name">{{ \Carbon\Carbon::parse($event->starts_at)->format('M. d, Y') }}
+            - {{ $event->venue }}
+         </div>
       </div>
    </div>
 
@@ -165,8 +170,11 @@
    <div>
       {{-- Title --}}
       <div class="title">
-         <div>PENCAK SILAT - TANDING COMPETITION</div>
-         <div>MATCH RESULTS</div>
+         <div>PENCAK SILAT - <span class="uc">{{ $game->name }}</span> COMPETITION</div>
+         <div>CLASS <span class="uc">{{ $game->category->class_label }}</span> -
+            <span class="uc">{{ $game->category->sex }}</span>
+         </div>
+         <div>GAME RESULTS</div>
       </div>
 
       {{-- Elimination Table --}}
