@@ -9,7 +9,7 @@
       /* Page Style */
       @page {
          font-family: Arial, sans-serif;
-         margin: 1em 6em 1em 6em;
+         margin: 1em 6em 0em 6em;
          size: letter;
       }
 
@@ -81,10 +81,14 @@
          font-size: 18px;
       }
 
+      .uc {
+         text-transform: uppercase;
+      }
+
       /* Table */
       .table {
          text-align: center;
-         margin-top: 30px;
+         margin-top: 15px;
          font-size: 13px;
       }
 
@@ -156,12 +160,12 @@
       </div>
    </div>
 
-   {{-- 1st Page Male Category --}}
+   {{-- Male Category --}}
    <div>
       {{-- Title --}}
       <div class="title">
-         <div>PENCAK SILAT - TANDING COMPETITION</div>
-         <div>MALE CATEGORY</div>
+         <div>PENCAK SILAT - <span class="uc">{{ $game->name }}</span> COMPETITION</div>
+         <div><span class="uc">{{ $game->category->sex }}</span> CATEGORY</div>
          <div>FINAL OFFICIAL RESULT</div>
       </div>
 
@@ -392,14 +396,15 @@
       </div>
    </div>
 
+   {{-- page break --}}
    <hr />
 
-   {{-- 2nd Page Female Category --}}
+   {{-- Table --}}
    <div>
       {{-- Title --}}
       <div class="title">
          <div>PENCAK SILAT - TANDING COMPETITION</div>
-         <div><span class="category">FEMALE CATEGORY</span></div>
+         <div>FEMALE CATEGORY</div>
          <div>FINAL OFFICIAL RESULT</div>
       </div>
 

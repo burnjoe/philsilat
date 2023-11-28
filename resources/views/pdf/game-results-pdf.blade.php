@@ -9,7 +9,7 @@
       /* Page Style */
       @page {
          font-family: Arial, sans-serif;
-         margin: 1em 6em 1em 6em;
+         margin: 1em 6em 0em 6em;
          size: letter;
       }
 
@@ -88,7 +88,7 @@
       /* Table */
       .table {
          text-align: center;
-         margin-top: 30px;
+         margin-top: 15px;
          font-size: 14px;
       }
 
@@ -144,7 +144,7 @@
          font-size: 10px;
       }
    </style>
-   <title>Event Results</title>
+   <title>Game Results</title>
 </head>
 
 <body>
@@ -177,305 +177,73 @@
          <div>GAME RESULTS</div>
       </div>
 
-      {{-- Elimination Table --}}
-      <div class="table">
-         <table>
-            <tr>
-               <td colspan="4" class="round-name">
-                  Elimination
-               </td>
-            </tr>
-            <thead>
-               <tr>
-                  <th>CATEGORY</th>
-                  <th style="background-color: rgb(253, 70, 70);">RED</th>
-                  <th style="background-color: rgb(90, 147, 251);">BLUE</th>
-                  <th>REMARKS</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+      {{-- Table --}}
+      @foreach ($rounds as $round)
+         @php
+            $roundMatches = $matches->where('round', $round->round);
+         @endphp
 
-      {{-- Quaterfinals Table --}}
-      <div class="table">
-         <table>
-            <tr>
-               <td colspan="4" class="round-name">
-                  Quaterfinals
-               </td>
-            </tr>
-            <thead>
+         <div class="table">
+            <table>
                <tr>
-                  <th>CATEGORY</th>
-                  <th style="background-color: rgb(253, 70, 70);">RED</th>
-                  <th style="background-color: rgb(90, 147, 251);">BLUE</th>
-                  <th>REMARKS</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+                  <td colspan="4" class="round-name">
+                     @if ($roundMatches->where('round', $round->round)->count() === 1)
+                        Finals
+                     @elseif($roundMatches->where('round', $round->round)->count() === 2)
+                        Semi-Finals
+                     @else
+                        Elimination
+                     @endif
 
-      {{-- Semifinals Table --}}
-      <div class="table">
-         <table>
-            <tr>
-               <td colspan="4" class="round-name">
-                  Semifinals
-               </td>
-            </tr>
-            <thead>
-               <tr>
-                  <th>CATEGORY</th>
-                  <th style="background-color: rgb(253, 70, 70);">RED</th>
-                  <th style="background-color: rgb(90, 147, 251);">BLUE</th>
-                  <th>REMARKS</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
+                     (Round {{ $round->round }})
                   </td>
                </tr>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
-
-      {{-- Finals Table --}}
-      <div class="table">
-         <table>
-            <tr>
-               <td colspan="4" class="round-name">
-                  Finals
-               </td>
-            </tr>
-            <thead>
-               <tr>
-                  <th>CATEGORY</th>
-                  <th style="background-color: rgb(253, 70, 70);">RED</th>
-                  <th style="background-color: rgb(90, 147, 251);">BLUE</th>
-                  <th>REMARKS</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td>Male - Class E (54kg - 57kg)</td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 12</span>
-                     </div>
-                     <div>
-                        <span class="name">Derla, Julius A.</span>
-                     </div>
-                  </td>
-                  <td>
-                     <div>
-                        <span class="region">Region 9</span>
-                     </div>
-                     <div>
-                        <span class="name">Ferreras, Vince Austin R.</span>
-                     </div>
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+               <thead>
+                  <tr>
+                     <th>Game #</th>
+                     <th style="background-color: rgb(253, 70, 70);">Red Corner</th>
+                     <th style="background-color: rgb(90, 147, 251);">Blue Corner</th>
+                     <th>Round Winner</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach ($roundMatches as $roundMatch)
+                     <tr scope="row">
+                        <td>
+                           {{ $roundMatch->game_no }}
+                        </td>
+                        <td>
+                           <div>
+                              {{ $roundMatch->athlete1->team->name ?? '' }}
+                           </div>
+                           <div>
+                              {{ $roundMatch->athlete1()->exists() ? $roundMatch->athlete1->last_name . ', ' . $roundMatch->athlete1->first_name : 'N/A' }}
+                           </div>
+                        </td>
+                        <td>
+                           <div>
+                              {{ $roundMatch->athlete2->team->name ?? '' }}
+                           </div>
+                           <div>
+                              {{ $roundMatch->athlete2()->exists() ? $roundMatch->athlete2->last_name . ', ' . $roundMatch->athlete2->first_name : 'N/A' }}
+                           </div>
+                        </td>
+                        <td>
+                           @if ($roundMatch->winner)
+                              <div>
+                                 {{ $roundMatch->winner->team->name }}
+                              </div>
+                              <div>
+                                 {{ $roundMatch->winner()->exists() ? $roundMatch->winner->last_name . ', ' . $roundMatch->winner->first_name : 'N/A' }}
+                              </div>
+                           @endif
+                        </td>
+                     </tr>
+                  @endforeach
+               </tbody>
+            </table>
+         </div>
+      @endforeach
 
       {{-- Signature --}}
       <div class="signature">
