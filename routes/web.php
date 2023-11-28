@@ -3,6 +3,7 @@
 use App\Livewire\Events;
 use App\Livewire\Accounts;
 use App\Livewire\DropTeam;
+use App\Livewire\ViewTeam;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
 use App\Livewire\EventsShow;
@@ -10,21 +11,21 @@ use App\Livewire\EventsTeams;
 use App\Livewire\GamesCreate;
 use App\Livewire\GamesDelete;
 use App\Livewire\AccountsEdit;
+use App\Livewire\EventsCancel;
 use App\Livewire\EventsCreate;
+use App\Livewire\EventsDelete;
 use App\Livewire\GamesMatches;
 use App\Livewire\AccountsIndex;
 use App\Livewire\GamesAthletes;
 use App\Livewire\GamesSettings;
-use App\Http\Controllers\PdfController;
 use App\Livewire\AccountsDelete;
 use App\Livewire\CategoriesEdit;
 use App\Livewire\EventsSettings;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
 use App\Livewire\Auth\ChangePassword;
-use App\Livewire\EventsCancel;
-use App\Livewire\EventsDelete;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,10 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/teams', EventsTeams::class)
             ->name('events.teams');
 
+        // View Team
+        Route::get('events/{event}/teams/{team}/view-team', ViewTeam::class)
+            ->name('events.view-team');
+
         // Event Settings
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
@@ -101,6 +106,8 @@ Route::middleware('auth')->group(function () {
         // Cancel Events
         Route::get('events/{event}/cancel', EventsCancel::class)
             ->name('events.cancel');
+
+        
 
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
