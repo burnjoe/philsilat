@@ -15,6 +15,7 @@ use App\Livewire\GamesMatches;
 use App\Livewire\AccountsIndex;
 use App\Livewire\GamesAthletes;
 use App\Livewire\GamesSettings;
+use App\Http\Controllers\PdfController;
 use App\Livewire\AccountsDelete;
 use App\Livewire\CategoriesEdit;
 use App\Livewire\EventsSettings;
