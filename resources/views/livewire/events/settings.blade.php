@@ -14,7 +14,7 @@
 
         <div class="container-fluid text-dark py-3">
             <div class="px-1">
-                <h5 class="fw-bold">Edit Event</h5>
+                <h5 class="fw-bold">Edit Game</h5>
             </div>
 
             <div class="p-4"
