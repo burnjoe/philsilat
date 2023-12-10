@@ -14,7 +14,7 @@
 
         <div class="container-fluid text-dark py-3">
             <div class="px-1">
-                <h5 class="fw-bold">Edit Game</h5>
+                <h5 class="fw-bold">Edit Event</h5>
             </div>
 
             <div class="p-4"
@@ -202,7 +202,8 @@
             @if($event->status === "ONGOING")
             <div class="px-1 mt-5">
                 <h5 class="fw-bold">Finish Event</h5>
-                <p>Conclude and wrap up the event. Before proceeding, ensure that all games within this event have already determined winners.</p>
+                <p>Conclude and wrap up the event. Before proceeding, ensure that all games within this event have
+                    already determined winners.</p>
 
                 <button wire:click="endEvent" class="custBtn custBtn-red me-3">
                     <i style="display: inline-block;" class="bi bi-check-circle"></i>
@@ -215,9 +216,11 @@
             @if(in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"]))
             <div class="px-1 mt-5">
                 <h5 class="fw-bold">Cancel Event</h5>
-                <p>Proceeding will lead to the discontinuation of the scheduled event. This action cannot be undone, please be sure before proceeding.</p>
+                <p>Proceeding will lead to the discontinuation of the scheduled event. This action cannot be undone,
+                    please be sure before proceeding.</p>
 
-                <a wire:navigate href="{{ route('events.cancel', ['event' => $this->event->id]) }}" class="custBtn custBtn-red me-3">
+                <a wire:navigate href="{{ route('events.cancel', ['event' => $this->event->id]) }}"
+                    class="custBtn custBtn-red me-3">
                     <i style="display: inline-block;" class="bi bi-x-circle"></i>
                     &nbsp Cancel Event
                 </a>

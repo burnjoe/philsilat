@@ -13,7 +13,7 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
-                @if(in_array($event->status, ["REGISTRATION OPEN"]) && $teams->isNotEmpty())
+                @if (in_array($event->status, ['REGISTRATION OPEN']) && $teams->isNotEmpty())
                 <a wire:navigate href="{{ route('events.drop-all-teams', ['event' => $event->id]) }}"
                     class="custBtn custBtn-red me-3"><i class=" bi bi-arrow-down"></i>&nbsp Drop All Teams</a>
                 @endif
@@ -32,15 +32,21 @@
                     @foreach ($teams as $team)
                     <tr scope="row" wire:key="{{ $team->id }}">
                         <td>{{ $team->name }}</td>
+                        {{-- coach 1 data --}}
                         <td></td>
+                        {{-- coach 2 data --}}
                         <td></td>
                         <td>
                             <div style="white-space: nowrap;">
-                                <a wire:navigate href="#" class="custBtn custBtn-light"
-                                    style="display: inline-block; margin-right: 8px;"><i
-                                        class="bi bi-eye-fill"></i>&nbsp View</a>
-                                @if(in_array($event->status, ["REGISTRATION OPEN"]))
-                                <a wire:navigate href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
+                                {{-- route --}}
+                                <a wire:navigate
+                                    href="{{ route('events.view-team', ['event' => $event->id, 'team' => $team->id]) }}"
+                                    class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
+                                        class="bi bi-eye-fill"></i>&nbsp
+                                    View</a>
+                                @if (in_array($event->status, ['REGISTRATION OPEN']))
+                                <a wire:navigate
+                                    href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
                                     class="custBtn custBtn-red ms-3"
                                     style="display: inline-block; margin-right: 8px;"><i class=" bi bi-arrow-down"></i>
                                     Drop</a>
@@ -53,12 +59,12 @@
             </table>
 
             {{-- No Records Found --}}
-            @if($teams->total() == 0)
+            @if ($teams->total() == 0)
             <div class="d-flex justify-content-center align-items-center my-5">
-                @if(empty($search))
+                @if (empty($search))
                 <h4>No existing records.</h4>
                 @else
-                <h4>No records found for matching "{{$search}}".</h4>
+                <h4>No records found for matching "{{ $search }}".</h4>
                 @endif
             </div>
             @endif
