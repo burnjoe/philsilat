@@ -5,6 +5,8 @@
     </div>
 
     <div class="container text-dark py-3 px-1">
+
+
         <div class="row g-4 p-3">
             <div class="col-12">
                 <div class="card bg-audience" style="overflow: hidden; height: 130px; background-color: white;">
@@ -19,6 +21,7 @@
         </div>
 
         {{-- Total Numbers --}}
+        @role('admin')
         <div class="row row-cols-1 row-cols-lg-3 g-4 p-3">
             <div class="col">
                 <div class="card" style="height:130px; background-color: white;">
@@ -30,7 +33,7 @@
                             <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
                                 <span class="text-end">Events</span>
                                 <span class="fs-2 text-end">
-                                    {{ $events->count() }}
+                                    {{ $eventsCount }}
                                 </span>
                             </div>
                         </div>
@@ -75,17 +78,64 @@
 
             </div>
         </div>
+        @endrole
 
         <div class="row g-4 p-3">
             <div class="col-12 col-lg-8">
                 <div class="card" style="overflow: hidden; height: 958px; background-color: white;">
                     <div class="header d-flex align-items-center bg-dark h-100 p-3" style="max-height: 6.1%;">
                         <div class="gx-1 text-light fw-bold" style="font-size: 15px;">
-                            <span class="text-light">Content</span>
+                            @role('admin')
+                            <span class="text-light">Round Winners</span>
+                            @endrole
+                            @role('coach')
+                            <span class="text-light">My Matches</span>
+                            @endrole
                         </div>
                     </div>
-                    <div class="card-body" style="overflow-y: auto;">
-                        ...
+                    <div class="card-body p-0" style="overflow-y: auto;">
+                        @role('admin')
+                        <div class="bg-white" style="overflow-x: auto;">
+                            <table class="table table-striped table-hover mb-0" style="font-size: 14px;">
+                                <thead class="table-dark text-light">
+                                    <th scope="col">Round #</th>
+                                    <th scope="col">Round Winner</th>
+                                    <th scope="col">Defeated</th>
+                                    <th scope="col">Action</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            {{-- No Records Found --}}
+                            @if ($roundWinners->count() == 0)
+                            <div class="d-flex justify-content-center align-items-center my-5">
+                                <h4>No existing ongoing events.</h4>
+                            </div>
+                            @endif
+                        </div>
+                        @endrole
+                        @role('coach')
+                        <div class="mb-3 bg-white" style="overflow-x: auto;">
+                            <table class="table table-striped table-hover mb-0" style="font-size: 14px;">
+                                <thead class="table-dark text-light">
+                                    <th scope="col">Round #</th>
+                                    <th scope="col">Red Corner</th>
+                                    <th scope="col">Blue Corner</th>
+                                    <th scope="col">Action</th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+
+                            {{-- No Records Found --}}
+                            @if ($myMatches->count() == 0)
+                            <div class="d-flex justify-content-center align-items-center my-5">
+                                <h4>No existing ongoing matches from joined events.</h4>
+                            </div>
+                            @endif
+                        </div>
+                        @endrole
                     </div>
                 </div>
             </div>
@@ -107,6 +157,27 @@
                         </div>
                     </div>
 
+                    {{-- Total Numbers of Events Joined --}}
+                    @role('coach')
+                    <div class="col-12 mt-4">
+                        <div class="card" style="height:130px; background-color: white;">
+                            <div class="header h-100 p-3">
+                                <div class="row row-cols-2 g-4 p-3">
+                                    <div class="mt-3 gx-1" style="color: #3a4c88; font-size: 3rem;">
+                                        <i class="bi bi-calendar-event"></i>
+                                    </div>
+                                    <div class="row d-flex justify-content-end align-items-center gx-1 mt-3">
+                                        <span class="text-end">Events Joined</span>
+                                        <span class="fs-2 text-end">
+                                            {{ $eventsJoinedCount }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endrole
+
                     {{-- Today's Event --}}
                     <div class="col-12 mt-4">
                         <div class="card" style="overflow: hidden; height: 390px; background-color: white;">
@@ -118,8 +189,8 @@
                             <div class="card-body" style="overflow-y: auto;">
                                 {{-- If event(s) found --}}
                                 @foreach ($todayEvents as $todayEvent)
-                                <a wire:key="{{ $todayEvent->id }}" class="nav-link"
-                                    wire:navigate href="{{ route('events.show', ['event' => $todayEvent->id]) }}">
+                                <a wire:key="{{ $todayEvent->id }}" class="nav-link" wire:navigate
+                                    href="{{ route('events.show', ['event' => $todayEvent->id]) }}">
                                     <div class="row g-4 p-2">
                                         <div class="col-auto mt-2">
                                             <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
@@ -162,8 +233,8 @@
                             <div class="card-body" style="overflow-y: auto;">
                                 {{-- If event(s) found --}}
                                 @foreach ($upcomingEvents as $upcomingEvent)
-                                <a wire:key="{{ $upcomingEvent }}" class="nav-link"
-                                    wire:navigate href="{{ route('events.show', ['event' => $upcomingEvent->id])}}">
+                                <a wire:key="{{ $upcomingEvent }}" class="nav-link" wire:navigate
+                                    href="{{ route('events.show', ['event' => $upcomingEvent->id])}}">
                                     <div class="row g-4 p-2">
                                         <div class="col-auto mt-2">
                                             <span style="font-size: 50px"><i class="bi bi-calendar-event"></i></span>
