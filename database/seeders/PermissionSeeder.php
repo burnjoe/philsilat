@@ -39,7 +39,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'view teams']);
         Permission::create(['name' => 'drop teams']);
         Permission::create(['name' => 'generate matches']);
-        
+
         Permission::create(['name' => 'manage events'])
             ->givePermissionTo([
                 'view events',
@@ -75,6 +75,17 @@ class PermissionSeeder extends Seeder
             ->givePermissionTo([
                 'view codes',
                 'generate codes',
+            ]);
+
+        // Participate Event
+        Permission::create(['name' => 'join events']);
+        Permission::create(['name' => 'leave events']);
+
+        Permission::create(['name' => 'participate events'])
+            ->givePermissionTo([
+                'view events',
+                'join events',
+                'leave events',
             ]);
     }
 }

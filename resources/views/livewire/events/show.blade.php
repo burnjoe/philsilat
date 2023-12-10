@@ -13,10 +13,12 @@
             <div class="d-flex justify-content-end col">
                 {{-- Search --}}
                 @include('livewire.inc.search')
+                @hasrole('admin')
                 @if($event->status === "UPCOMING")
                 <a wire:navigate href="{{ route('games.create', ['event' => $event->id]) }}" class="custBtn custBtn-light me-3"><i
                         class="bi bi-plus-lg"></i>&nbsp Add New Game</a>
                 @endif
+                @endhasrole
             </div>
         </div>
 

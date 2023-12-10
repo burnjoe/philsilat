@@ -22,12 +22,14 @@
         <div class="d-flex justify-content-end col">
             {{-- Search --}}
             @include('livewire.inc.search')
+            @hasrole('admin')
             @if($rounds->count() >= 1 && $matches->total() > 1 && $is_round_completed && !$matches->first()->is_closed)
             <button wire:click="generateMatches" class="custBtn custBtn-light me-3">Generate Next Round &nbsp<i
                     class="bi bi-arrow-right"></i></button>
             @elseif($matches->total() == 1 && !$matches->first()->is_closed && $matches->first()->winner_id)
             <button wire:click="closeMatchesOfRound({{$round}})" class="custBtn custBtn-light me-3"><i
                     class="bi bi-lock-fill"></i>&nbsp Mark Game Complete</button>
+            @endhasrole
             @endif
         </div>
     </div>
@@ -40,10 +42,12 @@
                 <th scope="col">Blue Corner</th>
                 {{-- <th scope="col">Round</th> --}}
                 <th scope="col">Round Winner</th>
+                @hasrole('admin')
                 @if($matches->where('round', $round)->where('is_closed', true)->count() != $matches->where('round',
                 $round)->count())
                 <th scope="col">Action</th>
                 @endif
+                @endhasrole
             </thead>
             <tbody style="white-space: nowrap;">
                 @foreach ($matches as $match)
@@ -76,6 +80,7 @@
                         {{ $match->winner()->exists() ? $match->winner->last_name.', '.$match->winner->first_name :
                         'N/A' }}
                         @else
+                        @hasrole('admin')
                         <div>
                             <select wire:model.live.debounce.300ms="winner_id" name="winner"
                                 class="form-select custFormSelect @error('sex') is-invalid @enderror"
@@ -94,8 +99,10 @@
                             </span>
                             @enderror
                         </div>
+                        @endhasrole
                         @endif
                     </td>
+                    @hasrole('admin')
                     @if($matches->where('round', $round)->where('is_closed', true)->count() != $matches->where('round',
                     $round)->count())
                     <td>
@@ -106,6 +113,7 @@
                         @endif
                     </td>
                     @endif
+                    @endhasrole
                 </tr>
                 @endforeach
             </tbody>
@@ -119,11 +127,13 @@
                 <div class="d-flex justify-content-center">
                     <h4>No existing records.</h4>
                 </div>
+                @hasrole('admin')
                 <div class="d-flex justify-content-center">
                     <button wire:click="generateMatches" class="custBtn custBtn-light me-3"><i
                             class="bi bi-diagram-2"></i>&nbsp
                         Generate Matches</button>
                 </div>
+                @endhasrole
             </div>
             @else
             <div class="d-flex justify-content-center">

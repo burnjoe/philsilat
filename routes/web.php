@@ -46,6 +46,22 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
 
+    // All Events
+    Route::get('events', Events::class)
+        ->name('events');
+
+    // Event Games
+    Route::get('events/{event}/games', EventsShow::class)
+        ->name('events.show');
+
+    // Game Matches
+    Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
+        ->name('games.matches');
+
+    // Participate Event
+    Route::middleware('can:participate events')->group(function () {
+        // routes
+    });
 
     // Manage Categories
     Route::middleware('can:manage categories')->group(function () {
@@ -69,17 +85,9 @@ Route::middleware('auth')->group(function () {
 
     // Manage Events
     Route::middleware('can:manage events')->group(function () {
-        // All Events
-        Route::get('events', Events::class)
-            ->name('events');
-
         // Add Events
         Route::get('events/add', EventsCreate::class)
             ->name('events.create');
-
-        // Event Games
-        Route::get('events/{event}/games', EventsShow::class)
-            ->name('events.show');
 
         // Event Teams
         Route::get('events/{event}/teams', EventsTeams::class)
@@ -106,10 +114,6 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/teams/drop', DropTeam::class)
             ->middleware('event.registration-open')
             ->name('events.drop-all-teams');
-
-        // Game Matches
-        Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
-            ->name('games.matches');
 
         // Game Athletes
         Route::get('events/{event}/games/{game}/athletes', GamesAthletes::class)

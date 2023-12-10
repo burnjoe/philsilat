@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Coach;
 use App\Models\Event;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -13,8 +14,27 @@ class Dashboard extends Component
     {
         $events = Event::with('teams')->get();
 
+        if (Auth::user()->hasRole('admin')) {
+            return view('livewire.dashboard', [
+                'todayEvents' => $events->filter(
+                    fn ($event) =>
+                    Carbon::parse($event->starts_at)->startOfDay() == Carbon::now()->startOfDay()
+                )->sortBy('starts_at'),
+                'upcomingEvents' => $events->filter(
+                    fn ($event) =>
+                    in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"])
+                )->sortBy('starts_at'),
+                'eventsCount' => $events->count(),
+                'coachesCount' => Coach::all()->count(),
+                'teamsCount' => $events->pluck('teams')->flatten()->count(),
+                'roundWinners' => $events->filter(
+                    fn ($event) =>
+                    $event->name == null
+                ),
+            ]);
+        }
+
         return view('livewire.dashboard', [
-            'events' => $events,
             'todayEvents' => $events->filter(
                 fn ($event) =>
                 Carbon::parse($event->starts_at)->startOfDay() == Carbon::now()->startOfDay()
@@ -23,8 +43,11 @@ class Dashboard extends Component
                 fn ($event) =>
                 in_array($event->status, ["UPCOMING", "REGISTRATION OPEN"])
             )->sortBy('starts_at'),
-            'coachesCount' => Coach::all()->count(),
-            'teamsCount' => $events->pluck('teams')->flatten()->count(),
+            'eventsJoinedCount' => $events->count(),
+            'myMatches' => $events->filter(
+                fn ($event) =>
+                $event->name == null
+            ),
         ]);
     }
 }

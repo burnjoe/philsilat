@@ -21,7 +21,7 @@
         @endcan
 
         {{-- Events --}}
-        @can('manage events')
+        @hasanyrole('admin|coach')
         <li>
             <a wire:navigate href="{{ route('events') }}">
                 <i class="bi bi-calendar-event"></i>
@@ -29,7 +29,7 @@
             </a>
             <span class="tooltip">Events</span>
         </li>
-        @endcan
+        @endhasanyrole
 
         {{-- Accounts --}}
         @can('manage accounts')

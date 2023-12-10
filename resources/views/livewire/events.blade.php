@@ -93,9 +93,11 @@
             </div>
 
             {{-- Add New Event Button --}}
+            @hasrole('admin')
             <a wire:navigate href="{{ route('events.create') }}" class="custBtn custBtn-light ms-3"><i
                   class="bi bi-plus-lg"></i>&nbsp Add New Event
             </a>
+            @endhasrole
          </div>
       </div>
 
