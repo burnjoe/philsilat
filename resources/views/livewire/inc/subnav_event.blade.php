@@ -1,25 +1,25 @@
 <div>
-    @php
-    $statusColor = [
-    'UPCOMING' => 'primary',
-    'REGISTRATION OPEN' => 'success',
-    'CANCELLED' => 'danger',
-    'ONGOING' => 'warning',
-    'COMPLETED' => 'success',
-    ];
-    @endphp
+   @php
+      $statusColor = [
+          'UPCOMING' => 'primary',
+          'REGISTRATION OPEN' => 'success',
+          'CANCELLED' => 'danger',
+          'ONGOING' => 'warning',
+          'COMPLETED' => 'success',
+      ];
+   @endphp
 
-    <div class="text-dark px-3 pt-3">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <h3 class="fw-bold mb-0">
-                    {{ $event->name }}
-                </h3>
-                <span class="badge text-bg-{{$statusColor[$event->status]}} py-1 ms-3">{{ $event->status }}</span>
-            </div>
-        </div>
-        <hr class="mb-0">
-    </div>
+   <div class="text-dark px-3 pt-3">
+      <div class="d-flex justify-content-between">
+         <div class="d-flex align-items-center">
+            <h3 class="fw-bold mb-0">
+               {{ $event->name }}
+            </h3>
+            <span class="badge text-bg-{{ $statusColor[$event->status] }} py-1 ms-3">{{ $event->status }}</span>
+         </div>
+      </div>
+      <hr class="mb-0">
+   </div>
 
     <div class="container text-dark pb-3">
         <nav class="navbar navbar-expand navbar-light">
@@ -43,6 +43,12 @@
                             <a class="nav-link" wire:navigate
                                 href="{{ route('events.settings', ['event' => $event->id]) }}">Settings</a>
                         </li>
+                        {{-- generate results --}}
+                        <li class="nav-item">
+                           <a class="nav-link"
+                              href="{{ route('export_event_results_pdf', ['event' => $event->id]) }}" target="_blank">Event
+                              Results</a>
+                        </li>
                         @endhasrole
                         @hasrole('coach')
                         <li class="nav-item">
@@ -64,6 +70,7 @@
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
+         </div>
+      </nav>
+   </div>
 </div>

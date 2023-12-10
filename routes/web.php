@@ -3,6 +3,7 @@
 use App\Livewire\Events;
 use App\Livewire\Accounts;
 use App\Livewire\DropTeam;
+use App\Livewire\ViewTeam;
 use App\Livewire\Dashboard;
 use App\Livewire\Categories;
 use App\Livewire\EventsShow;
@@ -10,7 +11,9 @@ use App\Livewire\EventsTeams;
 use App\Livewire\GamesCreate;
 use App\Livewire\GamesDelete;
 use App\Livewire\AccountsEdit;
+use App\Livewire\EventsCancel;
 use App\Livewire\EventsCreate;
+use App\Livewire\EventsDelete;
 use App\Livewire\GamesMatches;
 use App\Livewire\AccountsIndex;
 use App\Livewire\GamesAthletes;
@@ -21,9 +24,8 @@ use App\Livewire\EventsSettings;
 use App\Livewire\CategoriesCreate;
 use App\Livewire\CategoriesDelete;
 use App\Livewire\Auth\ChangePassword;
-use App\Livewire\EventsCancel;
-use App\Livewire\EventsDelete;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,10 +95,18 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/teams', EventsTeams::class)
             ->name('events.teams');
 
+        // View Team
+        Route::get('events/{event}/teams/{team}/view-team', ViewTeam::class)
+            ->name('events.view-team');
+
         // Event Settings
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
+        // Event Results
+        Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+            ->name('export_event_results_pdf');
+      
         // Delete Events
         Route::get('events/{event}/delete', EventsDelete::class)
             ->name('events.delete');
@@ -104,6 +114,8 @@ Route::middleware('auth')->group(function () {
         // Cancel Events
         Route::get('events/{event}/cancel', EventsCancel::class)
             ->name('events.cancel');
+
+        
 
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
@@ -123,6 +135,10 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
 
+        // Game Results
+        Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
+            ->name('export_game_results_pdf');
+      
         // Delete Games
         Route::get('events/{event}/games/{game}/delete', GamesDelete::class)
             ->name('games.delete');
