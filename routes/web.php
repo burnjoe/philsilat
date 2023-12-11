@@ -26,6 +26,8 @@ use App\Livewire\CategoriesDelete;
 use App\Livewire\Auth\ChangePassword;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
+use App\Livewire\EventsDetails;
+use App\Livewire\EventsJoin;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,16 +56,31 @@ Route::middleware('auth')->group(function () {
 
     // Event Games
     Route::get('events/{event}/games', EventsShow::class)
+        ->middleware('coach.joined')
         ->name('events.show');
+
+    // View Team
+    Route::get('events/{event}/teams/{team}/view-team', ViewTeam::class)
+        ->name('events.view-team');
 
     // Game Matches
     Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
         ->name('games.matches');
 
+
+
     // Participate Event
     Route::middleware('can:participate events')->group(function () {
-        // routes
+        // Event Details
+        Route::get('events/{event}/details', EventsDetails::class)
+            ->name('events.details');
+
+        // Event Games
+        Route::get('events/{event}/games/join', EventsJoin::class)
+            ->name('events.join');
     });
+
+
 
     // Manage Categories
     Route::middleware('can:manage categories')->group(function () {
@@ -85,6 +102,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
+
     // Manage Events
     Route::middleware('can:manage events')->group(function () {
         // Add Events
@@ -95,10 +113,6 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/teams', EventsTeams::class)
             ->name('events.teams');
 
-        // View Team
-        Route::get('events/{event}/teams/{team}/view-team', ViewTeam::class)
-            ->name('events.view-team');
-
         // Event Settings
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
@@ -106,7 +120,7 @@ Route::middleware('auth')->group(function () {
         // Event Results
         Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
             ->name('export_event_results_pdf');
-      
+
         // Delete Events
         Route::get('events/{event}/delete', EventsDelete::class)
             ->name('events.delete');
@@ -114,8 +128,6 @@ Route::middleware('auth')->group(function () {
         // Cancel Events
         Route::get('events/{event}/cancel', EventsCancel::class)
             ->name('events.cancel');
-
-        
 
         // Drop Selected Team
         Route::get('events/{event}/teams/{team}/drop', DropTeam::class)
@@ -138,7 +150,7 @@ Route::middleware('auth')->group(function () {
         // Game Results
         Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
             ->name('export_game_results_pdf');
-      
+
         // Delete Games
         Route::get('events/{event}/games/{game}/delete', GamesDelete::class)
             ->name('games.delete');
@@ -148,6 +160,7 @@ Route::middleware('auth')->group(function () {
             ->middleware('event.upcoming')
             ->name('games.create');
     });
+
 
 
     // Manage Accounts and Manage Codes
@@ -168,6 +181,7 @@ Route::middleware('auth')->group(function () {
         Route::get('accounts/{user}/delete', AccountsDelete::class)
             ->name('accounts.delete');
     });
+
 
 
     // Change Password
