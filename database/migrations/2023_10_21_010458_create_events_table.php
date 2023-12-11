@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamp('starts_at');
             $table->timestamp('ends_at')->nullable();
-            $table->string('venue', 20);
+            $table->string('venue', 50);
             $table->string('address');
             $table->string('barangay', 20);
             $table->string('city', 20);

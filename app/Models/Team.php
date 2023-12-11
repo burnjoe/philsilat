@@ -37,6 +37,6 @@ class Team extends Model
 
     public function coaches(): BelongsToMany
     {
-        return $this->belongsToMany(Coach::class);
+        return $this->belongsToMany(Coach::class, 'coaches_teams', 'team_id', 'coach_id');
     }
 }

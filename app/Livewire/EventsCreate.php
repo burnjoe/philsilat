@@ -38,7 +38,7 @@ class EventsCreate extends Component
             'description' => ['max:255'],
             'starts_at' => ['required', 'date', 'after_or_equal:now'],
             'ends_at' => ['required', 'date', 'after:starts_at'],
-            'venue' => ['required', 'string', 'min:2', 'max:20'],
+            'venue' => ['required', 'string', 'min:2', 'max:30'],
             'address' => ['required', 'string', 'min:2', 'max:255'],
             'barangay' => ['required', 'string', 'min:2', 'max:20'],
             'city' => ['required', 'string', 'min:2', 'max:20'],
