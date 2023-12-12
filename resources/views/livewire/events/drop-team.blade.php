@@ -10,7 +10,7 @@
                 style="border-style: solid; border-width: 1px; border-color: #A7A7A7; border-radius: 10px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
 
                 <div class="d-flex align-items-center">
-                    <i class="bi bi-x-circle-fill text-danger fs-1"></i>
+                    <i class="bi bi-exclamation-circle-fill text-danger fs-1"></i>
                     @if($team->exists)
                     <span class="fs-4 ms-4">Are you sure to drop this team including its athletes?</span>
                     @else
