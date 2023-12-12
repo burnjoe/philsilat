@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('profile', Profile::class)
         ->name('profile');
-    
+
     // Dashboard
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
@@ -73,14 +73,6 @@ Route::middleware('auth')->group(function () {
     // Game Matches
     Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
         ->name('games.matches');
-
-    // Event Results
-    Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
-        ->name('export_event_results_pdf');
-
-    // Game Results
-    Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
-        ->name('export_game_results_pdf');
 
     // Change Password
     Route::get('change-password', ChangePassword::class)
@@ -180,6 +172,14 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/games/add', GamesCreate::class)
             ->middleware('event.upcoming')
             ->name('games.create');
+
+        // Event Results
+        Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+            ->name('export_event_results_pdf');
+
+        // Game Results
+        Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
+            ->name('export_game_results_pdf');
     });
 
 
