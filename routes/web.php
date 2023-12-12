@@ -82,6 +82,10 @@ Route::middleware('auth')->group(function () {
     Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
         ->name('export_game_results_pdf');
 
+    // Change Password
+    Route::get('change-password', ChangePassword::class)
+        ->name('change-password');
+
 
 
     // Participate Event
