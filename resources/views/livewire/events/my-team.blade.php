@@ -1,53 +1,8 @@
 <div>
-    @php
-    $statusColor = [
-    'UPCOMING' => 'primary',
-    'REGISTRATION OPEN' => 'success',
-    'CANCELLED' => 'danger',
-    'ONGOING' => 'warning',
-    'COMPLETED' => 'success',
-    ];
-    @endphp
-
-    <div class="text-dark px-3 pt-3">
-        <div class="d-flex justify-content-between">
-            <div class="d-flex align-items-center">
-                <h3 class="fw-bold mb-0">
-                    VIEW TEAM
-                </h3>
-            </div>
-            <div>
-                @hasrole('admin')
-                @if (in_array($event->status, ['REGISTRATION OPEN']))
-                <a wire:navigate href="{{ route('events.drop-team', ['event' => $event->id, 'team' => $team->id]) }}"
-                    class="custBtn custBtn-red ms-3" style="display: inline-block; margin-right: 8px;"><i
-                        class=" bi bi-arrow-down"></i>
-                    Drop Team</a>
-                @endif
-                @endhasrole
-            </div>
-        </div>
-        <hr class="mb-0">
-    </div>
-
-    <div class="container text-dark">
-        <nav class="navbar navbar-expand navbar-light">
-            <div class="container-fluid d-flex justify-content-end">
-                <div class="d-flex flex-row align-items-center">
-                    <div class="pe-1 py-2">
-                        <a wire:navigate href="{{ route('events.teams', ['event' => $event->id]) }}"
-                            class="custBtn custBtn-light"><i class="bi bi-arrow-left"></i>&nbsp
-                            Back to All Teams</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+    {{-- Sub Navigation --}}
+    @include('livewire.inc.subnav_event')
 
     <div class="container text-dark pb-3">
-        {{-- Alerts --}}
-        @include('livewire.inc.alerts')
-
         <div class="d-flex justify-content-between mb-3">
             <div class="px-3">
                 <h5 class="fw-bold">{{ $team->name }}</h5>

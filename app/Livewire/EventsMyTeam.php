@@ -6,10 +6,11 @@ use App\Models\Athlete;
 use App\Models\Coach;
 use App\Models\Event;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ViewTeam extends Component
+class EventsMyTeam extends Component
 {
     use WithPagination;
 
@@ -25,10 +26,20 @@ class ViewTeam extends Component
     /**
      * Initializes attributes upon load
      */
-    public function mount(Event $event, Team $team)
+    public function mount(Event $event)
     {
         $this->event = $event;
-        $this->team = $team;
+        $this->team = Team::whereHas(
+            'event',
+            fn ($query) =>
+            $query->where('events.id', $this->event->id)
+        )
+            ->whereHas(
+                'coaches',
+                fn ($query) =>
+                $query->where('coaches.id', Auth::user()->profileable->id)
+            )
+            ->first();
     }
 
     /**
@@ -36,7 +47,7 @@ class ViewTeam extends Component
      */
     public function render()
     {
-        return view('livewire.events.view-team', [
+        return view('livewire.events.my-team', [
             'athletes' => Athlete::where('team_id', $this->team->id)
                 ->when(
                     $this->search,
@@ -58,6 +69,7 @@ class ViewTeam extends Component
                 )
                 ->latest()
                 ->get(),
+            'isJoined' => $this->team->exists(),
         ]);
     }
 

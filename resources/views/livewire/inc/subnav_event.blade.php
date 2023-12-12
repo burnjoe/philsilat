@@ -24,10 +24,13 @@
                     class="custBtn custBtn-green ms-3">Join Event &nbsp<i class="bi bi-box-arrow-in-right"></i></a>
             </div>
             @else
+            @if (in_array($event->status, ['REGISTRATION OPEN']))
             <div class="d-flex align-items-center">
-                <a wire:navigate href="#" class="custBtn custBtn-red ms-3"><i class="bi bi-box-arrow-left"></i>&nbsp
+                <a wire:navigate href="{{ route('events.leave', ['event' => $event->id]) }}"
+                    class="custBtn custBtn-red ms-3"><i class="bi bi-box-arrow-left"></i>&nbsp
                     Leave Event</i></a>
             </div>
+            @endif
             @endif
             @endhasrole
         </div>
@@ -84,7 +87,8 @@
                                 href="{{ route('events.show', ['event' => $event->id]) }}">Games</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" wire:navigate href="#">My Team</a>
+                            <a class="nav-link" wire:navigate
+                                href="{{ route('events.my-team', ['event' => $event->id]) }}">My Team</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" wire:navigate

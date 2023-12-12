@@ -28,6 +28,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
 use App\Livewire\EventsDetails;
 use App\Livewire\EventsJoin;
+use App\Livewire\EventsLeave;
+use App\Livewire\EventsMyTeam;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +62,7 @@ Route::middleware('auth')->group(function () {
         ->name('events.show');
 
     // View Team
-    Route::get('events/{event}/teams/{team}/view-team', ViewTeam::class)
+    Route::get('events/{event}/teams/{team}/view', ViewTeam::class)
         ->name('events.view-team');
 
     // Game Matches
@@ -78,6 +80,15 @@ Route::middleware('auth')->group(function () {
         // Event Games
         Route::get('events/{event}/games/join', EventsJoin::class)
             ->name('events.join');
+
+        // My Team
+        Route::get('events/{event}/my-team', EventsMyTeam::class)
+            ->name('events.my-team');
+
+        // Drop Selected Team
+        Route::get('events/{event}/leave', EventsLeave::class)
+            ->middleware('event.registration-open')
+            ->name('events.leave');
     });
 
 
