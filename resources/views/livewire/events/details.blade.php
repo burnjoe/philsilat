@@ -79,7 +79,7 @@
                     {{-- No Records Found --}}
                     @if ($maleGames->count() == 0)
                     <div class="d-flex justify-content-center align-items-center my-5">
-                        <h4>No existing games yet.</h4>
+                        <h4>No existing games.</h4>
                     </div>
                     @endif
                 </div>
@@ -105,7 +105,7 @@
                     {{-- No Records Found --}}
                     @if ($femaleGames->count() == 0)
                     <div class="d-flex justify-content-center align-items-center my-5">
-                        <h4>No existing games yet.</h4>
+                        <h4>No existing games.</h4>
                     </div>
                     @endif
                 </div>

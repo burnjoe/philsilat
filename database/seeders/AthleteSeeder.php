@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Athlete;
+use App\Models\Event;
 use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,14 +15,16 @@ class AthleteSeeder extends Seeder
      */
     public function run(): void
     {
-        $teams = Team::all();
-
-        foreach ($teams as $team) {
-            Athlete::factory()->create([
-                'team_id' => $team->id,
-            ]);
+        $events = Event::with('teams')->get();
+        
+        foreach ($events as $event) {
+            if (in_array($event->status, ['REGISTRATION OPEN', 'ONGOING', 'COMPLETED', 'CANCELLED'])) {
+                foreach ($event->teams as $team) {
+                    Athlete::factory(10)->create([
+                        'team_id' => $team->id,
+                    ]);
+                }
+            }
         }
-
-        // Athlete::factory(1000)->create();
     }
 }

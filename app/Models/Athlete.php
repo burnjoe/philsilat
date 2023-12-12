@@ -35,8 +35,12 @@ class Athlete extends Model
             ->orWhere('first_name', 'like', "%{$value}%")
             ->orWhere('weight', 'like', "%{$value}%")
             ->orWhere('school_name', 'like', "%{$value}%")
-            ->orWhere('grade_level', 'like', "%{$value}%")
-            ->orWhere('lrn', 'like', "%{$value}%");
+            ->orWhere('grade_level', 'like', "%{$value}%");
+    }
+
+    public function scopeSex($query, $array)
+    {
+        $query->whereIn('sex', $array);
     }
 
     public function scopeNoMatchesInSameGame($query, $gameId)
