@@ -35,7 +35,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li>
-                                <a class="dropdown-item" wire:navigate href="profile.php">
+                                <a class="dropdown-item" wire:navigate href="{{ route('profile') }}">
                                     <i class="bi bi-person me-3"></i>My Profile
                                 </a>
                             </li>

@@ -19,10 +19,12 @@
             </div>
             @hasrole('coach')
             @if(!$isJoined)
+            @if (in_array($event->status, ['REGISTRATION OPEN']))
             <div class="d-flex align-items-center">
                 <a wire:navigate href="{{ route('events.join', ['event' => $event->id]) }}"
                     class="custBtn custBtn-green ms-3">Join Event &nbsp<i class="bi bi-box-arrow-in-right"></i></a>
             </div>
+            @endif
             @else
             @if (in_array($event->status, ['REGISTRATION OPEN']))
             <div class="d-flex align-items-center">

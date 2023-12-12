@@ -30,6 +30,7 @@ use App\Livewire\EventsDetails;
 use App\Livewire\EventsJoin;
 use App\Livewire\EventsLeave;
 use App\Livewire\EventsMyTeam;
+use App\Livewire\Profile;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,10 @@ Route::get('/', function () {
 
 // Authenticated Users
 Route::middleware('auth')->group(function () {
+    // Profile
+    Route::get('profile', Profile::class)
+        ->name('profile');
+    
     // Dashboard
     Route::get('dashboard', Dashboard::class)
         ->name('dashboard');
@@ -87,6 +92,7 @@ Route::middleware('auth')->group(function () {
 
         // Event Games
         Route::get('events/{event}/games/join', EventsJoin::class)
+            ->middleware('event.registration-open')
             ->name('events.join');
 
         // My Team
