@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Athlete extends Model
 {
@@ -80,5 +81,10 @@ class Athlete extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function award(): HasOne
+    {
+        return $this->hasOne(Award::class);
     }
 }

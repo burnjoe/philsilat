@@ -2,9 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Game;
-use App\Models\Event;
 use App\Models\Athlete;
+use App\Models\Award;
 use Livewire\Component;
 use App\Models\GameMatch;
 use Livewire\WithPagination;
@@ -272,8 +271,44 @@ class MatchList extends Component
             if ($matches->count() === 1) {
                 $this->game->update(['is_completed' => true]);
 
+                // $winners = Athlete::with([
+                //     'award',
+                //     'team',
+                // ])
+                // ->whereHas(
+                //     'game', 
+                //     fn ($query) =>
+                //     $query->where('id', $this->game->id)
+                // )
+                // ->whereHas('winningGameMatches')
+                // ->withCount('winningGameMatches')
+                // ->orderBy('winning_game_matches_count', 'desc')
+                // ->limit(3)
+                // ->get();
 
-                // Create table for winners
+                // Get the top 3 athletes
+                $winners = Athlete::whereHas(
+                    'game',
+                    fn ($query) =>
+                    $query->where('id', $this->game->id)
+                )
+                    ->whereHas('winningGameMatches')
+                    ->withCount('winningGameMatches')
+                    ->orderBy('winning_game_matches_count', 'desc')
+                    ->limit(3)
+                    ->get();
+
+                $medals = ['GOLD', 'SILVER', 'BRONZE'];
+                $i = 0;
+
+                // Create winner records
+                foreach ($winners as $winner) {
+                    Award::create([
+                        'medal' => $medals[$i++],
+                        'rank' => $i,
+                        'athlete_id' => $winner->id
+                    ]);
+                }
 
                 $matches->where('is_closed', false)
                     ->update(['is_closed' => true]);
