@@ -36,12 +36,6 @@
 								href="{{ route('games.settings', ['event' => $event->id, 'game' => $game->id]) }}">Settings</a>
 						</li>
 						@endhasrole
-						<li class="nav-item">
-							<a class="nav-link"
-								href="{{ route('export_game_results_pdf', ['event' => $event->id, 'game' => $game->id]) }}"
-								target="_blank">Game
-								Results</a>
-						</li>
 					</ul>
 				</div>
 				<div class="d-flex flex-row align-items-center">

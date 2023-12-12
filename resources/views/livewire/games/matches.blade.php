@@ -21,6 +21,12 @@
                     Result Summary
                 </h5>
             </div>
+            @hasrole('admin')
+            <div class="px-3">
+                <a href="{{ route('export_game_results_pdf', ['event' => $event->id, 'game' => $game->id]) }}"
+                    class="custBtn custBtn-light" target="_blank"><i class="bi bi-printer-fill"></i>&nbsp Print Result</a>
+            </div>
+            @endhasrole
         </div>
 
         {{-- Winners Table --}}
@@ -32,7 +38,7 @@
                     <th scope="col">Team</th>
                 </thead>
                 <tbody style="white-space: nowrap;">
-                    @foreach ($awards as $award)    
+                    @foreach ($awards as $award)
                     <tr wire:key="{{ $award->id }}">
                         <td>{{ $award->medal }}</td>
                         <td>{{ $award->athlete->last_name . ', ' . $award->athlete->first_name }}</td>
