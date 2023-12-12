@@ -69,7 +69,6 @@
                     {{-- <td>{{ $match->round }}</td> --}}
                     <td>
                         @if($match->winner)
-
                         @php
                         $badgeColor = $match->winner->team->id === $match->athlete1->team->id ? 'danger' :
                         'primary';

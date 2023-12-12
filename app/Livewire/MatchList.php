@@ -121,7 +121,20 @@ class MatchList extends Component
     {
         // Only generate match pairings for ongoing events
         if ($this->event->status !== "ONGOING") {
-            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            switch ($this->event->status) {
+                case 'UPCOMING':
+                case 'REGISTRATION OPEN':
+                    session()->flash('danger', 'Unable to generate matches. The event has not even started yet. Please start the event first.');
+                    break;
+                case 'COMPLETED':
+                    session()->flash('danger', 'Unable to generate matches. The event has already been completed.');
+                    break;
+                case 'CANCELLED':
+                    session()->flash('danger', 'Unable to generate matches. The event has already been cancelled.');
+                    break;
+                default:
+                    session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
+            }
             return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
         }
 
@@ -263,7 +276,7 @@ class MatchList extends Component
                 // Create table for winners
 
                 $matches->where('is_closed', false)
-                ->update(['is_closed' => true]);
+                    ->update(['is_closed' => true]);
 
                 session()->flash('success', 'The game has been successfully completed.');
                 return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);

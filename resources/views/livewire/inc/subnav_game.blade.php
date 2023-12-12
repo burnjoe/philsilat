@@ -21,14 +21,18 @@
                       <a class="nav-link ps-1" wire:navigate
                          href="{{ route('games.matches', ['event' => $event->id, 'game' => $game->id]) }}">Matches</a>
                    </li>
+                   @hasrole('admin')
                    <li class="nav-item">
                       <a class="nav-link" wire:navigate
                          href="{{ route('games.athletes', ['event' => $event->id, 'game' => $game->id]) }}">Athletes</a>
                    </li>
+                   @endhasrole
+                   @hasrole('admin')
                    <li class="nav-item">
                       <a class="nav-link" wire:navigate
                          href="{{ route('games.settings', ['event' => $event->id, 'game' => $game->id]) }}">Settings</a>
                    </li>
+                   @endhasrole
                    <li class="nav-item">
                       <a class="nav-link"
                          href="{{ route('export_game_results_pdf', ['event' => $event->id, 'game' => $game->id]) }}"
