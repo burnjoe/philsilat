@@ -168,10 +168,10 @@ class EventsSettings extends Component
 
         if ($this->event->games()
             ->select('id')
-            ->has('athletes', '<', 2)
+            ->has('athletes', '<', 3)
             ->exists()
         ) {
-            session()->flash('danger', 'Unable to start the event. Each game created requires at least two (2) participating athletes to continue.');
+            session()->flash('danger', 'Unable to start the event. Each game created requires at least three (3) participating athletes to continue.');
             return;
         }
 
