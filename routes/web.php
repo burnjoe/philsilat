@@ -69,6 +69,14 @@ Route::middleware('auth')->group(function () {
     Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
         ->name('games.matches');
 
+    // Event Results
+    Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
+        ->name('export_event_results_pdf');
+
+    // Game Results
+    Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
+        ->name('export_game_results_pdf');
+
 
 
     // Participate Event
@@ -128,10 +136,6 @@ Route::middleware('auth')->group(function () {
         Route::get('events/{event}/settings', EventsSettings::class)
             ->name('events.settings');
 
-        // Event Results
-        Route::get('{event}/event-results-pdf', [PdfController::class, 'export_event_results_pdf'])
-            ->name('export_event_results_pdf');
-
         // Delete Events
         Route::get('events/{event}/delete', EventsDelete::class)
             ->name('events.delete');
@@ -157,10 +161,6 @@ Route::middleware('auth')->group(function () {
         // Game Settings
         Route::get('events/{event}/games/{game}/settings', GamesSettings::class)
             ->name('games.settings');
-
-        // Game Results
-        Route::get('{event}/{game}/game-results-pdf', [PdfController::class, 'export_game_results_pdf'])
-            ->name('export_game_results_pdf');
 
         // Delete Games
         Route::get('events/{event}/games/{game}/delete', GamesDelete::class)

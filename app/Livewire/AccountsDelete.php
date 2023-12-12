@@ -40,7 +40,7 @@ class AccountsDelete extends Component
 
         $this->user->delete();
 
-        session()->flash('success', 'The user account has been updated successfully.');
+        session()->flash('success', 'The user account has been deleted successfully.');
         return $this->redirectRoute('accounts', navigate: true);
     }
 }

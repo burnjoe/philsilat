@@ -32,8 +32,7 @@
         <div class="mx-3 mb-3 bg-white" style="overflow-x: auto;  box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.2);">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-dark text-light">
-                    <th scope="col">Last Name</th>
-                    <th scope="col">First Name</th>
+                    <th scope="col">Coach</th>
                     <th scope="col">Sex</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Email</th>
@@ -42,8 +41,7 @@
                     {{-- Coach data --}}
                     @foreach ($coaches as $coach)
                     <tr scope="row" wire:key="{{ $coach->id }}">
-                        <td>{{ $coach->last_name }}</td>
-                        <td>{{ $coach->first_name }}</td>
+                        <td>{{ $coach->last_name . ', ' . $coach->first_name }}</td>
                         <td>{{ $coach->sex }}</td>
                         <td>{{ $coach->phone }}</td>
                         <td>{{ $coach->user->email }}</td>
@@ -79,8 +77,7 @@
         <div class="mx-3 mb-3 bg-white" style="overflow-x: auto;  box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.2);">
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-dark text-light">
-                    <th scope="col">Last Name</th>
-                    <th scope="col">First Name</th>
+                    <th scope="col">Athlete</th>
                     <th scope="col">Birthdate</th>
                     <th scope="col">
                         <ul class="navbar-nav ms-auto me-2">
@@ -113,18 +110,19 @@
                     <th scope="col">Weight (kg)</th>
                     <th scope="col">School</th>
                     <th scope="col">Grade Level</th>
+                    <th scope="col">Joined Game</th>
                 </thead>
                 <tbody>
                     {{-- Atheletes Data --}}
                     @foreach ($athletes as $athlete)
                     <tr scope="row" wire:key="{{ $athlete->id }}">
-                        <td>{{ $athlete->last_name }}</td>
-                        <td>{{ $athlete->first_name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($athlete->birthdate)->format('F j, Y') }}</td>
+                        <td>{{ $athlete->last_name . ', ' . $athlete->first_name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($athlete->birthdate)->format('M. j, Y') }}</td>
                         <td>{{ $athlete->sex }}</td>
                         <td>{{ $athlete->weight.' kg' }}</td>
                         <td>{{ $athlete->school_name }}</td>
                         <td>{{ $athlete->grade_level }}</td>
+                        <td>{{ $athlete->game->name . ': Class ' . $athlete->game->category->class_label . ' - ' . $athlete->game->category->sex }}</td>
                     </tr>
                     @endforeach
                 </tbody>

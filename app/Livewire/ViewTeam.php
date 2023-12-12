@@ -37,7 +37,11 @@ class ViewTeam extends Component
     public function render()
     {
         return view('livewire.events.view-team', [
-            'athletes' => Athlete::where('team_id', $this->team->id)
+            'athletes' => Athlete::with([
+                'game' => fn ($query) => $query->select('id', 'name', 'category_id'),
+                'game.category' => fn ($query) => $query->select('id', 'class_label', 'sex')
+            ])
+                ->where('team_id', $this->team->id)
                 ->when(
                     $this->search,
                     fn ($query) =>
