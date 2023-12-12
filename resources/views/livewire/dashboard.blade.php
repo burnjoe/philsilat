@@ -82,14 +82,16 @@
 
         <div class="row g-4 p-3">
             <div class="col-12 col-lg-8">
-                <div class="card" style="overflow: hidden; height: 958px; background-color: white;">
-                    <div class="header d-flex align-items-center bg-dark h-100 p-3" style="max-height: 6.1%;">
+                <div class="card" style="overflow: hidden; background-color: white;">
+                    <div class="header d-flex align-items-center bg-dark p-3" style="max-height: 6.1%;">
                         <div class="gx-1 text-light fw-bold" style="font-size: 15px;">
                             @role('admin')
                             <span class="text-light">Round Winners</span>
+                            <span class="badge text-bg-warning py-1 ms-1">On Going</span>
                             @endrole
                             @role('coach')
                             <span class="text-light">My Matches</span>
+                            <span class="badge text-bg-warning py-1 ms-1">On Going</span>
                             @endrole
                         </div>
                     </div>
@@ -104,6 +106,52 @@
                                     <th scope="col">Action</th>
                                 </thead>
                                 <tbody>
+                                    @foreach ($roundWinners as $roundWinner)
+                                    <tr scope="row" wire:key="{{ $roundWinner->id }}">
+                                        <td>{{ $roundWinner->round }}</td>
+                                        <td>
+                                            @if($roundWinner->winner->id === $roundWinner->athlete1->id)
+                                            <span class="badge text-bg-danger py-1 fs-6">
+                                                {{ $roundWinner->winner->last_name . ', ' .
+                                                $roundWinner->winner->first_name
+                                                }}
+                                            </span>
+                                            @else
+                                            <span class="badge text-bg-primary py-1 fs-6">
+                                                {{ $roundWinner->winner->last_name . ', ' .
+                                                $roundWinner->winner->first_name }}
+                                            </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($roundWinner->winner->id !== $roundWinner->athlete1->id)
+                                            <span class="badge text-bg-danger py-1 fs-6">
+                                                {{ $roundWinner->athlete1->last_name . ', ' .
+                                                $roundWinner->athlete1->first_name }}
+                                            </span>
+                                            @else
+                                            @if($roundWinner->athlete2)
+                                            <span class="badge text-bg-primary py-1 fs-6">
+                                                {{ $roundWinner->athlete2->last_name . ', ' .
+                                                $roundWinner->athlete2->first_name }}
+                                            </span>
+                                            @else
+                                            <span class="badge text-bg-secondary py-1 fs-6">
+                                                N/A
+                                            </span>
+                                            @endif
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div style="white-space: nowrap;">
+                                                <a wire:navigate
+                                                    href="{{ route('games.matches', ['event' => $roundWinner->game->event->id, 'game' => $roundWinner->game->id]) }}"
+                                                    class="custBtn custBtn-light">Go to Matches &nbsp<i
+                                                        class="bi bi-arrow-right"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
@@ -116,7 +164,7 @@
                         </div>
                         @endrole
                         @role('coach')
-                        <div class="mb-3 bg-white" style="overflow-x: auto;">
+                        <div class="bg-white" style="overflow-x: auto;">
                             <table class="table table-striped table-hover mb-0" style="font-size: 14px;">
                                 <thead class="table-dark text-light">
                                     <th scope="col">Round #</th>
@@ -125,13 +173,44 @@
                                     <th scope="col">Action</th>
                                 </thead>
                                 <tbody>
+                                    @foreach ($myMatches as $myMatch)
+                                    <tr scope="row" wire:key="{{ $myMatch->id }}">
+                                        <td>{{ $myMatch->round }}</td>
+                                        <td>
+                                            <span class="badge text-bg-danger py-1 fs-6">
+                                                {{ $myMatch->athlete1->last_name . ', ' . $myMatch->athlete1->first_name
+                                                }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @if($myMatch->athlete2)
+                                            <span class="badge text-bg-primary py-1 fs-6">
+                                                {{ $myMatch->athlete2->last_name . ', ' .
+                                                $myMatch->athlete2->first_name }}
+                                            </span>
+                                            @else
+                                            <span class="badge text-bg-secondary py-1 fs-6">
+                                                N/A
+                                            </span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div style="white-space: nowrap;">
+                                                <a wire:navigate
+                                                    href="{{ route('games.matches', ['event' => $myMatch->game->event->id, 'game' => $myMatch->game->id]) }}"
+                                                    class="custBtn custBtn-light">Go to Matches &nbsp<i
+                                                        class="bi bi-arrow-right"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
                             {{-- No Records Found --}}
-                            @if ($myMatches->count() == 0)
+                            @if ($myMatches->total() == 0)
                             <div class="d-flex justify-content-center align-items-center my-5">
-                                <h4>No existing ongoing matches from joined events.</h4>
+                                <h4>No existing ongoing matches of joined events.</h4>
                             </div>
                             @endif
                         </div>
