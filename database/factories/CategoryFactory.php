@@ -19,8 +19,8 @@ class CategoryFactory extends Factory
     {
         $categories = Category::all();
         $label = 'A';
-        $minWeight = 39;
-        $maxWeight = 42;
+        $minWeight = 42;
+        $maxWeight = 45;
 
         // if category is not empty
         if(!$categories->isEmpty()) {

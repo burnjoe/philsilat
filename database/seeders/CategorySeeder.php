@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         // Male
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             Category::factory()->create([
                 'sex' => 'Male'
             ]);
@@ -50,12 +50,6 @@ class CategorySeeder extends Seeder
             'sex' => 'Female',
             'min_weight' => 51,
             'max_weight' => 54,
-        ]);
-        Category::factory()->create([
-            'class_label' => 'F',
-            'sex' => 'Female',
-            'min_weight' => 54,
-            'max_weight' => 57,
         ]);
     }
 }
