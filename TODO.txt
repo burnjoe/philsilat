@@ -10,14 +10,11 @@ Major:
 
 Pending Modules:
 0. Result Summary (Each Games)
-1. View Teams
 2. Summary Reports
 3. Dashboard (Admin & Coach)
 4. My Profile
 5. Change password
-6. View Event Details
 7. Join Event
-8. Leave Event
 
 --------------------------------------------------------------------------------------------------------------------------
 
