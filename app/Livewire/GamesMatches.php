@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Game;
 use App\Models\Event;
-use App\Models\Athlete;
+use App\Models\Award;
 use Livewire\Component;
 use App\Models\GameMatch;
 use Livewire\WithPagination;
@@ -49,6 +49,16 @@ class GamesMatches extends Component
                 ->groupBy('round')
                 ->orderBy('round', 'desc')
                 ->get(),
+            'awards' => Award::with([
+                'athlete' => fn ($query) => $query->select('id', 'last_name', 'first_name', 'team_id', 'game_id'),
+                'athlete.team' => fn ($query) => $query->select('id', 'name')
+            ])
+                ->whereHas(
+                    'athlete.game',
+                    fn ($query) => $query->where('id', $this->game->id)
+                )
+                ->orderBy('rank', 'asc')
+                ->get()
         ]);
     }
 }

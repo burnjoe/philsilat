@@ -32,11 +32,13 @@
                     <th scope="col">Team</th>
                 </thead>
                 <tbody style="white-space: nowrap;">
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    @foreach ($awards as $award)    
+                    <tr wire:key="{{ $award->id }}">
+                        <td>{{ $award->medal }}</td>
+                        <td>{{ $award->athlete->last_name . ', ' . $award->athlete->first_name }}</td>
+                        <td>{{ $award->athlete->team->name }}</td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
