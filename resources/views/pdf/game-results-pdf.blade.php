@@ -157,7 +157,7 @@
         <div class="event-header">
             {{-- event name --}}
             <div class="event-name">
-                {{ $event->name }} {{ $event->id }}
+                {{ $event->name }}
             </div>
             {{-- date - venue --}}
             <div class="sub-name">{{ \Carbon\Carbon::parse($event->starts_at)->format('M. d, Y') }}
