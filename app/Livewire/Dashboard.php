@@ -33,7 +33,7 @@ class Dashboard extends Component
                 'teamsCount' => $events->pluck('teams')->flatten()->count(),
                 'roundWinners' => GameMatch::with('athlete1', 'athlete2', 'winner', 'game', 'game.event')
                     ->whereNot('winner_id', null)
-                    ->whereHas('game.event', fn ($query) => $query->where('status', 'ONGOING'))
+                    ->whereHas('game', fn ($query) => $query->where('is_completed', false))
                     ->orderBy('round', 'asc')
                     ->paginate(20),
             ]);

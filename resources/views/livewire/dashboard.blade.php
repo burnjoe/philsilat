@@ -156,7 +156,7 @@
                             {{-- No Records Found --}}
                             @if ($roundWinners->count() == 0)
                             <div class="d-flex justify-content-center align-items-center my-5">
-                                <h4>No existing ongoing events.</h4>
+                                <h4>No existing ongoing games from joined events.</h4>
                             </div>
                             @endif
                         </div>
