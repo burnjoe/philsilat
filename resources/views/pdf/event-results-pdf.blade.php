@@ -165,7 +165,7 @@
         {{-- Title --}}
         <div class="title">
             <div>PENCAK SILAT - <span class="uc">{{ $game->name }}</span> COMPETITION</div>
-            <div><span class="uc">{{ $game->category->sex }}</span> CATEGORY</div>
+            {{-- <div><span class="uc">{{ $game->category->sex }}</span> CATEGORY</div> --}}
             <div>FINAL OFFICIAL RESULT</div>
         </div>
 
