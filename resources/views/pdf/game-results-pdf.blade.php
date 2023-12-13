@@ -177,6 +177,45 @@
             <div>GAME RESULTS</div>
         </div>
 
+        <div class="table">
+            <table>
+                <tr>
+                    <td colspan="3" class="round-name" style="background-color: rgb(185, 185, 185);">
+                        RESULT SUMMARY
+                    </td>
+                </tr>
+                <thead>
+                    <tr>
+                        <th style="background-color: rgb(185, 185, 185);">Medal</th>
+                        <th style="background-color: rgb(185, 185, 185);">Winning Athletes</th>
+                        <th style="background-color: rgb(185, 185, 185);">Team</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($awards as $award)
+                    <tr scope="row">
+                        <td>
+                            <div>
+                                {{ $award->medal }}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{ $award->athlete->last_name . ', ' . $award->athlete->first_name }}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{ $award->athlete->team->name }}
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+
         {{-- Table --}}
         @foreach ($rounds as $round)
         @php
@@ -186,7 +225,7 @@
         <div class="table">
             <table>
                 <tr>
-                    <td colspan="4" class="round-name">
+                    <td colspan="4" class="round-name" style="background-color: rgb(185, 185, 185);">
                         @if ($roundMatches->where('round', $round->round)->count() === 1)
                         Finals
                         @elseif($roundMatches->where('round', $round->round)->count() === 2)
@@ -200,10 +239,10 @@
                 </tr>
                 <thead>
                     <tr>
-                        <th>Game #</th>
+                        <th style="background-color: rgb(185, 185, 185);">Game #</th>
                         <th style="background-color: rgb(253, 70, 70);">Red Corner</th>
                         <th style="background-color: rgb(90, 147, 251);">Blue Corner</th>
-                        <th>Round Winner</th>
+                        <th style="background-color: rgb(185, 185, 185);">Round Winner</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Award;
 use App\Models\Game;
 use App\Models\Event;
 use App\Models\GameMatch;
@@ -28,7 +29,17 @@ class PdfController extends Controller
             'event' => $event,
             'game' => $game,
             'matches' => GameMatch::where('game_id', $game->id)->get(),
-            'rounds' => GameMatch::select('round')->groupBy('round')->get()
+            'rounds' => GameMatch::select('round')->groupBy('round')->get(),
+            'awards' => Award::with([
+                'athlete' => fn ($query) => $query->select('id', 'last_name', 'first_name', 'team_id', 'game_id'),
+                'athlete.team' => fn ($query) => $query->select('id', 'name')
+            ])
+                ->whereHas(
+                    'athlete.game',
+                    fn ($query) => $query->where('id', $game->id)
+                )
+                ->orderBy('rank', 'asc')
+                ->get()
         ]);
         return $pdf->stream('Game-Results.pdf');
     }
