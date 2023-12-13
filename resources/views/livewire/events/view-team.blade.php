@@ -71,7 +71,7 @@
         </div>
 
         <div class="px-3 mb-4 pt-4">
-            <h5 class="fw-bold">Coaches</h5>
+            <h5 class="fw-bold">Coach</h5>
         </div>
 
         <div class="mx-3 mb-3 bg-white" style="overflow-x: auto;  box-shadow: 0px 5px 8px 0 rgba(0, 0, 0, 0.2);">

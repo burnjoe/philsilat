@@ -24,8 +24,8 @@
             <table class="table table-striped table-hover mb-0">
                 <thead class="table-dark text-light">
                     <th scope="col">Team Name</th>
-                    <th scope="col">Coach 1</th>
-                    <th scope="col">Coach 2</th>
+                    <th scope="col">Coach</th>
+                    {{-- <th scope="col">Coach 2</th> --}}
                     <th scope="col">Action</th>
                 </thead>
                 <tbody>
@@ -33,9 +33,13 @@
                     <tr scope="row" wire:key="{{ $team->id }}">
                         <td>{{ $team->name }}</td>
                         {{-- coach 1 data --}}
-                        <td></td>
+                        <td>
+                            @if(!$team->coaches->isEmpty())
+                            {{ $team->coaches->first()->last_name . ', ' . $team->coaches->first()->first_name }}
+                            @endif
+                        </td>
                         {{-- coach 2 data --}}
-                        <td></td>
+                        {{-- <td></td> --}}
                         <td>
                             <div style="white-space: nowrap;">
                                 {{-- route --}}

@@ -30,14 +30,14 @@ class EventsTeams extends Component
     public function render()
     {
         return view('livewire.events.teams', [
-            'teams' => Team::with('athletes')
+            'teams' => Team::with('athletes', 'coaches')
                 ->where('event_id', $this->event->id)
-                ->latest()
                 ->when(
                     $this->search,
                     fn ($query) =>
                     $query->search($this->search)
                 )
+                ->latest()
                 ->paginate(16)
         ]);
     }
