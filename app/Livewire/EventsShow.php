@@ -46,7 +46,7 @@ class EventsShow extends Component
                         $subquery->search($this->search)
                     )
             )
-            ->latest()
+            ->orderByRaw("(SELECT CONCAT(sex, class_label) FROM categories WHERE categories.id = games.category_id) ASC")
             ->paginate(16);
 
         // if user is admin
