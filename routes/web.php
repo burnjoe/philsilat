@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function () {
             ->name('events.details');
 
         // Event Games
-        Route::get('events/{event}/games/join', EventsJoin::class)
+        Route::get('events/{event}/join', EventsJoin::class)
             ->middleware('event.registration-open')
             ->name('events.join');
 
