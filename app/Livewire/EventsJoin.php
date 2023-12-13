@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Athlete;
 use App\Models\Event;
 use App\Models\Game;
+use App\Models\Team;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,22 +14,10 @@ class EventsJoin extends Component
     use WithPagination;
 
     public $event;
+    public $games;
 
-    // Team
     public $name;
-
-    // Athlete
-    public $last_name = [];
-    public $first_name = [];
-    public $birthdate;
-    public $sex;
-    public $weight;
-    public $school_name;
-    public $grade_level;
-    public $lrn;
-
-    // Teams
-    public $teams = [];
+    public $athletes = [];
 
     public $search = "";
 
@@ -46,12 +36,10 @@ class EventsJoin extends Component
     public function render()
     {
         return view('livewire.events.join', [
-            'games' =>
-            Game::with('category')
+            'games' => $this->games =  Game::with('category')
                 ->where('event_id', $this->event->id)
                 ->orderByRaw("(SELECT CONCAT(sex, class_label) FROM categories WHERE categories.id = games.category_id) ASC")
                 ->get()
-
         ]);
     }
 
@@ -61,15 +49,15 @@ class EventsJoin extends Component
     public function rules()
     {
         return [
-            'teams.*.name' => 'required|string|min:2|max:50',
-            'teams.*.last_name' => 'required|string|min:2|max:50',
-            'teams.*.first_name' => 'required|string|min:2|max:50',
-            'teams.*.birthdate' => 'required|date|after_or_equal:1950-01-01|before_or_equal:today',
-            'teams.*.sex' => 'required|in:Male,Female',
-            'teams.*.weight' => 'required|numeric',
-            'teams.*.school_name' => 'required|string|min:2|max:100',
-            'teams.*.grade_level' => 'required|integer',
-            'teams.*.lrn' => 'required|digits:12',
+            'name' => 'required|string|min:2|max:50',
+            'athletes.*.last_name' => 'required|string|min:2|max:50',
+            'athletes.*.first_name' => 'required|string|min:2|max:50',
+            'athletes.*.birthdate' => 'required|date|after_or_equal:1950-01-01|before_or_equal:today',
+            'athletes.*.sex' => 'required|in:Male,Female',
+            'athletes.*.weight' => 'required|numeric',
+            'athletes.*.school_name' => 'required|string|min:2|max:100',
+            'athletes.*.grade_level' => 'required|integer',
+            'athletes.*.lrn' => 'required|digits:12',
         ];
     }
 
@@ -87,15 +75,15 @@ class EventsJoin extends Component
     public function validationAttributes()
     {
         return [
-            'teams.*.name' => 'team name',
-            'teams.*.last_name' => 'last name',
-            'teams.*.first_name' => 'first name',
-            'teams.*.birthdate' => 'date of birth',
-            'teams.*.sex' => 'sex',
-            'teams.*.weight' => 'weight',
-            'teams.*.school_name' => 'school name',
-            'teams.*.grade_level' => 'grade level',
-            'teams.*.lrn' => 'lrn',
+            'name' => 'team name',
+            'athletes.*.last_name' => 'last name',
+            'athletes.*.first_name' => 'first name',
+            'athletes.*.birthdate' => 'date of birth',
+            'athletes.*.sex' => 'sex',
+            'athletes.*.weight' => 'weight',
+            'athletes.*.school_name' => 'school name',
+            'athletes.*.grade_level' => 'grade level',
+            'athletes.*.lrn' => 'lrn',
         ];
     }
 
@@ -104,10 +92,40 @@ class EventsJoin extends Component
      */
     public function joinEvent()
     {
-        // operation that makes you join an event
+        try {
+            $this->authorize('participate events');
+        } catch (\Throwable $th) {
+            session()->flash('danger', 'Unauthorized action.');
+            return $this->redirectRoute('events', navigate: true);
+        }
 
         $validated = $this->validate();
 
-        dd($validated);
+        $team = Team::create([
+            'name' => $validated['name'],
+            'event_id' => $this->event->id,
+        ]);
+        
+        $team->coaches()->attach(auth()->user()->profileable->id);
+
+        $index = 0;
+
+        foreach ($validated['athletes'] as $athlete) {
+            Athlete::create([
+                'last_name' => $athlete['last_name'],
+                'first_name' => $athlete['first_name'],
+                'birthdate' => $athlete['birthdate'],
+                'sex' => $athlete['sex'],
+                'weight' => $athlete['weight'],
+                'school_name' => $athlete['school_name'],
+                'grade_level' => $athlete['grade_level'],
+                'lrn' => $athlete['lrn'],
+                'game_id' => $this->games[$index++]->id,
+                'team_id' => $team->id,
+            ]);
+        }   
+
+        session()->flash('success', 'Successfully joined the event.');
+        $this->redirectRoute('events.show', ['event' => $this->event->id], navigate: true);
     }
 }

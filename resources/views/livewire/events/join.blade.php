@@ -43,10 +43,10 @@ $index = 0;
                     <div class="row row-cols-1 row-cols-sm-2 g-4">
                         <div class="form-group col">
                             <label for="last_name{{$index}}">Last Name<span style="color: #b63e3e;"> *</span></label>
-                            <input wire:model="teams.{{$index}}.last_name" id="last_name{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.last_name') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.last_name" id="last_name{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.last_name') is-invalid @enderror"
                                 type="text" autocomplete="off" placeholder="Last Name" required autofocus>
-                            @error('teams.'.$index.'.last_name')
+                            @error('athletes.'.$index.'.last_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -55,10 +55,10 @@ $index = 0;
 
                         <div class="form-group col">
                             <label for="first_name{{$index}}">First Name<span style="color: #b63e3e;"> *</span></label>
-                            <input wire:model="teams.{{$index}}.first_name" id="first_name{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.first_name') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.first_name" id="first_name{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.first_name') is-invalid @enderror"
                                 type="text" autocomplete="off" placeholder="First Name" required autofocus>
-                            @error('teams.'.$index.'.first_name')
+                            @error('athletes.'.$index.'.first_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -71,10 +71,10 @@ $index = 0;
                         <div class="form-group col">
                             <label for="birthdate{{$index}}">Date of Birth<span style="color: #b63e3e;">
                                     *</span></label>
-                            <input wire:model="teams.{{$index}}.birthdate" id="birthdate{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.birthdate') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.birthdate" id="birthdate{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.birthdate') is-invalid @enderror"
                                 type="date" autocomplete="off" required style="cursor: text;">
-                            @error('teams.'.$index.'.birthdate')
+                            @error('athletes.'.$index.'.birthdate')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -83,14 +83,14 @@ $index = 0;
 
                         <div class="form-group col">
                             <label for="sex{{$index}}">Sex<span style="color: #b63e3e;"> *</span></label>
-                            <select wire:model="teams.{{$index}}.sex" id="sex{{$index}}"
-                                class="form-select custFormSelect @error('teams.'.$index.'.sex') is-invalid @enderror"
+                            <select wire:model="athletes.{{$index}}.sex" id="sex{{$index}}"
+                                class="form-select custFormSelect @error('athletes.'.$index.'.sex') is-invalid @enderror"
                                 aria-label=".form-select example" required>
                                 <option class="custOption" hidden>Sex</option>
                                 <option class="custOption" value="Male">Male</option>
                                 <option class="custOption" value="Female">Female</option>
                             </select>
-                            @error('teams.'.$index.'.sex')
+                            @error('athletes.'.$index.'.sex')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -99,10 +99,10 @@ $index = 0;
 
                         <div class="form-group col">
                             <label for="weight{{$index}}">Weight (kg)<span style="color: #b63e3e;"> *</span></label>
-                            <input wire:model="teams.{{$index}}.weight" id="weight{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.weight') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.weight" id="weight{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.weight') is-invalid @enderror"
                                 type="number" autocomplete="off" placeholder="Weight" required autofocus>
-                            @error('teams.'.$index.'.weight')
+                            @error('athletes.'.$index.'.weight')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -115,10 +115,10 @@ $index = 0;
                         <div class="form-group col">
                             <label for="school_name{{$index}}">Name of the School<span style="color: #b63e3e;">
                                     *</span></label>
-                            <input wire:model="teams.{{$index}}.school_name" id="school_name{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.school_name') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.school_name" id="school_name{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.school_name') is-invalid @enderror"
                                 type="text" autocomplete="off" placeholder="School Name" required autofocus>
-                            @error('teams.'.$index.'.school_name')
+                            @error('athletes.'.$index.'.school_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -128,10 +128,10 @@ $index = 0;
                         <div class="form-group col">
                             <label for="grade_level{{$index}}">Grade Level<span style="color: #b63e3e;">
                                     *</span></label>
-                            <input wire:model="teams.{{$index}}.grade_level" id="grade_level{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.grade_level') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.grade_level" id="grade_level{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.grade_level') is-invalid @enderror"
                                 type="number" autocomplete="off" placeholder="Grade Level" required autofocus>
-                            @error('teams.'.$index.'.grade_level')
+                            @error('athletes.'.$index.'.grade_level')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -141,10 +141,10 @@ $index = 0;
                         <div class="form-group col">
                             <label for="lrn{{$index}}">LRN<span style="color: #b63e3e;">
                                     *</span></label>
-                            <input wire:model="teams.{{$index}}.lrn" id="lrn{{$index}}"
-                                class="form-control custInput @error('teams.'.$index.'.lrn') is-invalid @enderror"
+                            <input wire:model="athletes.{{$index}}.lrn" id="lrn{{$index}}"
+                                class="form-control custInput @error('athletes.'.$index.'.lrn') is-invalid @enderror"
                                 type="text" autocomplete="off" placeholder="LRN" required autofocus>
-                            @error('teams.'.$index.'.lrn')
+                            @error('athletes.'.$index.'.lrn')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
