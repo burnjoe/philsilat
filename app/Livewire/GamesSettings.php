@@ -7,6 +7,7 @@ use App\Models\Event;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Validation\Rule;
+use App\Models\Athlete;
 
 class GamesSettings extends Component
 {
@@ -45,7 +46,9 @@ class GamesSettings extends Component
      */
     public function render()
     {
-        return view('livewire.games.settings');
+        return view('livewire.games.settings', [
+            'roundsCount' => ceil(log(Athlete::where('game_id', $this->game->id)->count(), 2)),
+        ]);
     }
 
     /**

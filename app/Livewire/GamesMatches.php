@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Athlete;
 use App\Models\Game;
 use App\Models\Event;
 use App\Models\Award;
@@ -58,7 +59,8 @@ class GamesMatches extends Component
                     fn ($query) => $query->where('id', $this->game->id)
                 )
                 ->orderBy('rank', 'asc')
-                ->get()
+                ->get(),
+            'roundsCount' => ceil(log(Athlete::where('game_id', $this->game->id)->count(), 2)),
         ]);
     }
 }

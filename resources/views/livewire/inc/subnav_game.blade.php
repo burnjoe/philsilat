@@ -11,6 +11,11 @@
 				<span class="badge text-bg-success py-1 ms-2">COMPLETED</span>
 				@endif
 			</div>
+            <div class="d-flex align-items-center">
+                <h3 class="fw-bold mb-0">
+                    {{ $roundsCount }} <span class="fs-6">Total Rounds</span>
+                </h3>
+            </div>
 		</div>
 		<hr class="mb-0">
 	</div>

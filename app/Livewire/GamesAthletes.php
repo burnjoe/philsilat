@@ -32,15 +32,18 @@ class GamesAthletes extends Component
      */
     public function render()
     {
+        $athletes = Athlete::with('team')
+            ->where('game_id', $this->game->id)
+            ->when(
+                $this->search,
+                fn ($query) =>
+                $query->search($this->search)
+            )
+            ->paginate(15);
+
         return view('livewire.games.athletes', [
-            'athletes' => Athlete::with('team')
-                ->where('game_id', $this->game->id)
-                ->when(
-                    $this->search,
-                    fn ($query) =>
-                    $query->search($this->search)
-                )
-                ->paginate(15)  
+            'athletes' => $athletes,
+            'roundsCount' => ceil(log($athletes->total(), 2)),
         ]);
     }
 }
