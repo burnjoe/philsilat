@@ -9,11 +9,11 @@ Major:
 Revision:
 1. Email Signup Code to Coach prior registration
 2. Include Athlete Profile Photo in Team Registration
+3. Polish: Automatic Start and End of Registration and Events
 
 --------------------------------------------------------------------------------------------------------------------------
 
 Pending Modules:
-0. Result Summary (Each Games)
 2. Summary Reports
 7. Join Event
 
