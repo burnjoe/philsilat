@@ -16,6 +16,8 @@ class Event extends Model
         'description',
         'starts_at',
         'ends_at',
+        'registration_starts_at',
+        'registration_ends_at',
         'venue',
         'address',
         'barangay',
