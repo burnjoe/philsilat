@@ -10,6 +10,8 @@ Revision:
 1. Email Signup Code to Coach prior registration
 2. Include Athlete Profile Photo in Team Registration
 3. Polish: Automatic Start and End of Registration and Events
+4. To be added: View Athlete Information
+5. Add constraint before deleting a specific account with an existing transaction in system
 
 --------------------------------------------------------------------------------------------------------------------------
 
