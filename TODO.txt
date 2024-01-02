@@ -6,6 +6,10 @@ Major:
 2. Do not allow update when data to be updated is used by other records - this ensures data integrity.
 3. Add validation rules for checking that time of starts_at must not be below time of now().
 
+Revision:
+1. Email Signup Code to Coach prior registration
+2. Include Athlete Profile Photo in Team Registration
+
 --------------------------------------------------------------------------------------------------------------------------
 
 Pending Modules:
