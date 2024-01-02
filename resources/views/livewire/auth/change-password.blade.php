@@ -30,7 +30,7 @@
                     </div>
 
                     {{-- New Password --}}
-                    <div class="row row-cols-1 row-cols-sm-2 g-4 mt-1">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-3">
                         <div class="form-group col">
                             <label for="password">New Password<span style="color: #b63e3e;"> *</span></label>
                             <input id="password" type="password"
@@ -45,7 +45,7 @@
                     </div>
 
                     {{-- Confirm Password --}}
-                    <div class="row row-cols-1 row-cols-sm-2 g-4 mt-1">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-3">
                         <div class="form-group col">
                             <label for="password-confirm">Confirm Password<span style="color: #b63e3e;">
                                     *</span></label>
