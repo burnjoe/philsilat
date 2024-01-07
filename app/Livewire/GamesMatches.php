@@ -44,6 +44,8 @@ class GamesMatches extends Component
      */
     public function render()
     {
+        $roundsCount = Athlete::where('game_id', $this->game->id)->count();
+
         return view('livewire.games.matches', [
             'rounds' => GameMatch::select('round')
                 ->where('game_id', $this->game->id)
@@ -60,7 +62,7 @@ class GamesMatches extends Component
                 )
                 ->orderBy('rank', 'asc')
                 ->get(),
-            'roundsCount' => ceil(log(Athlete::where('game_id', $this->game->id)->count(), 2)),
+            'roundsCount' => ceil($roundsCount > 0 ? log($roundsCount, 2) : 0),
         ]);
     }
 }

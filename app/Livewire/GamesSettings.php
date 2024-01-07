@@ -46,8 +46,10 @@ class GamesSettings extends Component
      */
     public function render()
     {
+        $roundsCount = Athlete::where('game_id', $this->game->id)->count();
+
         return view('livewire.games.settings', [
-            'roundsCount' => ceil(log(Athlete::where('game_id', $this->game->id)->count(), 2)),
+            'roundsCount' => ceil($roundsCount > 0 ? log($roundsCount, 2) : 0),
         ]);
     }
 

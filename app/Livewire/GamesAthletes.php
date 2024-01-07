@@ -32,6 +32,8 @@ class GamesAthletes extends Component
      */
     public function render()
     {
+        $roundsCount = Athlete::where('game_id', $this->game->id)->count();
+
         $athletes = Athlete::with('team')
             ->where('game_id', $this->game->id)
             ->when(
@@ -43,7 +45,7 @@ class GamesAthletes extends Component
 
         return view('livewire.games.athletes', [
             'athletes' => $athletes,
-            'roundsCount' => ceil(log($athletes->total(), 2)),
+            'roundsCount' => ceil($roundsCount > 0 ? log($roundsCount, 2) : 0),
         ]);
     }
 }
