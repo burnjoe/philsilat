@@ -13,6 +13,8 @@ class EventSeeder extends Seeder
      */
     public function run(): void
     {
-        Event::factory(1)->create();
+        Event::factory()->create([
+            'status' => 'REGISTRATION OPEN',
+        ]);
     }
 }

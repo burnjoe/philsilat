@@ -16,9 +16,16 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
-        // Generate a random time for logged in and a later random time for logged out
-        $starts_at = fake()->randomElement([fake()->dateTimeThisMonth(), now()->modify('+' . mt_rand(0, 5) . ' days')]);
-        $starts_at->setTime($starts_at->format('H'), $starts_at->format('i'), 0);
+        
+        $registration_starts_at = fake()->randomElement([fake()->dateTimeThisMonth(), now()->modify('+' . mt_rand(0, 5) . ' days')]);
+        $registration_starts_at->setTime($registration_starts_at->format('H'), $registration_starts_at->format('i'), 0);
+        
+        $registration_ends_at = clone $registration_starts_at;
+        $registration_ends_at->modify('+' . mt_rand(3,5) . ' days');
+        
+        $starts_at = clone $registration_ends_at;
+        $starts_at = $starts_at->modify('+' . mt_rand(0,3) . ' days');
+
         $ends_at = clone $starts_at;
         $ends_at->modify('+' . mt_rand(1, 2) . ' days');
 
@@ -38,6 +45,8 @@ class EventFactory extends Factory
             'description' => fake()->randomElement(['Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quis architecto nemo voluptatem animi ea, corrupti minima, odio laudantium ipsum itaque, voluptates eius praesentium reiciendis repellat inventore optio perferendis fugiat!', '']),
             'starts_at' => $starts_at,
             'ends_at' => $ends_at,
+            'registration_starts_at' => $registration_starts_at,
+            'registration_ends_at' => $registration_ends_at,
             'venue' => 'CABS',
             'address' => 'Cabuyao Enterprise Park',
             'barangay' => 'Banay-Banay',

@@ -12,6 +12,8 @@ class EventsCreate extends Component
     public $description;
     public $starts_at;
     public $ends_at;
+    public $registration_starts_at;
+    public $registration_ends_at;
     public $venue;
     public $address;
     public $barangay;
@@ -36,7 +38,9 @@ class EventsCreate extends Component
             'host_name' => ['required', 'string', 'min:2', 'max:50'],
             'name' => ['required', 'string', 'min:2', 'max:20'],
             'description' => ['max:255'],
-            'starts_at' => ['required', 'date', 'after_or_equal:now'],
+            'registration_starts_at' => ['required', 'date', 'after_or_equal:now'],
+            'registration_ends_at' => ['required', 'date', 'after:registration_starts_at'],
+            'starts_at' => ['required', 'date', 'after_or_equal:registration_ends_at'],
             'ends_at' => ['required', 'date', 'after:starts_at'],
             'venue' => ['required', 'string', 'min:2', 'max:30'],
             'address' => ['required', 'string', 'min:2', 'max:255'],
@@ -52,8 +56,10 @@ class EventsCreate extends Component
     public function messages()
     {
         return [
-            'starts_at.after_or_equal' => 'The :attribute must be a valid schedule.',
-            'ends_at.after' => 'The :attribute must be after start schedule.',
+            'registration_starts_at.after_or_equal' => 'The registration must start at valid date and time.',
+            'registration_ends_at.after' => 'The registration must close at valid date and time.',
+            'starts_at.after_or_equal' => 'The event must start after registration closes.',
+            'ends_at.after' => 'The event must end at valid date and time.',
         ];
     }
 
@@ -63,8 +69,10 @@ class EventsCreate extends Component
     public function validationAttributes()
     {
         return [
-            'starts_at' => 'starting date and time',
-            'ends_at' => 'ending date and time',
+            'registration_starts_at' => 'opening schedule',
+            'registration_ends_at' => 'closing schedule',
+            'starts_at' => 'event starting schedule',
+            'ends_at' => 'event ending schedule',
         ];
     }
 
