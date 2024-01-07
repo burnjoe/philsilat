@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Coach;
+use App\Models\Event;
 use App\Models\Team;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,9 +15,8 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
-        Team::factory(8)->create();
-        // Team::factory(50)->create();
-        
+        Team::factory()->create();
+
         Team::factory()->create([
             'name' => 'Blue Eagles'
         ]);
@@ -27,5 +28,17 @@ class TeamSeeder extends Seeder
         Team::factory()->create([
             'name' => 'Laguna Fighters'
         ]);
+
+        foreach (Event::with('teams')->get() as $event) {
+            $coaches = Coach::inRandomOrder()->get()->toArray();
+            $size = count($coaches);
+            $i = 0;
+
+            foreach ($event->teams as $team) {
+                if($i < $size) {
+                    $team->coaches()->attach($coaches[$i++]['id']);
+                }
+            }
+        }
     }
 }
