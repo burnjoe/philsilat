@@ -14,6 +14,7 @@ class Athlete extends Model
     use HasFactory;
 
     protected $fillable = [
+        'profile_photo',
         'last_name',
         'first_name',
         'birthdate',

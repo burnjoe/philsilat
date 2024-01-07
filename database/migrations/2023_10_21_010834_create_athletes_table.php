@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('athletes', function (Blueprint $table) {
             $table->id();
+            $table->string('profile_photo')->nullable();
             $table->string('last_name', 50);
             $table->string('first_name', 50);
             $table->date('birthdate');
