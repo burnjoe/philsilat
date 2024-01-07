@@ -313,6 +313,14 @@ class MatchList extends Component
                 $matches->where('is_closed', false)
                     ->update(['is_closed' => true]);
 
+                // Mark event as completed automatically when all games are completed
+                if ($this->event->games()->where('is_completed', false)->count() === 0) {
+                    $this->event->update([
+                        'ends_at' => now(),
+                        'status' => 'COMPLETED'
+                    ]);
+                }
+
                 session()->flash('success', 'The game has been successfully completed.');
                 return $this->redirectRoute('games.matches', ['event' => $this->event->id, 'game' => $this->game->id], navigate: true);
             }

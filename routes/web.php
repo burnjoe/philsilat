@@ -59,19 +59,22 @@ Route::middleware('auth')->group(function () {
 
     // All Events
     Route::get('events', Events::class)
+        ->middleware('event.status-change')
         ->name('events');
 
     // Event Games
     Route::get('events/{event}/games', EventsShow::class)
-        ->middleware('coach.joined')
+        ->middleware(['coach.joined', 'event.status-change'])
         ->name('events.show');
 
     // View Team
     Route::get('events/{event}/teams/{team}/view', ViewTeam::class)
+        ->middleware('event.status-change')
         ->name('events.view-team');
 
     // Game Matches
     Route::get('events/{event}/games/{game}/matches', GamesMatches::class)
+        ->middleware('event.status-change')
         ->name('games.matches');
 
     // Change Password
@@ -79,9 +82,8 @@ Route::middleware('auth')->group(function () {
         ->name('change-password');
 
 
-
     // Participate Event
-    Route::middleware('can:participate events')->group(function () {
+    Route::middleware(['can:participate events', 'event.status-change'])->group(function () {
         // Event Details
         Route::get('events/{event}/details', EventsDetails::class)
             ->name('events.details');
@@ -125,7 +127,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Manage Events
-    Route::middleware('can:manage events')->group(function () {
+    Route::middleware(['can:manage events', 'event.status-change'])->group(function () {
         // Add Events
         Route::get('events/add', EventsCreate::class)
             ->name('events.create');
@@ -202,12 +204,6 @@ Route::middleware('auth')->group(function () {
         Route::get('accounts/{user}/delete', AccountsDelete::class)
             ->name('accounts.delete');
     });
-
-
-
-    // Change Password
-    Route::get('change-password', ChangePassword::class)
-        ->name('change-password');
 });
 
 

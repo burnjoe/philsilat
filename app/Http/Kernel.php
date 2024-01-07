@@ -61,6 +61,7 @@ class Kernel extends HttpKernel
         'coach.joined' => \App\Http\Middleware\RedirectIfJoined::class,
         'event.registration-open' => \App\Http\Middleware\CheckEventStatusRegistrationOpen::class,
         'event.upcoming' => \App\Http\Middleware\CheckEventStatusUpcoming::class,
+        'event.status-change' => \App\Http\Middleware\ChangeStatusAutomatically::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
