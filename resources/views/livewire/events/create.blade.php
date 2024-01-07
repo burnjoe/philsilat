@@ -54,10 +54,10 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
-                        {{-- Registration Opens At --}}
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 pt-3">
+                        {{-- Registration Starts At --}}
                         <div class="form-group col">
-                            <label for="registration_starts_at">Registration Opens At<span style="color: #b63e3e;">
+                            <label for="registration_starts_at">Registration Starts At<span style="color: #b63e3e;">
                                     *</span></label>
                             <input wire:model="registration_starts_at" id="registration_starts_at"
                                 class="form-control custInput @error('registration_starts_at') is-invalid @enderror"
@@ -70,23 +70,6 @@
                             @enderror
                         </div>
 
-                        {{-- Registration Closes At --}}
-                        <div class="form-group col">
-                            <label for="registration_ends_at">Registration Closes At<span style="color: #b63e3e;">
-                                    *</span></label>
-                            <input wire:model="registration_ends_at" id="registration_ends_at"
-                                class="form-control custInput @error('registration_ends_at') is-invalid @enderror"
-                                type="datetime-local" name="registration_ends_at" autocomplete="off"
-                                placeholder="Ends At" required style="cursor: text;">
-                            @error('registration_ends_at')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
                         {{-- Starts At --}}
                         <div class="form-group col">
                             <label for="starts_at">Starts At<span style="color: #b63e3e;"> *</span></label>

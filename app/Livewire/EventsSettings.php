@@ -17,7 +17,6 @@ class EventsSettings extends Component
     public $starts_at;
     public $ends_at;
     public $registration_starts_at;
-    public $registration_ends_at;
     public $venue;
     public $address;
     public $barangay;
@@ -38,7 +37,6 @@ class EventsSettings extends Component
         $this->starts_at = $event->starts_at;
         $this->ends_at = $event->ends_at;
         $this->registration_starts_at = $event->registration_starts_at;
-        $this->registration_ends_at = $event->registration_ends_at;
         $this->venue = $event->venue;
         $this->address = $event->address;
         $this->barangay = $event->barangay;
@@ -66,8 +64,7 @@ class EventsSettings extends Component
             'name' => ['required', 'string', 'min:2', 'max:20'],
             'description' => ['max:255'],
             'registration_starts_at' => ['required', 'date', 'after_or_equal:now'],
-            'registration_ends_at' => ['required', 'date', 'after:registration_starts_at'],
-            'starts_at' => ['required', 'date', 'after_or_equal:registration_ends_at'],
+            'starts_at' => ['required', 'date', 'after:registration_starts_at'],
             'ends_at' => ['required', 'date', 'after:starts_at'],
             'venue' => ['required', 'string', 'min:2', 'max:30'],
             'address' => ['required', 'string', 'min:2', 'max:255'],
@@ -84,8 +81,7 @@ class EventsSettings extends Component
     {
         return [
             'registration_starts_at.after_or_equal' => 'The registration must start at valid date and time.',
-            'registration_ends_at.after' => 'The registration must close at valid date and time.',
-            'starts_at.after_or_equal' => 'The event must start after registration closes.',
+            'starts_at.after' => 'The event must start after registration date and time.',
             'ends_at.after' => 'The event must end at valid date and time.',
         ];
     }
@@ -96,8 +92,7 @@ class EventsSettings extends Component
     public function validationAttributes()
     {
         return [
-            'registration_starts_at' => 'opening schedule',
-            'registration_ends_at' => 'closing schedule',
+            'registration_starts_at' => 'registration date',
             'starts_at' => 'event starting schedule',
             'ends_at' => 'event ending schedule',
         ];
@@ -149,7 +144,15 @@ class EventsSettings extends Component
             return;
         }
 
-        $this->event->update(['status' => "REGISTRATION OPEN"]);
+        if ($this->event->games()->count() === 0) {
+            session()->flash('danger', 'Unable to open registration. The event requires at least one (1) game to open registration.');
+            return;
+        }
+
+        $this->event->update([
+            'registration_starts_at' => now(),
+            'status' => 'REGISTRATION OPEN'
+        ]);
 
         session()->flash('success', 'Registration for the event has been successfully opened.');
     }
@@ -171,11 +174,6 @@ class EventsSettings extends Component
             return;
         }
 
-        if ($this->event->games()->count() === 0) {
-            session()->flash('danger', 'Unable to start the event. The event requires at least one (1) game to be created to start.');
-            return;
-        }
-
         if ($this->event->games()
             ->select('id')
             ->has('athletes', '<', 3)
@@ -185,35 +183,11 @@ class EventsSettings extends Component
             return;
         }
 
-        $this->event->update(['status' => "ONGOING"]);
+        $this->event->update([
+            'starts_at' => now(),
+            'status' => 'ONGOING'
+        ]);
 
         session()->flash('success', 'The event has successfully started.');
-    }
-
-    /**
-     * Ending an ongoing event
-     */
-    public function endEvent()
-    {
-        try {
-            $this->authorize('manage events');
-        } catch (\Throwable $th) {
-            session()->flash('danger', 'Unauthorized action.');
-            return;
-        }
-
-        if ($this->event->status !== "ONGOING") {
-            session()->flash('danger', 'Something unexpected happened. Please refresh the page and try again.');
-            return;
-        }
-
-        if ($this->event->games()->where('is_completed', false)->count() > 0) {
-            session()->flash('danger', 'Unable to finish and end the event. The event must finish its ongoing game matches first.');
-            return;
-        }
-
-        $this->event->update(['status' => "COMPLETED"]);
-
-        session()->flash('success', 'The event has been successfully completed.');
     }
 }

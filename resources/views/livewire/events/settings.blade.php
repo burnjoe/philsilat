@@ -66,10 +66,10 @@
                         </div>
                     </div>
 
-                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
-                        {{-- Registration Opens At --}}
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 pt-3">
+                        {{-- Registration Starts At --}}
                         <div class="form-group col">
-                            <label for="registration_starts_at">Registration Opens At<span style="color: #b63e3e;">
+                            <label for="registration_starts_at">Registration Starts At<span style="color: #b63e3e;">
                                     *</span></label>
                             <input wire:model="registration_starts_at" id="registration_starts_at"
                                 class="form-control custInput @error('registration_starts_at') is-invalid @enderror"
@@ -82,23 +82,6 @@
                             @enderror
                         </div>
 
-                        {{-- Registration Closes At --}}
-                        <div class="form-group col">
-                            <label for="registration_ends_at">Registration Closes At<span style="color: #b63e3e;">
-                                    *</span></label>
-                            <input wire:model="registration_ends_at" id="registration_ends_at"
-                                class="form-control custInput @error('registration_ends_at') is-invalid @enderror"
-                                type="datetime-local" name="registration_ends_at" autocomplete="off"
-                                placeholder="Ends At" required style="cursor: text;">
-                            @error('registration_ends_at')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-lg-2 g-4 pt-3">
                         {{-- Starts At --}}
                         <div class="form-group col">
                             <label for="starts_at">Starts At<span style="color: #b63e3e;"> *</span></label>
@@ -207,7 +190,7 @@
             {{-- Open Registration --}}
             @if($event->status === "UPCOMING")
             <div class="px-1 mt-5">
-                <h5 class="fw-bold">Open Registration</h5>
+                <h5 class="fw-bold">Force Open Registration</h5>
                 <p>By proceeding, you are allowing coaches to join and register their lineup or team in this event.</p>
 
                 <button wire:click="openRegistration" class="custBtn custBtn-green me-3">
@@ -220,26 +203,12 @@
             {{-- Start Event --}}
             @if($event->status === "REGISTRATION OPEN")
             <div class="px-1 mt-5">
-                <h5 class="fw-bold">Start Event</h5>
+                <h5 class="fw-bold">Force Start Event</h5>
                 <p>Start this event and begin generating match pairings for each games.</p>
 
                 <button wire:click="startEvent" class="custBtn custBtn-green me-3">
                     <i style="display: inline-block;" class="bi bi-play-circle"></i>
                     &nbsp Start Event
-                </button>
-            </div>
-            @endif
-
-            {{-- End Event --}}
-            @if($event->status === "ONGOING")
-            <div class="px-1 mt-5">
-                <h5 class="fw-bold">Finish Event</h5>
-                <p>Conclude and wrap up the event. Before proceeding, ensure that all games within this event have
-                    already determined winners.</p>
-
-                <button wire:click="endEvent" class="custBtn custBtn-red me-3">
-                    <i style="display: inline-block;" class="bi bi-check-circle"></i>
-                    &nbsp End Event
                 </button>
             </div>
             @endif

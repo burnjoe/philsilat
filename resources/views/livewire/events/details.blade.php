@@ -15,20 +15,26 @@
                     <p class="fw-bold mb-0">Host:</p>
                     <p>{{ $event->host_name }}</p>
                 </div>
+
+                <div>
+                    <p class="fw-bold mb-0">Start of Registration:</p>
+                    <p class="mb-3">{{ \Carbon\Carbon::parse($event->registration_starts_at)->format('F j, Y') }}</p>
+                </div>
+
                 {{-- If event is one day --}}
                 @if(\Carbon\Carbon::parse($event->starts_at)->isSameDay($event->ends_at))
                 <div>
-                    <p class="fw-bold mb-0">Date:</p>
+                    <p class="fw-bold mb-0">Event Date:</p>
                     <p class="mb-3">{{ \Carbon\Carbon::parse($event->starts_at)->format('F j, Y') }}</p>
                 </div>
                 @else
                 {{-- If event is more than one day --}}
                 <div>
-                    <p class="fw-bold mb-0">Start Date:</p>
+                    <p class="fw-bold mb-0">Event Starts At:</p>
                     <p class="mb-3">{{ \Carbon\Carbon::parse($event->starts_at)->format('F j, Y') }}</p>
                 </div>
                 <div>
-                    <p class="fw-bold mb-0">End Date:</p>
+                    <p class="fw-bold mb-0">Event Ends At:</p>
                     <p class="mb-3">{{ \Carbon\Carbon::parse($event->ends_at)->format('F j, Y') }}</p>
                 </div>
                 @endif

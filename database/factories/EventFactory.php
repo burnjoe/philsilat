@@ -20,10 +20,7 @@ class EventFactory extends Factory
         $registration_starts_at = fake()->randomElement([fake()->dateTimeThisMonth(), now()->modify('+' . mt_rand(0, 5) . ' days')]);
         $registration_starts_at->setTime($registration_starts_at->format('H'), $registration_starts_at->format('i'), 0);
         
-        $registration_ends_at = clone $registration_starts_at;
-        $registration_ends_at->modify('+' . mt_rand(3,5) . ' days');
-        
-        $starts_at = clone $registration_ends_at;
+        $starts_at = clone $registration_starts_at;
         $starts_at = $starts_at->modify('+' . mt_rand(0,3) . ' days');
 
         $ends_at = clone $starts_at;
@@ -46,7 +43,6 @@ class EventFactory extends Factory
             'starts_at' => $starts_at,
             'ends_at' => $ends_at,
             'registration_starts_at' => $registration_starts_at,
-            'registration_ends_at' => $registration_ends_at,
             'venue' => 'CABS',
             'address' => 'Cabuyao Enterprise Park',
             'barangay' => 'Banay-Banay',

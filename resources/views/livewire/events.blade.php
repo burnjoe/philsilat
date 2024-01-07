@@ -116,7 +116,7 @@
                      <div class="d-flex justify-content-center align-items-center p-0 mb-5">
                         <h3 class="fs-5 fw-bold mb-0">{{ $event->name }} {{ $event->id }}</h3>
                      </div>
-                     <p class="m-0" style="font-size: 14px"><small><b>Date:</b></small></p>
+                     <p class="m-0" style="font-size: 14px"><small><b>Event Date:</b></small></p>
                      <p class="m-0" style="font-size: 14px">
                         {{ \Carbon\Carbon::parse($event->starts_at)->format('M.
                         d, Y') }}
