@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 20);
             $table->string('description')->nullable();
             $table->timestamp('registration_starts_at');
-            $table->timestamp('starts_at');
+            $table->timestamp('starts_at')->nullable();
             $table->timestamp('ends_at')->nullable();
             $table->string('venue', 50);
             $table->string('address');
