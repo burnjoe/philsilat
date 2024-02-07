@@ -25,8 +25,8 @@ class ChangeStatusAutomatically
         foreach ($events as $event) {
             if ($event->status === 'UPCOMING') {
                 if (
-                    now()->startOfDay()->greaterThanOrEqualTo(Carbon::parse($event->starts_at)->startOfDay()) &&
-                    now()->startOfDay()->lessThanOrEqualTo(Carbon::parse($event->ends_at)->startOfDay())
+                    now()->greaterThanOrEqualTo(Carbon::parse($event->starts_at)) &&
+                    now()->lessThanOrEqualTo(Carbon::parse($event->ends_at))
                 ) {
                     // Event must have at least 1 game to automatically open registration
                     if ($event->games()->count() > 0) {
@@ -37,8 +37,8 @@ class ChangeStatusAutomatically
                 }
             } else {
                 if (
-                    now()->startOfDay()->greaterThanOrEqualTo(Carbon::parse($event->starts_at)->startOfDay()) &&
-                    now()->startOfDay()->lessThanOrEqualTo(Carbon::parse($event->ends_at)->startOfDay())
+                    now()->greaterThanOrEqualTo(Carbon::parse($event->starts_at)) &&
+                    now()->lessThanOrEqualTo(Carbon::parse($event->ends_at))
                 ) {
                     // Event must have at least 3 participating athletes to automatically start
                     if (!$event->games()
