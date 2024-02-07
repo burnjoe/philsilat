@@ -100,6 +100,14 @@
                                 </a>
                             </p>
                         </div>
+                        <div class="text-center">
+                            <p class="custText">
+                                Get Signup Code
+                                <a href="https://m.me/j/AbZtCL6XQRSIYpEW/" target="_blank" class="custText custText-clickable">
+                                    <strong>Here</strong>
+                                </a>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -191,6 +199,14 @@
                             Already have an account?
                             <a href="{{ route('login') }}" class="custText custText-clickable">
                                 <strong>Login</strong>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <p class="custText">
+                            Get Signup Code
+                            <a href="https://m.me/j/AbZtCL6XQRSIYpEW/" target="_blank" class="custText custText-clickable">
+                                <strong>Here</strong>
                             </a>
                         </p>
                     </div>

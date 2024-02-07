@@ -156,6 +156,7 @@
                     <th scope="col">School</th>
                     <th scope="col">Grade Level</th>
                     <th scope="col">Joined Game</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     {{-- Atheletes Data --}}
@@ -169,6 +170,22 @@
                         <td>{{ $athlete->grade_level }}</td>
                         <td>{{ $athlete->game->name . ': Class ' . $athlete->game->category->class_label . ' - ' .
                             $athlete->game->category->sex }}</td>
+                        <td>
+                            <div style="white-space: nowrap;">
+                                {{-- route --}}
+                                @if(isset($athlete->profile_photo))
+                                <a href="/storage/{{ $athlete->profile_photo }}" target="_blank"
+                                    class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
+                                        class="bi bi-eye-fill"></i>&nbsp
+                                    View Photo</a>
+                                @else
+                                <a href="{{ asset('img/user_icon.png') }}" target="_blank"
+                                    class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
+                                        class="bi bi-eye-fill"></i>&nbsp
+                                    View Photo</a>
+                                @endif
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

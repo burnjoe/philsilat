@@ -39,8 +39,31 @@ $index = 0;
                         $game->category->class_label }}</h5>
                     <hr class="mt-1 mb-4">
 
+                    {{-- Profile Photo --}}                  
+                    <div class="d-flex justify-content-center">
+                        <div class="mx-auto" style="text-align: center">
+                            <div>
+                                <img class="object-fit-fill border rounded-circle align-center"
+                                src="{{ isset($athletes[$index]) ? $athletes[$index]['profile_photo']->temporaryUrl() : asset('img/user_icon.png') }}"
+                                alt="Profile Picture" height="150px" width="150px">
+                            </div>
+                            <div class="form-group col pt-4">
+                                <label for="profile_photo{{$index}}">Profile Photo<span style="color: #b63e3e;">
+                                        *</span></label>
+                                <input wire:model="athletes.{{$index}}.profile_photo" id="profile_photo{{$index}}"
+                                    class="form-control custInput @error('athletes.'.$index.'.profile_photo') is-invalid @enderror"
+                                    type="file" placeholder="ID Photo" required>
+                                @error('athletes.'.$index.'.profile_photo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- Last Name & First Name --}}
-                    <div class="row row-cols-1 row-cols-sm-2 g-4">
+                    <div class="row row-cols-1 row-cols-sm-2 g-4 pt-4">
                         <div class="form-group col">
                             <label for="last_name{{$index}}">Last Name<span style="color: #b63e3e;"> *</span></label>
                             <input wire:model="athletes.{{$index}}.last_name" id="last_name{{$index}}"

@@ -20,6 +20,7 @@
                     <th scope="col">Weight (kg)</th>
                     <th scope="col">School</th>
                     <th scope="col">Grade Level</th>
+                    <th scope="col">Action</th>
                 </thead>
                 <tbody>
                     @foreach ($athletes as $athlete)
@@ -29,7 +30,22 @@
                         <td>{{ $athlete->first_name }}</td>
                         <td>{{ $athlete->weight }}</td>
                         <td>{{ $athlete->school_name }}</td>
-                        <td>{{ $athlete->grade_level }}</td>    
+                        <td>{{ $athlete->grade_level }}</td>
+                        <td>
+                            <div style="white-space: nowrap;">
+                                @if(isset($athlete->profile_photo))
+                                <a href="/storage/{{ $athlete->profile_photo }}" target="_blank"
+                                    class="custBtn custBtn-light" style="display: inline-block; margin-right: 8px;"><i
+                                        class="bi bi-eye-fill"></i>&nbsp
+                                    View Photo</a>
+                                @else
+                                <a href="{{ asset('img/user_icon.png') }}" target="_blank" class="custBtn custBtn-light"
+                                    style="display: inline-block; margin-right: 8px;"><i
+                                        class="bi bi-eye-fill"></i>&nbsp
+                                    View Photo</a>
+                                @endif
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

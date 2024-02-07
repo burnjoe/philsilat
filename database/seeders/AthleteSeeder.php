@@ -17,7 +17,7 @@ class AthleteSeeder extends Seeder
         $events = Event::with('teams')->get();
         
         foreach ($events as $event) {
-            if (in_array($event->status, ['REGISTRATION OPEN', 'ONGOING', 'COMPLETED', 'CANCELLED'])) {
+            if (in_array($event->status, ['REGISTRATION OPEN'])) {
                 foreach ($event->teams as $team) {
                     Athlete::factory()->create([
                         'team_id' => $team->id,
