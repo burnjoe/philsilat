@@ -25,8 +25,8 @@ class ChangeStatusAutomatically
         foreach ($events as $event) {
             if ($event->status === 'UPCOMING') {
                 if (
-                    now()->greaterThanOrEqualTo(Carbon::parse($event->starts_at)) &&
-                    now()->lessThanOrEqualTo(Carbon::parse($event->ends_at))
+                    now()->greaterThanOrEqualTo(Carbon::parse($event->registration_starts_at)) &&
+                    now()->lessThan(Carbon::parse($event->starts_at))
                 ) {
                     // Event must have at least 1 game to automatically open registration
                     if ($event->games()->count() > 0) {
